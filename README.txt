@@ -1,1 +1,1 @@
-hELLO GIT
+This is our repository for our online auctioning system grad project.
