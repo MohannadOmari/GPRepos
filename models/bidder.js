@@ -33,9 +33,9 @@ const bidderSchema = new Schema ({
                 type: Number,
                 required: true
             },
-            verification: {
+           /* verification: {
                 type: Number
-            }
+            }*/
         }
 });
 

@@ -33,9 +33,9 @@ const organizerSchema = new Schema ({
                 type: Number,
                 required: true
             },
-            verification: {
+            /*verification: {
                 type: Number
-            },
+            },*/
             /*credentials: {
                 type: String
             }*/
