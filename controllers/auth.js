@@ -6,9 +6,34 @@ exports.getSignin = (req, res, next) => {
 	res.render("auth/user-signin", { title: "Sign In" });
 };
 // JSON => JavaScript Object Notation
-exports.postAddUser = (req, res, next) => {
-	const user = req.body.user;
+exports.postAddBidder = (req, res, next) => {
 
-	console.log(user);
-	res.redirect("/");
+	const firstName = req.body.firstName;
+	const lastName = req.body.lastName;
+	const email = req.body.email;
+	const username = req.body.username;
+	const phoneNumber = req.body.phoneNumber;
+	const password = req.body.password;
+	const wallet = req.body.wallet;
+	const verification = 0;
+
+	const Bidder = new Bidder ({
+
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		username: username,
+		phoneNumber: phoneNumber,
+		password: password, //not encrypted yet will come back later
+		wallet: wallet,
+		verification: verification
+	});
+
+	Bidder.save()
+	.then(result => {console.log("Created Bidder");
+	res.redirect(/*put signin page here*/)})
+	.catch(err => {console.log(err);});
 };
+
+
+
