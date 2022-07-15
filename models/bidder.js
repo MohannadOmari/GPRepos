@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bidderSchema = new Schema ({
-    bidder: 
-        {
+    
             firstName: {
                 type: String,
                 required: true
@@ -17,13 +16,13 @@ const bidderSchema = new Schema ({
                 type: String,
                 required: true
             },
-            username: {
+           /* username: {
                 type: String,
                 required: true
-            },
+            },*/
             phoneNumber: {
                 type: Number,
-                required: true
+                //required: true
             },
             password: {
                 type: String,
@@ -31,12 +30,12 @@ const bidderSchema = new Schema ({
             },
             wallet: {
                 type: Number,
-                required: true
+               
             },
            /* verification: {
                 type: Number
             }*/
-        }
+        
 });
 
 module.exports = mongoose.model('Bidder', bidderSchema);

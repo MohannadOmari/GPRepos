@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -20,9 +21,18 @@ app.use(basicRoutes);
 app.use(authRoutes);
 app.use("/auction", auctionRoutes);
 
-app.listen(3000, () => {
-	console.log("port 3000");
-});
+//connection to the mongo atlas DB
+mongoose
+  .connect("mongodb+srv://mohannadalomari:Mohannad_2@bidhaauction.y4bgeky.mongodb.net/bidhaauction?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((result) => {
+    app.listen(3000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /**
  * Landing page
