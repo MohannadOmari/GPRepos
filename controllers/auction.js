@@ -93,6 +93,6 @@ exports.postAddAuction = (req, res, next) => {
 
 	Auction.save()
 	.then(result => {console.log("Created Auction");
-res.redirect(/*put auction page here*/)})
-.catch(err => {console.log(err);});
+	res.redirect(/*put auction page here*/)})
+	.catch(err => {console.log(err);});
 };
