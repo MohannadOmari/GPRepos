@@ -1,6 +1,3 @@
-const Auction = require('../models/auction');
-
-
 let auctionData = [
 	{
 		date: new Date("July 11, 2022 03:24:00"),
@@ -65,34 +62,4 @@ exports.getIndex = (req, res, next) => {
 
 exports.getAuctionInfo = (req, res, next) => {
 	res.render("auction/info", { auctionData, title: "Auction Info" });
-};
-
-
-exports.postAddAuction = (req, res, next) => {
-	const year = req.body.year;
-	const brand = req.body.brand;
-	const model = req.body.model;
-	const fuel = req.body.fuel;
-	const mileage = req.body.mileage;
-	const gearType = req.body.gearType;
-	const interiorColor = req.body.interiorColor;
-	const exteriorColor = req.body.exteriorColor;
-	const price = req.body.price;
-
-	const Auction = new Auction ({
-		year: year,
-		brand: brand,
-		model: model,
-		fuel: fuel,
-		mileage: mileage,
-		gearType: gearType,
-		interiorColor: interiorColor,
-		exteriorColor: exteriorColor,
-		price: price
-	});
-
-	Auction.save()
-	.then(result => {console.log("Created Auction");
-	res.redirect(/*put auction page here*/)})
-	.catch(err => {console.log(err);});
 };

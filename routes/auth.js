@@ -4,10 +4,17 @@ const authController = require("../controllers/auth");
 
 const router = express.Router();
 
-router.get("/user-signup", authController.getSignup);
+router.get("/user-signup", authController.getUserSignup);
 
-router.get("/user-signin", authController.getSignin);
+router.get("/user-signin", authController.getUserSignin);
 
 router.post("/user-signup", authController.postAddUser);
+
+router.get("/organizer-signup", authController.getOrganizerSignup);
+
+router.get("/organizer-signin", authController.getOrganizerSignin);
+
+router.post("/organizer-signup", authController.postAddUser);
+
 
 module.exports = router;

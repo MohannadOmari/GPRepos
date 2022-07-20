@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
-const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
 const basicRoutes = require("./routes/basic");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
@@ -19,24 +19,16 @@ app.use(express.static(path.join(__dirname, "public")));
 // });
 app.use(basicRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 app.use("/auction", auctionRoutes);
 
-//connection to the mongo atlas DB
-mongoose
-  .connect("mongodb+srv://mohannadalomari:Mohannad_2@bidhaauction.y4bgeky.mongodb.net/bidhaauction?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((result) => {
-    app.listen(3000);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+app.listen(3000, () => {
+	console.log("port 3000");
+});
 
 /**
- * Landing page
- * Auth pages
+ * Landing page (Info about webapp, Help section, org or bidder link)
+ * Auth pages (org)
  * Home page (Ads, [clickable]=Count Down(), Search Bar)
  * Car Info
  * Single Auction
