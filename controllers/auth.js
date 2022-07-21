@@ -18,7 +18,7 @@ exports.getOrganizerSignin = (req, res, next) => {
 exports.postAddUser = (req, res, next) => {
 	const user = req.body.user;
 
-	
+	//const bidder = new Bidder (user);
 	console.log(user);
 	res.redirect("/");
 };
