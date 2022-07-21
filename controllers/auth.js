@@ -18,6 +18,7 @@ exports.getOrganizerSignin = (req, res, next) => {
 exports.postAddUser = (req, res, next) => {
 	const user = req.body.user;
 
+	
 	console.log(user);
 	res.redirect("/");
 };
