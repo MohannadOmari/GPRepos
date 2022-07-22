@@ -17,10 +17,10 @@ const organizerSchema = new Schema ({
                 type: String,
                 required: true
             },
-            username: {
+            /*username: {
                 type: String,
                 required: true
-            },
+            },*/
             phoneNumber: {
                 type: Number,
                 required: true
