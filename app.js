@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require('mongoose');
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -21,6 +22,9 @@ app.use(basicRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use("/auction", auctionRoutes);
+
+// connecting to online database cluster
+mongoose.connect('mongodb+srv://mohannadalomari:Mohannad_2@bidhaauction.y4bgeky.mongodb.net/bidhaauctionretryWrites=true&w=majority');
 
 app.listen(3000, () => {
 	console.log("port 3000");
