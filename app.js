@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
+const dbLogin = require("./connection/dbLogin");
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -24,7 +25,7 @@ app.use(userRoutes);
 app.use("/auction", auctionRoutes);
 
 // connecting to online database cluster
-mongoose.connect('mongodb+srv://mohannadalomari:Mohannad_2@bidhaauction.y4bgeky.mongodb.net/bidhaauctionretryWrites=true&w=majority');
+mongoose.connect(`mongodb+srv://${dbLogin.dbUsername}:${dbLogin.dbPassword}@${dbLogin.dbName}.y4bgeky.mongodb.net/${dbLogin.dbName}?retryWrites=true&w=majority`);
 
 app.listen(3000, () => {
 	console.log("port 3000");
