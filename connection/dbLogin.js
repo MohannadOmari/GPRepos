@@ -1,7 +1,3 @@
-const dbUsername = "mohannadalomari";
-const dbPassword = "Mohannad_2";
-const dbName = "bidhaauction";
+const dbURI = 'mongodb+srv://mohannadalomari:Mohannad_2@bidhaauction.y4bgeky.mongodb.net/bidhaauction?retryWrites=true&w=majority';
 
-module.exports.dbName = dbName;
-module.exports.dbUsername = dbUsername;
-module.exports.dbPassword = dbPassword;
+exports.dbURI = dbURI;

@@ -19,7 +19,7 @@ exports.getOrganizerSignin = (req, res, next) => {
 
 // JSON => JavaScript Object Notation
 // creates Bidder and saves him to the database
-exports.postAddUser = (req, res, next) => {
+exports.postAddUser = ('./user-signup', (req, res, next) => {
 	const user = req.body.user;
 
 	var bidder = new Bidder (user);
@@ -28,17 +28,17 @@ exports.postAddUser = (req, res, next) => {
 	res.redirect("/")})
 	.catch(err => {console.log(err);});
 
-};
+});
 
 // creates Organizer and saves to the database
 /*--------- needs fixing/saves to bidder not organizer --------*/
-exports.postAddOrganizer = (req, res, next) => {
-	/* const user = req.body.user; */
+exports.postAddOrganizer = ('./organizer-signup', (req, res, next) => {
+	const org = req.body.org;
 
-	var organizer = new Organizer (user);
+	var organizer = new Organizer (org);
 	organizer.save()
 	.then(result => {console.log("Created Organizer");
 	res.redirect("/")})
-	.catch(err => {console.log(err);});
+	.catch(err => {console.log('hello');});
 
-};
+});

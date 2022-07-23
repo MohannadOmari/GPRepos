@@ -31,14 +31,14 @@ const organizerSchema = new Schema ({
             },
             wallet: {
                 type: Number,
-                required: true
+                //required: true
             },
             /*verification: {
                 type: Number
             },*/
-            /*credentials: {
+            credentials: {
                 type: String
-            }*/
+            }
         }
 });
 

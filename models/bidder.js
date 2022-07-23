@@ -31,7 +31,7 @@ const bidderSchema = new Schema ({
             wallet: {
                 type: Number,
                
-            },
+            }//,
            /* verification: {
                 type: Number
             }*/

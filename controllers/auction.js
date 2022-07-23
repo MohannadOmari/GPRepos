@@ -63,3 +63,5 @@ exports.getIndex = (req, res, next) => {
 exports.getAuctionInfo = (req, res, next) => {
 	res.render("auction/info", { auctionData, title: "Auction Info" });
 };
+
+
