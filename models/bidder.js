@@ -16,10 +16,6 @@ const bidderSchema = new Schema ({
                 type: String,
                 required: true
             },
-           /* username: {
-                type: String,
-                required: true
-            },*/
             phoneNumber: {
                 type: Number,
                 //required: true
@@ -38,4 +34,6 @@ const bidderSchema = new Schema ({
         
 });
 
-module.exports = mongoose.model('Bidder', bidderSchema);
+const Bidder = mongoose.model('Bidder', bidderSchema);
+
+module.exports = Bidder;

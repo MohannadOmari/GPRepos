@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const organizerSchema = new Schema ({
-    organizer: 
-        {
+
             firstName: {
                 type: String,
                 required: true
@@ -17,10 +16,6 @@ const organizerSchema = new Schema ({
                 type: String,
                 required: true
             },
-            /*username: {
-                type: String,
-                required: true
-            },*/
             phoneNumber: {
                 type: Number,
                 required: true
@@ -39,7 +34,9 @@ const organizerSchema = new Schema ({
             credentials: {
                 type: String
             }
-        }
+        
 });
 
-module.exports = mongoose.model('Organizer', organizerSchema);
+const Organizer = mongoose.model('Organizer', organizerSchema);
+
+module.exports = Organizer;

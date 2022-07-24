@@ -32,7 +32,7 @@ exports.postAddUser = ('./user-signup', (req, res, next) => {
 
 // creates Organizer and saves to the database
 /*--------- needs fixing/saves to bidder not organizer --------*/
-exports.postAddOrganizer = ('./organizer-signup', (req, res, next) => {
+/* exports.postAddOrganizer = ('/organizer-signup', (req, res, next) => {
 	const org = req.body.org;
 
 	var organizer = new Organizer (org);
@@ -41,4 +41,4 @@ exports.postAddOrganizer = ('./organizer-signup', (req, res, next) => {
 	res.redirect("/")})
 	.catch(err => {console.log('hello');});
 
-});
+}); */

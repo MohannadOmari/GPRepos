@@ -48,13 +48,16 @@ const auctionSchema = new Schema({
             exteriorColor: {
                 type: String,
                 required: true
-            }//,
+            },
             /* carInspection: {
                 type: pictures
             },
             pictures: {
                 type: pics
-            } */
+            }, */
+            notes: {
+                type: String,
+            }
         }
     ]
 }, { timestamps: true });
