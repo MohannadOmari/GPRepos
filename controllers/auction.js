@@ -1,4 +1,4 @@
-let auctionData = [
+/* let auctionData = [
 	{
 		date: new Date("July 11, 2022 03:24:00"),
 		cars: [
@@ -32,7 +32,7 @@ let auctionData = [
 const user = {
 	name: "Ahmed",
 	wallet: 100,
-};
+}; */
 
 exports.getIndex = (req, res, next) => {
 	let today = new Date().toLocaleString("en-US", { timeZone: "UTC" });
