@@ -32,7 +32,7 @@ const bidderSchema = new Schema ({
                 type: Number
             }*/
         
-});
+}, { timestamps: true });
 
 const Bidder = mongoose.model('Bidder', bidderSchema);
 

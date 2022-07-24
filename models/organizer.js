@@ -35,7 +35,7 @@ const organizerSchema = new Schema ({
                 type: String
             }
         
-});
+}, { timestamps: true });
 
 const Organizer = mongoose.model('Organizer', organizerSchema);
 

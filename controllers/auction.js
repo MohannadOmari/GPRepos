@@ -1,34 +1,32 @@
-let auctionData = [
-	{
-		date: new Date("July 11, 2022 03:24:00"),
-		cars: [
-			{
-				brand: "BMW",
-				model: "x",
-				year: 2020,
-				exteriorColor: "red",
-				interiorColor: "black",
-				gearType: "auto",
-				Fuel: 1000,
-				milage: 100000,
-				carInspection: "Good",
-				notes: "none",
-			},
-			{
-				brand: "Honda",
-				model: "Insight",
-				year: 2020,
-				exteriorColor: "red",
-				interiorColor: "black",
-				gearType: "auto",
-				Fuel: 1000,
-				milage: 100000,
-				carInspection: "Good",
-				notes: "none",
-			},
-		],
-	},
-];
+const Auction = require('../models/auction');
+
+const auctionData = new Auction({
+	startDate: new Date("July 26, 2022 12:30:00"),
+	finishDate: new Date("July 27, 2022 05:00:00"),
+	cars: [
+		{
+			brand: 'BMW',
+			model: 'i8',
+			year: '2018',
+			fuel: 'electric',
+			mileage: 102478,
+			gearType: 'automatic',
+			interiorColor: 'White',
+			exteriorColor: 'White'
+		},
+		{
+			brand: 'Mercedes',
+			model: 'E200',
+			year: '2012',
+			fuel: 'petrol',
+			mileage: 64242,
+			gearType: 'automatic',
+			interiorColor: 'Gray',
+			exteriorColor: 'Black'
+		}
+	]
+});
+
 const user = {
 	name: "Ahmed",
 	wallet: 100,
@@ -36,7 +34,7 @@ const user = {
 
 exports.getIndex = (req, res, next) => {
 	let today = new Date().toLocaleString("en-US", { timeZone: "UTC" });
-	let auctionDate = auctionData[0].date.toLocaleString("en-US", {
+	let auctionDate = auctionData.startDate.toLocaleString("en-US", {
 		timeZone: "UTC",
 	});
 
