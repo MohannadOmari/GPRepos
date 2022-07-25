@@ -14,7 +14,7 @@ router.get("/organizer-signup", authController.getOrganizerSignup);
 
 router.get("/organizer-signin", authController.getOrganizerSignin);
 
-router.post("/organizer-signup", authController.postAddUser);
+router.post("/organizer-signup", authController.postOrganizerSignup);
 
 
 module.exports = router;

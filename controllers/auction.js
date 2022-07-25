@@ -12,7 +12,8 @@ const auctionData = new Auction({
 			mileage: 102478,
 			gearType: 'automatic',
 			interiorColor: 'White',
-			exteriorColor: 'White'
+			exteriorColor: 'White',
+			price: 100000
 		},
 		{
 			brand: 'Mercedes',
@@ -22,7 +23,8 @@ const auctionData = new Auction({
 			mileage: 64242,
 			gearType: 'automatic',
 			interiorColor: 'Gray',
-			exteriorColor: 'Black'
+			exteriorColor: 'Black',
+			price: 30000
 		}
 	]
 });

@@ -22,7 +22,7 @@ exports.getOrganizerSignin = (req, res, next) => {
 exports.postAddUser = ('./user-signup', (req, res, next) => {
 	const user = req.body.user;
 
-	var bidder = new Bidder (user);
+	const bidder = new Bidder (user);
 	bidder.save()
 	.then(result => {console.log("Created Bidder");
 	res.redirect("/")})
@@ -31,14 +31,14 @@ exports.postAddUser = ('./user-signup', (req, res, next) => {
 });
 
 // creates Organizer and saves to the database
-/*--------- needs fixing/saves to bidder not organizer --------*/
-exports.postAddOrganizer = ('./organizer-signup', (req, res, next) => {
+exports.postOrganizerSignup = ('./organizer-signup', (req, res, next) => {
 	const org = req.body.org;
-
-	var organizer = new Organizer (org);
+	
+	const organizer = new Organizer (org);
+	
 	organizer.save()
 	.then(result => {console.log("Created Organizer");
 	res.redirect("/")})
-	.catch(err => {console.log('hello');});
-
+	.catch(err => {console.log(err);});
+	
 });

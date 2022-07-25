@@ -55,6 +55,10 @@ const auctionSchema = new Schema({
             pictures: {
                 type: pics
             }, */
+            price: {
+                type: Number,
+                required: true
+            },
             notes: {
                 type: String,
             }
