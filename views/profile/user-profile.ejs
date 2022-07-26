@@ -1,6 +1,7 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
 
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!--update Profile (User information)-->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
 	<form action="/user-signup" method="post">
 		<div class="input-group mb-3">
@@ -70,9 +71,6 @@
 					aria-describedby="passwordHelpInline"
 					name="user[password]"
 				/>
-				<!-- <button id="submit-button" class="btn btn-primary m-auto mt-3">
-					Change Password
-				</button> -->
 			</div>
 		</div>
 
@@ -84,7 +82,8 @@
 	</form>
 </section>
 
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!--bank account-->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
 
 	<form action="/card-info" method="post">
@@ -159,7 +158,8 @@
 	</form>
 </section>
 
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!-- wallet -->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Wallet Info</h2>
 	<div class="row">
 		<div class="col">
@@ -192,8 +192,8 @@
 </section>
 
 
-
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!-- Auctions Participated -->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Auctions Participated</h2>
 	<div class="container mt-5">
 		<h3 id="heading" class="text-center text-grey">Auction 8</h3>
@@ -238,8 +238,4 @@
 </section>
 
 <%- include("../includes/end.ejs") %>
-<!--
-    Info
-    Auctions Bid info
 
--->
