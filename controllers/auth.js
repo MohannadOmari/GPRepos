@@ -40,5 +40,5 @@ exports.postOrganizerSignup = ('./organizer-signup', (req, res, next) => {
 	.then(result => {console.log("Created Organizer");
 	res.redirect("/")})
 	.catch(err => {console.log(err);});
-	
+
 });

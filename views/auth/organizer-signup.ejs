@@ -1,5 +1,7 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
-<div id="signup-container" class="container mt-5 w-100 bg-white">
+
+<!--organizer signup-->
+<div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign Up</h2>
 	<form action="/organizer-signup" method="post">
 		<div class="input-group mb-3">
@@ -83,7 +85,7 @@
 					required
 					type="text"
 					class="form-control"
-					placeholder="Credential"
+					placeholder="Credentials"
 					aria-describedby="basic-addon1"
 					name="org[credentials]"
 				/>

@@ -27,6 +27,10 @@ const bidderSchema = new Schema ({
             wallet: {
                 type: Number,
                
+            },
+            city: {
+                type: String,
+                required: true
             }//,
            /* verification: {
                 type: Number
