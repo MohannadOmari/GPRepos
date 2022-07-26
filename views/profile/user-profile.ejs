@@ -1,38 +1,7 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
 
-<section id="signup-container" class="container mt-5 w-100 bg-white">
-	<h2 id="heading" class="text-center text-grey mb-5">Wallet Info</h2>
-	<div class="row">
-		<div class="col">
-			<h3>wallet Info</h3>
-			<span>Balance: <i class="text-success">200$</i></span>
-		</div>
-		<div class="col">
-			<h3>wallet Transaction</h3>
-			<p>
-				Last Transaction: <span class="text-danger">-200$</span> on
-				<span class="text-primary">Auction 8</span>
-			</p>
-		</div>
-		<div class="col">
-			<h3>wallet Top Up</h3>
-			<form action="user/balance" method="post">
-				<input
-					type="number"
-					placeholder="Amount to Add"
-					class="form-control"
-					name=""
-					id=""
-				/>
-				<button type="submit" class="form-control btn btn-primary mt-3">
-					ADD
-				</button>
-			</form>
-		</div>
-	</div>
-</section>
-
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!--update Profile (User information)-->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
 	<form action="/user-signup" method="post">
 		<div class="input-group mb-3">
@@ -102,9 +71,6 @@
 					aria-describedby="passwordHelpInline"
 					name="user[password]"
 				/>
-				<!-- <button id="submit-button" class="btn btn-primary m-auto mt-3">
-					Change Password
-				</button> -->
 			</div>
 		</div>
 
@@ -116,7 +82,118 @@
 	</form>
 </section>
 
-<section id="signup-container" class="container mt-5 w-100 bg-white">
+<!--bank account-->
+<section id="containers" class="container mt-5 w-100 bg-white">
+	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
+
+	<form action="/card-info" method="post">
+		<div class="input-group mb-3">
+			<input
+				maxlength="16"
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="Back Account Number"
+				aria-label="backAccountNumber"
+				aria-describedby="basic-addon1"
+				name="backAccountNumber"
+			/>
+		</div>
+		<div class="input-group mb-3">
+			<input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Card Name"
+				aria-label="cardName"
+				aria-describedby="basic-addon1"
+				name="cardName"
+			/>
+		</div>
+		<div class="input-group mb-3">
+			<select name="expireMM" id="expireMM" class="form-select">
+				<option value="">Month</option>
+				<option value="01">January</option>
+				<option value="02">February</option>
+				<option value="03">March</option>
+				<option value="04">April</option>
+				<option value="05">May</option>
+				<option value="06">June</option>
+				<option value="07">July</option>
+				<option value="08">August</option>
+				<option value="09">September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">December</option>
+			</select>
+			<select name="expireYY" id="expireYY" class="form-select">
+				<option value="">Year</option>
+				<option value="22">2022</option>
+				<option value="23">2023</option>
+				<option value="24">2024</option>
+				<option value="25">2025</option>
+				<option value="26">2026</option>
+			</select>
+		</div>
+
+		<div class="input-group mb-3">
+			<input
+				maxlength="3"
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="CCV"
+				aria-label="CCV"
+				aria-describedby="basic-addon1"
+				name="CCV"
+			/>
+		</div>
+
+		<div id="submit-button" class="text-center">
+			<button type="submit" class="btn btn-primary mt-3">Add Card</button>
+		</div>
+	</form>
+</section>
+
+<!-- wallet -->
+<section id="containers" class="container mt-5 w-100 bg-white">
+	<h2 id="heading" class="text-center text-grey mb-5">Wallet Info</h2>
+	<div class="row">
+		<div class="col">
+			<h3>wallet Info</h3>
+			<span>Balance: <i class="text-success">200$</i></span>
+		</div>
+		<div class="col">
+			<h3>wallet Transaction</h3>
+			<p>
+				Last Transaction: <span class="text-danger">-200$</span> on
+				<span class="text-primary">Auction 8</span>
+			</p>
+		</div>
+		<div class="col">
+			<h3>wallet Top Up</h3>
+			<form action="user/balance" method="post">
+				<input
+					type="number"
+					placeholder="Amount to Add"
+					class="form-control"
+					name=""
+					id=""
+				/>
+				<button type="submit" class="form-control btn btn-primary mt-3">
+					ADD
+				</button>
+			</form>
+		</div>
+	</div>
+</section>
+
+
+<!-- Auctions Participated -->
+<section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Auctions Participated</h2>
 	<div class="container mt-5">
 		<h3 id="heading" class="text-center text-grey">Auction 8</h3>
@@ -161,8 +238,4 @@
 </section>
 
 <%- include("../includes/end.ejs") %>
-<!--
-    Info
-    Auctions Bid info
 
--->
