@@ -66,6 +66,7 @@ let auctionData = [
 		],
 	},
 ];
+
 const user = {
 	name: "Ahmed",
 	wallet: 100,
@@ -73,7 +74,7 @@ const user = {
 
 exports.getIndex = (req, res, next) => {
 	let today = new Date().toLocaleString("en-US", { timeZone: "UTC" });
-	let auctionDate = auctionData[0].date.toLocaleString("en-US", {
+	let auctionDate = auctionData.startDate.toLocaleString("en-US", {
 		timeZone: "UTC",
 	});
 
@@ -151,3 +152,5 @@ let auction = {
 		},
 	],
 };
+
+

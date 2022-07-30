@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
 const dbLogin = require("./connection/dbLogin");
+const cookieParser = require('cookie-parser');
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -16,6 +17,7 @@ app.set("views", "views");
 
 app.use(express.urlencoded({ extended: true })); // middleware
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
 
 // app.use("/", (req, res, next) => {
 // 	res.render("basic/home", {title: "Bidha Auction"});
@@ -27,7 +29,9 @@ app.use(organizerRoutes);
 app.use("/auction", auctionRoutes);
 
 // connecting to online database cluster
-mongoose.connect(`mongodb+srv://${dbLogin.dbUsername}:${dbLogin.dbPassword}@${dbLogin.dbName}.y4bgeky.mongodb.net/${dbLogin.dbName}?retryWrites=true&w=majority`);
+mongoose.connect(dbLogin.dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((result) => console.log('connected to db'))
+	.catch((err) => console.log(err));
 
 app.listen(3000, () => {
 	console.log("port 3000");
