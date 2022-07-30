@@ -2,7 +2,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
 const dbLogin = require("./connection/dbLogin");
-const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -10,13 +11,21 @@ const basicRoutes = require("./routes/basic");
 const userRoutes = require("./routes/user");
 
 const app = express();
+const store = new MongoDBStore({
+	uri: dbLogin.dbURI,
+	collection: 'sessions'
+});
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.urlencoded({ extended: true })); // middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cookieParser());
+app.use(session({
+		secret: 'acdc123diokars6942069jotarofoodtruckkun',
+	 	resave: false,
+	 	saveUninitialized: false,
+		store: store}));
 
 // app.use("/", (req, res, next) => {
 // 	res.render("basic/home", {title: "Bidha Auction"});

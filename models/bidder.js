@@ -36,14 +36,14 @@ const bidderSchema = new Schema ({
                 type: String,
                 required: true
             },
-            bankAccount: {
+           /*  bankAccount: {
                 type: Schema.Types.ObjectId,
                 required: true,
                 ref: 'Bank'
-            }
-           /* verification: {
+            },
+            verification: {
                 type: Number
-            }*/
+            } */
         
 }, { timestamps: true });
 
@@ -55,7 +55,7 @@ bidderSchema.pre('save', async function (next) {
     next();
 });
 
-// static method to login user
+/* // static method to login user
 bidderSchema.statics.signin = async function (email, password) {
     const user = await this.findOne({ email });
     if (user) {
@@ -66,7 +66,7 @@ bidderSchema.statics.signin = async function (email, password) {
        throw Error('Incorrect password');
     }
     throw Error('Incorrect email');
-}
+} */
 
 const Bidder = mongoose.model('Bidder', bidderSchema);
 
