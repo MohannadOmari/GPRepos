@@ -41,6 +41,9 @@ section p.meta {
 	margin-bottom: 15px;
 }
 
+section hgroup {
+	margin-top: -360px;
+}
 
 section p.numbers {
 	font-size: 6em;
@@ -61,7 +64,6 @@ div#countdown {
 
 div#countdown p {
 	width: 100%;
-	display: inline-block;
 	text-align: center;
 }
 
@@ -85,7 +87,7 @@ div.cd-box {
 	width: 210px;
 	height: 360px;
 	background: #ffffff;
-	float: left;
+	
 	
 	padding: 25px 0 0 0;
 	margin: 30px 15px 0 0;
@@ -94,3 +96,7 @@ div.cd-box {
 	box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
 }
 
+footer {
+	margin-top: 10rem;
+	clear: both;
+}

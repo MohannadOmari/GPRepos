@@ -1,8 +1,29 @@
+const car = {
+	brand: "BMW",
+	model: "x",
+	year: 2020,
+	exteriorColor: "red",
+	interiorColor: "black",
+	gearType: "auto",
+	Fuel: 1000,
+	milage: 100000,
+	carInspection: "Good",
+	notes: "none",
+	imgs: [
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+	],
+};
+
 let auctionData = [
 	{
 		date: new Date("July 11, 2022 03:24:00"),
 		cars: [
 			{
+				organizerName: "Yazan",
 				brand: "BMW",
 				model: "x",
 				year: 2020,
@@ -13,8 +34,17 @@ let auctionData = [
 				milage: 100000,
 				carInspection: "Good",
 				notes: "none",
+				imgs: [
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+				],
 			},
 			{
+				organizerName: "Ahmed",
+
 				brand: "Honda",
 				model: "Insight",
 				year: 2020,
@@ -25,6 +55,13 @@ let auctionData = [
 				milage: 100000,
 				carInspection: "Good",
 				notes: "none",
+				imgs: [
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+				],
 			},
 		],
 	},
@@ -61,5 +98,56 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getAuctionInfo = (req, res, next) => {
-	res.render("auction/info", { auctionData, title: "Auction Info" });
+	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info" });
+};
+
+exports.getCarInfo = (req, res, next) => {
+	res.render("auction/carinfo", { title: "Car Info", car });
+};
+exports.getAuctionBid = (req, res, next) => {
+	res.render("auction/bid", {
+		title: "Auction Bid",
+		auction,
+		state: "green",
+		currentBid: 200,
+	});
+};
+let auction = {
+	date: new Date("July 11, 2022 03:24:00"),
+	cars: [
+		{
+			organizerName: "Yazan",
+			brand: "BMW",
+			model: "x",
+			year: 2020,
+			exteriorColor: "red",
+			interiorColor: "black",
+			gearType: "auto",
+			Fuel: 1000,
+			milage: 100000,
+			carInspection: "Good",
+			notes: "none",
+			imgs: ["../imgs/bmwback.jpg", "../imgs/bmwfront.jpg", "../imgs/bmwinterior.jpg", "../imgs/bmwleft.jpg"],
+		},
+		{
+			organizerName: "Ahmed",
+
+			brand: "Honda",
+			model: "Insight",
+			year: 2020,
+			exteriorColor: "red",
+			interiorColor: "black",
+			gearType: "auto",
+			Fuel: 1000,
+			milage: 100000,
+			carInspection: "Good",
+			notes: "none",
+			imgs: [
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+			],
+		},
+	],
 };

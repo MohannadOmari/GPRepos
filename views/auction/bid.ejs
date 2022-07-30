@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
+<section class="d-flex flex-row justify-content-center m-5">
+	<div
+		id="signup-container"
+		class="container mt-5 mr-5 auction-flex bg-white"
+	>
+		<%- include("../includes/car.ejs", {car: auction.cars[0]}) %>
+	</div>
+</section>
+<section class="m-auto container text-center bg-white bid-container">
+	<div>
+		<h2 class="text-grey">Bid Information</h2>
+	</div>
+	<div>
+		<h4 class="h-4 mt-4">
+			Current Bid: <i> 200$</i>
+		</h4>
+	</div>
+	<div>
+		<form action="/auction/bidding" method="post">
+			<div class="mt-4">
+				<button
+					id="add-button"
+					type="button"
+					class="btn btn-primary mr-3"
+				>
+					+
+				</button>
+				<label class="form-label"
+					><h2 id="bid-amount" class="text-center">100</h2>
+				</label>
+				<button
+					id="decline-button"
+					type="button"
+					class="btn btn-danger ml-3"
+				>
+					-
+				</button>
+			</div>
+			<button id="bid-button" class="btn btn-success mt-1 mb-2" type="submit">
+				Bid
+			</button>
+		</form>
+	</div>
+
+	
+</section>
+<script src="../js/bid.js"></script>
+<%- include("../includes/end.ejs") %>

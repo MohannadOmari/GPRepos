@@ -1,7 +1,6 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
 
-<!--Auction page-->
-<section id="countdown" class="">
+<section id="" class="">
 	<div class="wrapper">
 		<div class="text-center mt-5">
 			<div id="buttons">
@@ -12,11 +11,10 @@
 					>Enter Auction</a
 				>
 			</div>
-			
-			<p class="meta mt-5">Next Auction starts after </p>
+			<p class="meta mt-5">Next Auction starts after</p>
 		</div>
 
-		<div id="countdown">
+		<div id="countdown" class="d-flex justify-content-start">
 			<div class="cd-box">
 				<p class="numbers days">00</p>
 				<br />
@@ -42,6 +40,7 @@
 	</div>
 	<!-- end div.wrapper -->
 </section>
-<br>
+
 <script src="../js/date.js"></script>
 
+<%- include("../includes/end.ejs") %>
