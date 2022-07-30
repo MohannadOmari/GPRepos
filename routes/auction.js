@@ -6,6 +6,10 @@ const router = express.Router();
 
 router.get("/", auctionController.getIndex);
 
-router.get("/info", auctionController.getAuctionInfo);
+router.get("/bid", auctionController.getAuctionBid);
+
+router.get("/Auctioninfo", auctionController.getAuctionInfo);
+
+router.get("/carinfo", auctionController.getCarInfo);
 
 module.exports = router;

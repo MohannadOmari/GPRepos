@@ -1,33 +1,71 @@
-const Auction = require('../models/auction');
+const car = {
+	brand: "BMW",
+	model: "x",
+	year: 2020,
+	exteriorColor: "red",
+	interiorColor: "black",
+	gearType: "auto",
+	Fuel: 1000,
+	milage: 100000,
+	carInspection: "Good",
+	notes: "none",
+	imgs: [
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+		"../imgs/landing-page.jpg",
+	],
+};
 
-const auctionData = new Auction({
-	startDate: new Date("July 26, 2022 12:30:00"),
-	finishDate: new Date("July 27, 2022 05:00:00"),
-	cars: [
-		{
-			brand: 'BMW',
-			model: 'i8',
-			year: '2018',
-			fuel: 'electric',
-			mileage: 102478,
-			gearType: 'automatic',
-			interiorColor: 'White',
-			exteriorColor: 'White',
-			price: 100000
-		},
-		{
-			brand: 'Mercedes',
-			model: 'E200',
-			year: '2012',
-			fuel: 'petrol',
-			mileage: 64242,
-			gearType: 'automatic',
-			interiorColor: 'Gray',
-			exteriorColor: 'Black',
-			price: 30000
-		}
-	]
-});
+let auctionData = [
+	{
+		date: new Date("July 11, 2022 03:24:00"),
+		cars: [
+			{
+				organizerName: "Yazan",
+				brand: "BMW",
+				model: "x",
+				year: 2020,
+				exteriorColor: "red",
+				interiorColor: "black",
+				gearType: "auto",
+				Fuel: 1000,
+				milage: 100000,
+				carInspection: "Good",
+				notes: "none",
+				imgs: [
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+				],
+			},
+			{
+				organizerName: "Ahmed",
+
+				brand: "Honda",
+				model: "Insight",
+				year: 2020,
+				exteriorColor: "red",
+				interiorColor: "black",
+				gearType: "auto",
+				Fuel: 1000,
+				milage: 100000,
+				carInspection: "Good",
+				notes: "none",
+				imgs: [
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+					"../imgs/landing-page.jpg",
+				],
+			},
+		],
+	},
+];
 
 const user = {
 	name: "Ahmed",
@@ -61,7 +99,58 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getAuctionInfo = (req, res, next) => {
-	res.render("auction/info", { auctionData, title: "Auction Info" });
+	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info" });
+};
+
+exports.getCarInfo = (req, res, next) => {
+	res.render("auction/carinfo", { title: "Car Info", car });
+};
+exports.getAuctionBid = (req, res, next) => {
+	res.render("auction/bid", {
+		title: "Auction Bid",
+		auction,
+		state: "green",
+		currentBid: 200,
+	});
+};
+let auction = {
+	date: new Date("July 11, 2022 03:24:00"),
+	cars: [
+		{
+			organizerName: "Yazan",
+			brand: "BMW",
+			model: "x",
+			year: 2020,
+			exteriorColor: "red",
+			interiorColor: "black",
+			gearType: "auto",
+			Fuel: 1000,
+			milage: 100000,
+			carInspection: "Good",
+			notes: "none",
+			imgs: ["../imgs/bmwback.jpg", "../imgs/bmwfront.jpg", "../imgs/bmwinterior.jpg", "../imgs/bmwleft.jpg"],
+		},
+		{
+			organizerName: "Ahmed",
+
+			brand: "Honda",
+			model: "Insight",
+			year: 2020,
+			exteriorColor: "red",
+			interiorColor: "black",
+			gearType: "auto",
+			Fuel: 1000,
+			milage: 100000,
+			carInspection: "Good",
+			notes: "none",
+			imgs: [
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+				"../imgs/car2.jpg",
+			],
+		},
+	],
 };
 
 

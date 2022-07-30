@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
 const basicRoutes = require("./routes/basic");
 const userRoutes = require("./routes/user");
+const organizerRoutes = require("./routes/organizer");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(basicRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(organizerRoutes);
 app.use("/auction", auctionRoutes);
 
 // connecting to online database cluster
