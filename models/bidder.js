@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+
 const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
@@ -8,27 +8,25 @@ const bidderSchema = new Schema ({
     
             firstName: {
                 type: String,
-                required: [true, 'Please enter a first name']
+                required: true
             },
             lastName: {
                 type: String,
-                required: [true, 'Please enter a last name']
+                required: true
             },
             email: {
                 type: String,
-                required: [true, 'Please enter an email'],
+                required: true,
                 unique: true,
                 lowercase: true,
-                validate: [isEmail, 'Please enter a valid email']
             },
             phoneNumber: {
                 type: String,
-                required: [true, 'Please enter a phone number']
+                required: true
             },
             password: {
                 type: String,
-                required: [true, 'Please enter a password'],
-                minlength: [8, 'Minimum password length is 8 characters']
+                required: true
             },
             wallet: {
                 type: Number,
@@ -37,10 +35,15 @@ const bidderSchema = new Schema ({
             city: {
                 type: String,
                 required: true
-            }//,
-           /* verification: {
+            },
+           /*  bankAccount: {
+                type: Schema.Types.ObjectId,
+                required: true,
+                ref: 'Bank'
+            },
+            verification: {
                 type: Number
-            }*/
+            } */
         
 }, { timestamps: true });
 
@@ -52,7 +55,7 @@ bidderSchema.pre('save', async function (next) {
     next();
 });
 
-// static method to login user
+/* // static method to login user
 bidderSchema.statics.signin = async function (email, password) {
     const user = await this.findOne({ email });
     if (user) {
@@ -63,7 +66,7 @@ bidderSchema.statics.signin = async function (email, password) {
        throw Error('Incorrect password');
     }
     throw Error('Incorrect email');
-}
+} */
 
 const Bidder = mongoose.model('Bidder', bidderSchema);
 
