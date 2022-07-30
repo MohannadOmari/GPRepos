@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+
 const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
@@ -8,27 +8,25 @@ const bidderSchema = new Schema ({
     
             firstName: {
                 type: String,
-                required: [true, 'Please enter a first name']
+                required: true
             },
             lastName: {
                 type: String,
-                required: [true, 'Please enter a last name']
+                required: true
             },
             email: {
                 type: String,
-                required: [true, 'Please enter an email'],
+                required: true,
                 unique: true,
                 lowercase: true,
-                validate: [isEmail, 'Please enter a valid email']
             },
             phoneNumber: {
                 type: String,
-                required: [true, 'Please enter a phone number']
+                required: true
             },
             password: {
                 type: String,
-                required: [true, 'Please enter a password'],
-                minlength: [8, 'Minimum password length is 8 characters']
+                required: true
             },
             wallet: {
                 type: Number,
@@ -37,7 +35,12 @@ const bidderSchema = new Schema ({
             city: {
                 type: String,
                 required: true
-            }//,
+            },
+            bankAccount: {
+                type: Schema.Types.ObjectId,
+                required: true,
+                ref: 'Bank'
+            }
            /* verification: {
                 type: Number
             }*/

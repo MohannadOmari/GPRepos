@@ -56,7 +56,7 @@ exports.postUserSignup = ('/', async (req, res) => {
 		const token = createToken(bidder._id);
 		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 		console.log(bidder);
-		res.status(201).redirect("/user-signin");
+		res.status(201).redirect("/");
 	}
 	catch (err) {
 		const errors = handleErrors(err);
@@ -75,7 +75,7 @@ exports.postOrganizerSignup = ('/', async (req, res) => {
 		const token = createToken(organizer._id);
 		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 		console.log(organizer);
-		res.status(201).redirect("organizer-signin");
+		res.status(201).redirect("/");
 	}
 	catch (err) {
 		const errors = handleErrors(err);
