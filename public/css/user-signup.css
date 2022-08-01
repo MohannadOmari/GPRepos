@@ -40,3 +40,12 @@
 .carinformation {
 	color: darkslateblue;
 }
+#search-form {
+	margin-left: 37px;
+}
+#auth-links {
+	margin-right: 37px;
+}
+.auth-buttons {
+	margin: 0 8px 0 8px;
+}
