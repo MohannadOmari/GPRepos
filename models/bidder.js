@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
-const bidderSchema = new Schema ({
+const BidderSchema = new Schema ({
     
             firstName: {
                 type: String,
@@ -38,7 +38,6 @@ const bidderSchema = new Schema ({
             },
            /*  bankAccount: {
                 type: Schema.Types.ObjectId,
-                required: true,
                 ref: 'Bank'
             },
             verification: {
@@ -48,7 +47,7 @@ const bidderSchema = new Schema ({
 }, { timestamps: true });
 
 // encrypt password when new bidder is created
-bidderSchema.pre('save', async function (next) {
+BidderSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
 
@@ -68,6 +67,6 @@ bidderSchema.statics.signin = async function (email, password) {
     throw Error('Incorrect email');
 } */
 
-const Bidder = mongoose.model('Bidder', bidderSchema);
+const Bidder = mongoose.model('Bidder', BidderSchema);
 
 module.exports = Bidder;

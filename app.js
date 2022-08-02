@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dbLogin = require("./connection/dbLogin");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const flash = require("connect-flash");
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -27,6 +28,7 @@ app.use(session({
 	 	resave: false,
 	 	saveUninitialized: false,
 		store: store}));
+app.use(flash());
 
 // app.use("/", (req, res, next) => {
 // 	res.render("basic/home", {title: "Bidha Auction"});

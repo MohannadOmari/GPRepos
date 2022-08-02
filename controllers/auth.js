@@ -1,27 +1,48 @@
 const Bidder = require("../models/bidder");
 const Organizer = require("../models/organizer");
 const bcrypt = require('bcrypt');
-const session = require('express-session');
 
 exports.getUserSignup = (req, res, next) => {
-	res.render("auth/user-signup", { title: "Sign Up" });
+	res.render("auth/user-signup", { 
+	title: "Sign Up",
+	isAuthenticated: false,
+	isOrganizer: false,
+	isBidder: false
+	});
 };
 
 exports.getUserSignin = (req, res, next) => {
-	res.render("auth/user-signin", { title: "Sign In" });
+	res.render("auth/user-signin", {
+		title: "Sign In",
+		isAuthenticated: false, 
+		isOrganizer: false, 
+		isBidder: false,
+		errorMessage: req.flash('error')
+	});
 };
 
 exports.getOrganizerSignup = (req, res, next) => {
-	res.render("auth/organizer-signup", { title: "Sign Up" });
+	res.render("auth/organizer-signup", { 
+		title: "Sign Up", 
+		isAuthenticated: false, 
+		isOrganizer: false, 
+		isBidder: false 
+	});
 };
 
 exports.getOrganizerSignin = (req, res, next) => {
-	res.render("auth/organizer-signin", { title: "Sign In" });
+	res.render("auth/organizer-signin", { 
+		title: "Sign In", 
+		isAuthenticated: false, 
+		isOrganizer: true, 
+		isBidder: false,
+		errorMessage: req.flash('error')
+	});
 };
 
 // JSON => JavaScript Object Notation
 // creates Bidder and saves him to the database
-exports.postUserSignup = ('/', async (req, res) => {
+exports.postUserSignup = ('/', (req, res) => {
 	const user = req.body.user;
 
 	Bidder.findOne({email: user.email})
@@ -42,7 +63,7 @@ exports.postUserSignup = ('/', async (req, res) => {
 });
 
 // creates Organizer and saves to the database
-exports.postOrganizerSignup = ('/', async (req, res) => {
+exports.postOrganizerSignup = ('/', (req, res) => {
 	const org = req.body.org;
 
 	Organizer.findOne({email: org.email})
@@ -63,24 +84,27 @@ exports.postOrganizerSignup = ('/', async (req, res) => {
 });
 
 // bidder signin function
-exports.postUserSignin = async (req, res) => {
+exports.postUserSignin = (req, res) => {
 	const user= req.body.user;
 
 	Bidder.findOne({email: user.email})
 		.then(userDoc => {
 			if (!userDoc) {
+				req.flash('error', 'Invalid email or password');
 				return res.redirect("/user-signin");
 			}
 			bcrypt.compare(user.password, userDoc.password)
 			.then(doMatch => {
 				if (doMatch) {
-					req.session.isLoggedin = true;
+					req.session.isBidder = true;
+					req.session.isLoggedIn = true;
 					req.session.user = user;
 					return req.session.save(err => {
 						console.log(err);
-						res.redirect("/");
+						res.redirect("/auction");
 					})
 				}
+				req.flash('error', 'Invalid email or password');
 				res.redirect("/user-signin");
 			})
 			.catch(err => {
@@ -91,24 +115,27 @@ exports.postUserSignin = async (req, res) => {
 };
 
 // organizer signin function
-exports.postOrganizerSignin = async (req, res) => {
+exports.postOrganizerSignin = (req, res) => {
 	const org = req.body.org;
 
 	Organizer.findOne({email: org.email})
 		.then(orgDoc => {
 			if (!orgDoc) {
+				req.flash('error', 'Invalid email or password');
 				return res.redirect("/organizer-signin");
 			}
 			bcrypt.compare(org.password, orgDoc.password)
 			.then(doMatch => {
 				if (doMatch) {
-					req.session.isLoggedin = true;
+					req.session.isOrganizer = true;
+					req.session.isLoggedIn = true;
 					req.session.org = org;
 					return req.session.save(err => {
 						console.log(err);
-						res.redirect("/");
+						res.redirect("/auction");
 					})
 				}
+				req.flash('error', 'Invalid email or password');
 				res.redirect("/organizer-signin");
 			})
 			.catch(err => {
@@ -120,9 +147,9 @@ exports.postOrganizerSignin = async (req, res) => {
 };
 
 
-/* exports.postUserLogout = ('/logout', (req,res) => {
+exports.postLogout = ('/logout', (req,res) => {
 	req.session.destroy(err => {
 		console.log(err);
 		res.redirect("/");
 	})
-}); */
+});

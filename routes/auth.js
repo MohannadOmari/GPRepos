@@ -10,7 +10,7 @@ router.get("/user-signin", authController.getUserSignin);
 
 router.post("/user-signin", authController.postUserSignin);
 
-// router.get("/user-logout", authController.postUserLogout);
+router.post("/logout", authController.postLogout);
 
 router.post("/user-signup", authController.postUserSignup);
 
