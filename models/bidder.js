@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
+const bcrypt = require('bcrypt');
+
 const Schema = mongoose.Schema;
 
-const bidderSchema = new Schema ({
+const BidderSchema = new Schema ({
     
             firstName: {
                 type: String,
@@ -14,15 +16,13 @@ const bidderSchema = new Schema ({
             },
             email: {
                 type: String,
-                required: true
+                required: true,
+                unique: true,
+                lowercase: true,
             },
-           /* username: {
+            phoneNumber: {
                 type: String,
                 required: true
-            },*/
-            phoneNumber: {
-                type: Number,
-                //required: true
             },
             password: {
                 type: String,
@@ -32,10 +32,41 @@ const bidderSchema = new Schema ({
                 type: Number,
                
             },
-           /* verification: {
+            city: {
+                type: String,
+                required: true
+            },
+           /*  bankAccount: {
+                type: Schema.Types.ObjectId,
+                ref: 'Bank'
+            },
+            verification: {
                 type: Number
-            }*/
+            } */
         
+}, { timestamps: true });
+
+// encrypt password when new bidder is created
+BidderSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+
+    next();
 });
 
-module.exports = mongoose.model('Bidder', bidderSchema);
+/* // static method to login user
+bidderSchema.statics.signin = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+       const auth = await bcrypt.compare(password, user.password);
+       if (auth) {
+        return user;
+       }
+       throw Error('Incorrect password');
+    }
+    throw Error('Incorrect email');
+} */
+
+const Bidder = mongoose.model('Bidder', BidderSchema);
+
+module.exports = Bidder;

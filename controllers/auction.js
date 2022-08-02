@@ -94,26 +94,36 @@ exports.getIndex = (req, res, next) => {
 		title: "Auction Page",
 		countDown,
 		enterAuction,
+		isAuthenticated: req.session.isLoggedIn,
+		isOrganizer: req.session.isOrganizer,
+		isBidder: req.session.isBidder
 	});
 };
 
 exports.getAuctionInfo = (req, res, next) => {
-	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info" });
+	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info", isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
 };
 
 exports.getCarInfo = (req, res, next) => {
-	res.render("auction/carinfo", { title: "Car Info", car });
+	res.render("auction/carinfo",  { title: "Car Info", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
 };
 
 exports.getPreviousAuction = (req, res, next) => {
 	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car });
 };
+exports.getNextAuction = (req, res, next) => {
+	res.render("auction/NextAuction", { title: "NextAuction ", car });
+};
+
 exports.getAuctionBid = (req, res, next) => {
 	res.render("auction/bid", {
 		title: "Auction Bid",
 		auction,
 		state: "green",
 		currentBid: 200,
+		isAuthenticated: req.session.isLoggedIn,
+		isOrganizer: req.session.isOrganizer,
+		isBidder: req.session.isBidder
 	});
 };
 let auction = {

@@ -1,0 +1,8 @@
+footer {
+	margin-top: 10rem;
+	clear: both;
+}
+.footer-links{
+	text-decoration:none !important;
+	color:black;
+}
