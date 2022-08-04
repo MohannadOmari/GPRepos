@@ -28,16 +28,22 @@
 								>Home</a
 							>
 						</li>
-
+						<% if (isAuthenticated) { %>
 						<li class="nav-item">
+							<% if (isBidder) { %>
 							<a class="nav-link" href="/user-profile">Profile</a>
+							<% } %>
+							<% if (isOrganizer) { %>
+							<a class="nav-link" href="/organizer-profile">Profile</a>
+							<% } %>
 						</li>
+						<% if (isBidder) { %>
 						<li class="nav-item">
-							<a class="nav-link" href="/user-profile"
+							<a class="nav-link" href="#"
 								>Wishlist</a
 							>
 						</li>
-
+						<% } %>
 						<li class="nav-item dropdown">
 							<a
 								class="nav-link dropdown-toggle"
@@ -65,6 +71,7 @@
 								</li>
 							</ul>
 						</li>
+						<% } %>
 						<li class="nav-item">
 							<a class="nav-link" href="/contact-us"
 								>Contact Us</a
@@ -90,6 +97,7 @@
 							</form>
 						</li>
 					</ul>
+					<% if (!isAuthenticated) { %>
 					<!--sign in button-->
 					<div id="auth-links" class="d-flex">
 						<div class="dropdown auth-buttons">
@@ -128,7 +136,7 @@
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
 								<li class="">
-									<a class="dropdown-item" href="/user-signup">Bidder Sign Up</a>
+									<a class="dropdown-item" href="/organizer-signup">Organizer Sign Up</a>
 								</li>
 
 								<li class="">
@@ -136,9 +144,14 @@
 								</li>
 							</ul>
 						</div>
-
+						<% } else { %>
+						
                         <!--logout button-->
-						<a href="" class="btn btn-danger auth-buttons">Logout</a>
+						
+							<form action="/logout" method="post">
+								<button type="submit" class="btn btn-danger auth-buttons">Logout</button>
+							</form>
+						<% } %>
 
 					</div>
 				</div>

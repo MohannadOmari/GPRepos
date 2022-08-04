@@ -3,6 +3,9 @@
 <!--bidder signin-->
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign in</h2>
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+		<% } %>
 	<form action="/user-signin" method="post">
         <div class="input-group mb-3">
 			<input
@@ -36,7 +39,32 @@
 		</div>
 	</form>
 </div>
+<!-- <script>
+	const form = document.querySelector('form');
 
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		// get values
+		const email = form.user[email].value;
+		const password = form.user[password].value;
+		
+		try {
+			const res = await fetch('/user-signin', {
+				method: 'post',
+				body: JSON.stringify({ email, password }),
+				headers: { 'Content-Type': 'application/json' }
+			});
+			const data = await res.json();
+			if (data.user) {
+				location.assign('/');
+			}
+		}
+		catch (err) {
+			console.log(err);
+		}
+	});
+</script> -->
 <%- include("../includes/end.ejs") %>
 
 <!--

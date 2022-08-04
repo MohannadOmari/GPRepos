@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
 const organizerSchema = new Schema ({
-    organizer: 
-        {
+
             firstName: {
                 type: String,
                 required: true
@@ -15,31 +15,52 @@ const organizerSchema = new Schema ({
             },
             email: {
                 type: String,
-                required: true
+                required: true,
+                unique: true,
+                lowercase: true,
             },
-            /*username: {
-                type: String,
-                required: true
-            },*/
             phoneNumber: {
-                type: Number,
+                type: String,
                 required: true
             },
             password: {
                 type: String,
-                required: true
+                required: true       
             },
             wallet: {
                 type: Number,
-                required: true
+                //required: true
             },
             /*verification: {
                 type: Number
             },*/
-            /*credentials: {
+            credentials: {
                 type: String
-            }*/
-        }
-});
+            }
+        
+}, { timestamps: true });
 
-module.exports = mongoose.model('Organizer', organizerSchema);
+// encrypt password when new organizer is created
+organizerSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    
+    next();
+})
+
+/* organizerSchema.statics.signin = async function (email, password) {
+    const org = await this.findOne({ email });
+    if (org) {
+       const auth = await bcrypt.compare(password, org.password);
+       if (auth) {
+        return org;
+       }
+       throw Error('Incorrect password');
+    }
+    throw Error('Incorrect email');
+}
+ */
+
+const Organizer = mongoose.model('Organizer', organizerSchema);
+
+module.exports = Organizer;
