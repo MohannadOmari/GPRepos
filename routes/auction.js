@@ -13,4 +13,6 @@ router.get("/Auctioninfo", auctionController.getAuctionInfo);
 
 router.get("/carinfo", auctionController.getCarInfo);
 
+router.get("/PreviousAuction", auctionController.getPreviousAuction);
+
 module.exports = router;
