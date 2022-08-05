@@ -95,3 +95,6 @@ div.cd-box {
 	-moz-box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
 	box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
 }
+.solid {
+	border-style: solid;
+}

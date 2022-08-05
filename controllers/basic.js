@@ -7,10 +7,10 @@ exports.getContactUs = (req, res, next) => {
 };
 
 exports.getAboutUs = (req, res, next) => {
-	res.render("basic/About-us", { title: "About us" });
+	res.render("basic/About-us", { title: "About us" ,isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder }); 
 };
 
 exports.getWishlist = (req, res, next) => {
-	res.render("basic/Wishlist", { title: "Wishlist" });
+	res.render("basic/Wishlist", { title: "Wishlist" ,isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
 };
 

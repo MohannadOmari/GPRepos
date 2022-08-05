@@ -4,8 +4,13 @@
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign in</h2>
 	<% if (errorMessage) { %>
+<<<<<<< HEAD
 		<div class="user-message user-message--error"><%= errorMessage %></div>
 		<% } %>
+=======
+	<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
+>>>>>>> 3ccdf841bbb9336fb4663aa7ce18842fdd388be9
 	<form action="/organizer-signin" method="post">
         <div class="input-group mb-3">
 			<input
@@ -15,7 +20,7 @@
 				placeholder="Email"
 				aria-label="Email"
 				aria-describedby="basic-addon2"
-				name="user[email]"
+				name="org[email]"
 			/>
 			<span class="input-group-text" id="basic-addon2">@example.com</span>
 		</div>
@@ -29,7 +34,7 @@
 					class="form-control"
 					placeholder="Password"
 					aria-describedby="passwordHelpInline"
-					name="user[password]"
+					name="org[password]"
 				/>
 			</div>
 		</div>
@@ -39,5 +44,9 @@
 		</div>
 	</form>
 </div>
+<<<<<<< HEAD
 
 <%- include("../includes/end.ejs") %>
+=======
+<%- include("../includes/end.ejs") %>
+>>>>>>> 3ccdf841bbb9336fb4663aa7ce18842fdd388be9

@@ -66,6 +66,7 @@ let auctionData = [
 		],
 	},
 ];
+
 const user = {
 	name: "Ahmed",
 	wallet: 100,
@@ -109,10 +110,10 @@ exports.getCarInfo = (req, res, next) => {
 };
 
 exports.getPreviousAuction = (req, res, next) => {
-	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car });
+	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
 };
 exports.getNextAuction = (req, res, next) => {
-	res.render("auction/NextAuction", { title: "NextAuction ", car });
+	res.render("auction/NextAuction", { title: "NextAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
 };
 
 exports.getAuctionBid = (req, res, next) => {
@@ -165,3 +166,5 @@ let auction = {
 		},
 	],
 };
+
+
