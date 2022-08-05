@@ -192,50 +192,13 @@
 </section>
 
 
-<!-- Auctions Participated -->
-<section id="containers" class="container mt-5 w-100 bg-white">
+
+<section id="signup-container" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Auctions Participated</h2>
 	<div class="container mt-5">
 		<h3 id="heading" class="text-center text-grey">Auction 8</h3>
-		<div class="card w-100">
-			<div class="row">
-				<div class="col">
-					<img
-						src="../imgs/landing-page.jpg"
-						class="card-img-top w-100 h-100"
-						alt="..."
-					/>
-				</div>
-				<div class="col">
-					<img
-						src="../imgs/landing-page.jpg"
-						class="card-img-top w-100 h-100"
-						alt="..."
-					/>
-				</div>
-				<div class="col">
-					<img
-						src="../imgs/landing-page.jpg"
-						class="card-img-top w-100 h-100"
-						alt="..."
-					/>
-				</div>
-			</div>
-
-			<!-- Image Src-->
-			<div class="card-body text-center mt-5">
-				<h5 class="card-title">Car Name</h5>
-				<h5 class="card-title">Car Model</h5>
-				<h5 class="card-title">Car Year</h5>
-				<h5 class="card-title">Car Color</h5>
-				<h5 class="card-title">Car Inspection</h5>
-
-				<a href="../auction/carinfo" class="btn btn-primary mt-3">Car Info</a>
-			</div>
-		</div>
+		<%- include("../includes/car.ejs", {cars: cars}) %>
 	</div>
 	<br />
 </section>
-
 <%- include("../includes/end.ejs") %>
-

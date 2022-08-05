@@ -106,12 +106,18 @@ exports.getAuctionInfo = (req, res, next) => {
 };
 
 exports.getCarInfo = (req, res, next) => {
+
 	res.render("auction/carinfo", { title: "Car Info", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+
 };
 
 exports.getPreviousAuction = (req, res, next) => {
-	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car });
+	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
 };
+exports.getNextAuction = (req, res, next) => {
+	res.render("auction/NextAuction", { title: "NextAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
+};
+
 exports.getAuctionBid = (req, res, next) => {
 	res.render("auction/bid", {
 		title: "Auction Bid",

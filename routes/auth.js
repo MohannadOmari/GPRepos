@@ -24,3 +24,4 @@ router.post("/organizer-signup", authController.postOrganizerSignup);
 
 
 module.exports = router;
+
