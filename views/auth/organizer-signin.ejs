@@ -7,6 +7,7 @@
 	<div class="user-message user-message--error"><%= errorMessage %></div>
 	<% } %>
 	<form action="/organizer-signin" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="input-group mb-3">
 			<input
 				required

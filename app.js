@@ -5,6 +5,7 @@ const dbLogin = require("./connection/dbLogin");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require("connect-flash");
+const csrf = require('csurf');
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");
@@ -17,6 +18,7 @@ const store = new MongoDBStore({
 	uri: dbLogin.dbURI,
 	collection: 'sessions'
 });
+const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -29,6 +31,16 @@ app.use(session({
 	 	saveUninitialized: false,
 		store: store}));
 app.use(flash());
+
+app.use(csrfProtection);
+app.use((req, res , next) => {
+	res.locals.isAuthenticated = req.session.isLoggedIn;
+	res.locals.isOrganizer = req.session.isOrganizer;
+	res.locals.isBidder = req.session.isBidder;
+	res.locals.csrfToken = req.csrfToken();
+
+	next();
+});
 
 // app.use("/", (req, res, next) => {
 // 	res.render("basic/home", {title: "Bidha Auction"});
