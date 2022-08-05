@@ -8,4 +8,8 @@ router.get("/", basicController.getHome);
 
 router.get("/contact-us", basicController.getContactUs);
 
+router.get("/About-us", basicController.getAboutUs);
+
+router.get("/Wishlist", basicController.getWishlist);
+
 module.exports = router;
