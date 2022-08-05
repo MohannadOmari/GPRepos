@@ -10,7 +10,7 @@ router.get("/profile", adminController.getProfile);
 
 router.get("/admin-signin", adminController.getAdminSignin);
 
-router.post("/admin-signin", adminController.postAdminSignin);
+
 
 router.get("/organizer-requests", adminController.getOrganizerRequests);
 
