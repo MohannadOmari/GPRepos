@@ -106,7 +106,9 @@ exports.getAuctionInfo = (req, res, next) => {
 };
 
 exports.getCarInfo = (req, res, next) => {
-	res.render("auction/carinfo",  { title: "Car Info", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+
+	res.render("auction/carinfo", { title: "Car Info", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+
 };
 
 exports.getPreviousAuction = (req, res, next) => {
