@@ -50,8 +50,7 @@ router.post("/organizer-signup",
                 .isLength({min: 10}),
             body('org[email]')
                 .isEmail()
-                .withMessage('Please enter a valid Email')
-                .normalizeEmail(),
+                .withMessage('Please enter a valid Email'),
             body('org[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
                 .isLength({min: 8})
                 .isAlphanumeric()
