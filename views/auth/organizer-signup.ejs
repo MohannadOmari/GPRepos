@@ -6,7 +6,7 @@
 	<% if (errorMessage) { %>
 		<div class="user-message user-message--error"><%= errorMessage %></div>
 	<% } %>
-	<form action="/organizer-signup" method="post" novalidate>
+	<form action="/organizer-signup" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
@@ -88,17 +88,7 @@
 			</div>
 		</div>
 		
-		<div class="input-group mt-3">
-			<textarea
-				required
-				placeholder="Location"
-				name="org[location]"
-				class="form-control"
-				id=""
-				cols="20"
-				rows="5"
-			></textarea>
-		</div>
+
 		
         <div class="align-items-center">
 			<div class="mt-3">

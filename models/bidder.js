@@ -36,10 +36,10 @@ const BidderSchema = new Schema ({
                 type: String,
                 required: true
             },
-           /*  bankAccount: {
+            bankAccount: {
                 type: Schema.Types.ObjectId,
                 ref: 'Bank'
-            },
+            },/* 
             verification: {
                 type: Number
             } */
