@@ -3,7 +3,10 @@
 <!--organizer signup-->
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign Up</h2>
-	<form action="/organizer-signup" method="post">
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
+	<form action="/organizer-signup" method="post" novalidate>
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
@@ -14,6 +17,7 @@
 				aria-label="FirstName"
 				aria-describedby="basic-addon1"
 				name="org[firstName]"
+				value="<%= oldInput.firstName %>"
 			/>
 		</div>
 
@@ -26,6 +30,7 @@
 				aria-label="LastName"
 				aria-describedby="basic-addon1"
 				name="org[lastName]"
+				value="<%= oldInput.lastName %>"
 			/>
 		</div>
 
@@ -38,6 +43,7 @@
 				aria-label="Email"
 				aria-describedby="basic-addon2"
 				name="org[email]"
+				value="<%= oldInput.email %>"
 			/>
 			<span class="input-group-text" id="basic-addon2">@example.com</span>
 		</div>
@@ -51,6 +57,7 @@
 				aria-label="PhoneNumber"
 				aria-describedby="basic-addon1"
 				name="org[phoneNumber]"
+				value="<%= oldInput.phoneNumber %>"
 			/>
 		</div>
 
@@ -76,6 +83,7 @@
 					class="form-control"
 					placeholder="Confirm Password"
 					aria-describedby="passwordHelpInline"
+					name="confirmPassword"
 				/>
 			</div>
 		</div>

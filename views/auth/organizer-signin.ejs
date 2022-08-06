@@ -4,10 +4,8 @@
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign in</h2>
 	<% if (errorMessage) { %>
-
-	<div class="user-message user-message--error"><%= errorMessage %></div>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
 	<% } %>
-
 	<form action="/organizer-signin" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="input-group mb-3">
