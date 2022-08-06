@@ -26,7 +26,13 @@ exports.getUserSignin = (req, res, next) => {
 exports.getOrganizerSignup = (req, res, next) => {
 	res.render("auth/organizer-signup", { 
 		title: "Sign Up", 
-		errorMessage: req.flash('error')
+		errorMessage: req.flash('error'),
+		oldInput: {
+			firstName: '',
+			lastName: '',
+			email: '',
+			phoneNumber: ''
+		}
 	});
 };
 
@@ -80,10 +86,28 @@ exports.postUserSignup = ('/', (req, res) => {
 // creates Organizer and saves to the database
 exports.postOrganizerSignup = ('/', (req, res) => {
 	const org = req.body.org;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		return res.status(422).render("auth/organizer-signup", { 
+			title: "Sign Up",
+			errorMessage: errors.array()[0].msg,
+			oldInput: {
+				firstName: org.firstName,
+				lastName: org.lastName,
+				email: org.email,
+				phoneNumber: org.phoneNumber,
+			}
+			});
+	}
 
 	Organizer.findOne({email: org.email})
 	.then(orgDoc => {
 		if (orgDoc) {
+			req.flash(
+				'error',
+				'Email already exists'
+			);
 			return res.redirect("/organizer-signin");
 		}
 		const organizer = new Organizer(org);

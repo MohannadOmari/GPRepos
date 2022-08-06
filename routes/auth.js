@@ -1,5 +1,5 @@
 const express = require("express");
-const { check, body } = require("express-validator");
+const { body } = require("express-validator");
 
 const authController = require("../controllers/auth");
 
@@ -22,8 +22,7 @@ router.post("/user-signup",
                 .isLength({min: 10}),
             body('user[email]')
                 .isEmail()
-                .withMessage('Please enter a valid Email')
-                .normalizeEmail(),
+                .withMessage('Please enter a valid Email'),
             body('user[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
                 .isLength({min: 8})
                 .isAlphanumeric()
@@ -42,7 +41,28 @@ router.get("/organizer-signin", authController.getOrganizerSignin);
 
 router.post("/organizer-signin", authController.postOrganizerSignin);
 
-router.post("/organizer-signup", authController.postOrganizerSignup);
+router.post("/organizer-signup",
+            body('org[firstName]', 'First name cannot be longer than 15 characters')
+                .isLength({max: 15}),
+            body('org[lastName]', 'Last name cannot be longer than 15 characters')
+                .isLength({max: 15}),
+            body('org[phoneNumber]', 'Please enter a valid phone number')
+                .isLength({min: 10}),
+            body('org[email]')
+                .isEmail()
+                .withMessage('Please enter a valid Email')
+                .normalizeEmail(),
+            body('org[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
+                .isLength({min: 8})
+                .isAlphanumeric()
+                .trim(),
+            body('confirmPassword').trim().custom((value, { req }) => {
+                if (value !== req.body.org.password) {
+                    throw new Error('Passwords have to match');
+                }
+                return true;
+            }),
+            authController.postOrganizerSignup);
 
 
 module.exports = router;
