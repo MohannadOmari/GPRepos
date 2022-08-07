@@ -11,9 +11,16 @@
 		
 		<div class="col mt-5 mb-5">
 			<h3 >Useful Links</h3>
+			<% if (isBidder) { %>
 			<div class="row mt-1">
 				<div class="col "><a class="footer-links" href="/user-profile">Profile</a></div>
 			</div>
+			<% } %>
+			<% if (isOrganizer) { %>
+			<div class="row mt-1">
+				<div class="col "><a class="footer-links" href="/organizer-profile">Profile</a></div>
+			</div>
+			<% } %>
 			<div class="row mt-1">
 				<div class="col"><a class="footer-links" href="/Wishlist">Wishlist</a></div>
 			</div>

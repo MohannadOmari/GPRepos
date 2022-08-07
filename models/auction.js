@@ -9,11 +9,11 @@ const auctionSchema = new Schema({
 
     startDate: {
         type: Date,
-        required: true
+        // required: true
     },
     finishDate: {
         type: Date,
-        required: true
+        // required: true
     },
     cars: [
         {
@@ -49,12 +49,13 @@ const auctionSchema = new Schema({
                 type: String,
                 required: true
             },
-            /* carInspection: {
-                type: pictures
-            },
-            pictures: {
-                type: pics
-            }, */
+            /* carInspection: [{
+                type: String
+            }],
+            pictures: [{
+                type: String,
+                required: true
+            }], */
             price: {
                 type: Number,
                 required: true
