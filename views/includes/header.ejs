@@ -39,7 +39,9 @@
 						</li>
 						<% if (isBidder) { %>
 						<li class="nav-item">
+
 							<a class="nav-link" href="/wishlist"
+
 								>Wishlist</a
 							>
 						</li>
@@ -149,6 +151,7 @@
                         <!--logout button-->
 						
 							<form action="/logout" method="post">
+								<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 								<button type="submit" class="btn btn-danger auth-buttons">Logout</button>
 							</form>
 						<% } %>

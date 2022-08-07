@@ -1,22 +1,24 @@
 const Bidder = require("../models/bidder");
 const Organizer = require("../models/organizer");
 const bcrypt = require('bcrypt');
+const { validationResult } = require("express-validator");
 
 exports.getUserSignup = (req, res, next) => {
 	res.render("auth/user-signup", { 
 	title: "Sign Up",
-	isAuthenticated: false,
-	isOrganizer: false,
-	isBidder: false
+	errorMessage: req.flash('error'),
+	oldInput: {
+		firstName: '',
+		lastName: '',
+		email: '',
+		phoneNumber: ''
+	}
 	});
 };
 
 exports.getUserSignin = (req, res, next) => {
 	res.render("auth/user-signin", {
 		title: "Sign In",
-		isAuthenticated: false, 
-		isOrganizer: false, 
-		isBidder: false,
 		errorMessage: req.flash('error')
 	});
 };
@@ -24,18 +26,13 @@ exports.getUserSignin = (req, res, next) => {
 exports.getOrganizerSignup = (req, res, next) => {
 	res.render("auth/organizer-signup", { 
 		title: "Sign Up", 
-		isAuthenticated: false, 
-		isOrganizer: false, 
-		isBidder: false 
+		errorMessage: req.flash('error')
 	});
 };
 
 exports.getOrganizerSignin = (req, res, next) => {
 	res.render("auth/organizer-signin", { 
 		title: "Sign In", 
-		isAuthenticated: false, 
-		isOrganizer: true, 
-		isBidder: false,
 		errorMessage: req.flash('error')
 	});
 };
@@ -44,10 +41,28 @@ exports.getOrganizerSignin = (req, res, next) => {
 // creates Bidder and saves him to the database
 exports.postUserSignup = ('/', (req, res) => {
 	const user = req.body.user;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		return res.status(422).render("auth/user-signup", { 
+			title: "Sign Up",
+			errorMessage: errors.array()[0].msg,
+			oldInput: {
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				phoneNumber: user.phoneNumber,
+			}
+			});
+	}
 
 	Bidder.findOne({email: user.email})
 	.then(userDoc => {
 		if (userDoc) {
+			req.flash(
+				'error',
+				'Email already exists'
+			);
 			return res.redirect("/user-signin");
 		}
 		const bidder = new Bidder(user);

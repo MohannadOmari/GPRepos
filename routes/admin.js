@@ -8,9 +8,7 @@ router.get("/dashboard", adminController.getDashboard);
 
 router.get("/profile", adminController.getProfile);
 
-router.get("/admin-signin", adminController.getAdminSignin);
-
-
+router.get("/", adminController.getAdminSignin);
 
 router.get("/organizer-requests", adminController.getOrganizerRequests);
 

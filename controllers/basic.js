@@ -1,16 +1,16 @@
 exports.getHome = (req, res, next) => {
-	res.render("basic/home", { title: "Bidha Auction", isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+	res.render("basic/home", { title: "Bidha Auction"});
 };
 
 exports.getContactUs = (req, res, next) => {
-	res.render("basic/contact-us", { title: "contact us", isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+	res.render("basic/contact-us", { title: "contact us"});
 };
 
 exports.getAboutUs = (req, res, next) => {
-	res.render("basic/About-us", { title: "About us" ,isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder }); 
+	res.render("basic/About-us", { title: "About us" }); 
 };
 
 exports.getWishlist = (req, res, next) => {
-	res.render("basic/Wishlist", { title: "Wishlist" ,isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+	res.render("basic/Wishlist", { title: "Wishlist" });
 };
 

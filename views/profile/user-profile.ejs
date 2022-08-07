@@ -4,6 +4,7 @@
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
 	<form action="/user-signup" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
 				style="width: 0auto"
@@ -87,6 +88,7 @@
 	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
 
 	<form action="/card-info" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
 				maxlength="16"
@@ -176,6 +178,7 @@
 		<div class="col">
 			<h3>wallet Top Up</h3>
 			<form action="user/balance" method="post">
+				<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				<input
 					type="number"
 					placeholder="Amount to Add"

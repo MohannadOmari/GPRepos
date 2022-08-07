@@ -3,7 +3,11 @@
 <!--bidder signup-->
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign up</h2>
-	<form action="/user-signup" method="post">
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
+	<form action="/user-signup" method="post" novalidate>
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
 				required
@@ -13,6 +17,7 @@
 				aria-label="FirstName"
 				aria-describedby="basic-addon1"
 				name="user[firstName]"
+				value="<%= oldInput.firstName %>"
 			/>
 		
 			<input
@@ -23,6 +28,7 @@
 				aria-label="LastName"
 				aria-describedby="basic-addon1"
 				name="user[lastName]"
+				value="<%= oldInput.lastName %>"
 			/>
 		</div>
 
@@ -35,6 +41,7 @@
 				aria-label="Email"
 				aria-describedby="basic-addon2"
 				name="user[email]"
+				value="<%= oldInput.email %>"
 			/>
 			<span class="input-group-text" id="basic-addon2">@example.com</span>
 		</div>
@@ -48,6 +55,7 @@
 				aria-label="PhoneNumber"
 				aria-describedby="basic-addon1"
 				name="user[phoneNumber]"
+				value="<%= oldInput.phoneNumber %>"
 			/>
 		</div>
 
@@ -73,6 +81,7 @@
 					class="form-control"
 					placeholder="Confirm Password"
 					aria-describedby="passwordHelpInline"
+					name="confirmPassword"
 				/>
 			</div>
 		</div>

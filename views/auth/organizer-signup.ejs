@@ -4,6 +4,7 @@
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign Up</h2>
 	<form action="/organizer-signup" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
 				required
@@ -93,17 +94,20 @@
 		
         <div class="align-items-center">
 			<div class="mt-3">
+				<label for="img">Credentials:</label>
 				<input
+				    id="img"
 					required
-					type="text"
+					type="file"
 					class="form-control"
 					placeholder="Credentials"
 					aria-describedby="basic-addon1"
 					name="org[credentials]"
+					accept="image/*"
 				/>
 			</div>
 		</div>
-        
+      
 		
 
 		<div id="submit-button" class="text-center">

@@ -4,6 +4,7 @@
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
 
 	<form action="/organizer-signup" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
 				style="width: 0auto"

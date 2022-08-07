@@ -7,6 +7,7 @@
 		<div class="user-message user-message--error"><%= errorMessage %></div>
 		<% } %>
 	<form action="/user-signin" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="input-group mb-3">
 			<input
 				required
@@ -39,38 +40,7 @@
 		</div>
 	</form>
 </div>
-<!-- <script>
-	const form = document.querySelector('form');
 
-<<<<<<< HEAD
-<!-- <script>
-	const form = document.querySelector('form');
-
-=======
->>>>>>> 3ccdf841bbb9336fb4663aa7ce18842fdd388be9
-	form.addEventListener('submit', async (e) => {
-		e.preventDefault();
-
-		// get values
-		const email = form.user[email].value;
-		const password = form.user[password].value;
-		
-		try {
-			const res = await fetch('/user-signin', {
-				method: 'post',
-				body: JSON.stringify({ email, password }),
-				headers: { 'Content-Type': 'application/json' }
-			});
-			const data = await res.json();
-			if (data.user) {
-				location.assign('/');
-			}
-		}
-		catch (err) {
-			console.log(err);
-		}
-	});
-</script> -->
 <%- include("../includes/end.ejs") %>
 
 

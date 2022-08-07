@@ -95,25 +95,23 @@ exports.getIndex = (req, res, next) => {
 		title: "Auction Page",
 		countDown,
 		enterAuction,
-		isAuthenticated: req.session.isLoggedIn,
-		isOrganizer: req.session.isOrganizer,
-		isBidder: req.session.isBidder
 	});
 };
 
 exports.getAuctionInfo = (req, res, next) => {
-	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info", isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info"});
 };
 
 exports.getCarInfo = (req, res, next) => {
-	res.render("auction/carinfo",  { title: "Car Info", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder });
+
+	res.render("auction/carinfo", { title: "Car Info", car});
 };
 
 exports.getPreviousAuction = (req, res, next) => {
-	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
+	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car});
 };
 exports.getNextAuction = (req, res, next) => {
-	res.render("auction/NextAuction", { title: "NextAuction ", car, isAuthenticated: req.session.isLoggedIn, isOrganizer: req.session.isOrganizer, isBidder: req.session.isBidder});
+	res.render("auction/NextAuction", { title: "NextAuction ", car});
 };
 
 exports.getAuctionBid = (req, res, next) => {
@@ -122,9 +120,6 @@ exports.getAuctionBid = (req, res, next) => {
 		auction,
 		state: "green",
 		currentBid: 200,
-		isAuthenticated: req.session.isLoggedIn,
-		isOrganizer: req.session.isOrganizer,
-		isBidder: req.session.isBidder
 	});
 };
 let auction = {
