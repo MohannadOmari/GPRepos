@@ -186,9 +186,9 @@ exports.postOrganizerSignin = (req, res) => {
 };
 
 
-exports.postLogout = ('/logout', (req,res) => {
+exports.postLogout = (req,res) => {
 	req.session.destroy(err => {
 		console.log(err);
 		res.redirect("/");
 	})
-});
+};

@@ -38,6 +38,7 @@ app.use((req, res , next) => {
 	res.locals.isAuthenticated = req.session.isLoggedIn;
 	res.locals.isOrganizer = req.session.isOrganizer;
 	res.locals.isBidder = req.session.isBidder;
+	res.locals.isAdmin = req.session.isAdmin;
 	res.locals.csrfToken = req.csrfToken();
 
 	next();

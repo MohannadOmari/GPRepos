@@ -34,11 +34,11 @@
 				<span class="links_name">Profile</span>
 			</a>
 		</li>
-		<li class="log_out">
-			<a href="#">
-				<i class="bx bx-log-out"></i>
-				<span class="links_name">Log out</span>
-			</a>
-		</li>
+			<li class="log_out">
+				<form action="admin-logout" method="post" class="bx bx-log-out">
+					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+					<button type="submit" class="links_name">Logout</button>
+				</form>
+			</li>
 	</ul>
 </div>
