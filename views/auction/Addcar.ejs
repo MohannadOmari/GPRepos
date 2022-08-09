@@ -1,0 +1,147 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
+
+
+<section id="containers" class="container mt-5 w-100 bg-white">
+	<h2 id="heading" class="text-center text-grey">Add car</h2>
+	<form action="/AddCar" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+		<div class="input-group mb-3">
+            <input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Brand"
+				aria-label="Brand"
+				aria-describedby="basic-addon1"
+				name="Car[Brand]"
+			/>
+			<input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Model"
+				aria-label="Model"
+				aria-describedby="basic-addon1"
+				name="Car[Model]"
+			/>
+			<input
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="Year"
+				aria-label="Year"
+				aria-describedby="basic-addon1"
+				name="Car[Year]"
+			/>
+		</div>
+
+		<div class="input-group mb-3">
+			<input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Gear Type"
+				aria-label="Gear Type"
+				aria-describedby="basic-addon1"
+				name="Car[GearType]"
+			/>
+            <input
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="Milage"
+				aria-label="Milage"
+				aria-describedby="basic-addon1"
+				name="Car[Milage]"
+			/>
+            <input
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="Fuel"
+				aria-label="Fuel"
+				aria-describedby="basic-addon1"
+				name="Car[Fuel]"
+			/>
+
+		</div>
+        <div class="input-group mb-3">
+			<input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Exterior Color"
+				aria-label="Exterior Color"
+				aria-describedby="basic-addon1"
+				name="Car[ExteriorColor]"
+			/>
+            <input
+				style="width: 0auto"
+				required
+				type="text"
+				class="form-control"
+				placeholder="Interior Color"
+				aria-label="Interior Color"
+				aria-describedby="basic-addon1"
+				name="Car[InteriorColor]"
+			/>
+            <input
+				style="width: 0auto"
+				required
+				type="number"
+				class="form-control"
+				placeholder="Car Inspection"
+				aria-label="Car Inspection"
+				aria-describedby="basic-addon1"
+				name="Car[CarInspection]"
+			/>
+
+		</div>
+		<div class="input-group mb-3">
+			<input
+            style="width: 0auto"
+            required
+            type="text"
+            class="form-control"
+            placeholder="Notes"
+            aria-label="Notes"
+            aria-describedby="basic-addon1"
+            name="Car[Notes]"
+			/>
+		</div>
+       
+        <div class="align-items-center">
+			<div class="mt-3">
+				<label for="img">5 images of the car:</label>
+				<input
+                multiple
+                id="img"
+                required
+                type="file"
+                class="form-control"
+                placeholder="images of the car "
+                aria-describedby="basic-addon1"
+                name="car[imgs]"
+                accept="image/*"
+				/>
+			</div>
+		</div>
+
+		
+
+		<div id="submit-button" class="text-center">
+			<button type="submit" class="btn btn-primary mt-3">
+				Add car
+			</button>
+		</div>
+	</form>
+</section>
+
+<%- include("../includes/end.ejs") %>

@@ -3,7 +3,7 @@
 <!--update Profile (User information)-->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
-	<form action="/user-signup" method="post">
+	<form action="/user-Profile" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
@@ -197,7 +197,7 @@
 
 
 <!-- <section id="signup-container" class="container mt-5 w-100 bg-white">
-	<h2 id="heading" class="text-center text-grey">Auctions Participated</h2>
+	<h2 id="heading" class="text-center text-grey">Car Won</h2>
 	<div class="container mt-5">
 		<h3 id="heading" class="text-center text-grey">Auction 8</h3>
 		<%- include("../includes/car.ejs", {cars: cars}) %>
