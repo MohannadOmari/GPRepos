@@ -12,4 +12,6 @@ router.get("/", adminController.getAdminSignin);
 
 router.get("/organizer-requests", adminController.getOrganizerRequests);
 
+router.get("/Car-requests", adminController.getCarRequests);
+
 module.exports = router;

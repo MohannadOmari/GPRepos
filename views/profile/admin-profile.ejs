@@ -1,5 +1,10 @@
-<%- include('../includes/admin-head.ejs') %> <%-
-include('../includes/admin-sidebar.ejs') %>
+<%- include('../includes/admin-head.ejs') %>
+<link rel="stylesheet" href="../css/admin.css" />
+<link
+	href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+	rel="stylesheet"
+/>
+<%- include('../includes/admin-sidebar.ejs') %>
 <section class="home-section">
 	<%- include('../includes/admin-nav.ejs') %>
 
@@ -9,23 +14,9 @@ include('../includes/admin-sidebar.ejs') %>
 				<div class="sales-details" style="margin: 0 auto">
 					<form action="/admin-profile" method="post">
 						<div class="form">
-							<div class="title">Welcome</div>
-							<div class="subtitle">
-								You can change Profile Info from here!
-							</div>
-							<div class="input-container ic1">
-								<input
-									id="username"
-									class="input"
-									name="admin[username]"
-									type="text"
-									placeholder=" "
-								/>
-								<div class="cut"></div>
-								<label for="username" class="placeholder"
-									>User name</label
-								>
-							</div>
+							<div class="title">Profile</div>
+						
+						
 							<div class="input-container ic2">
 								<input
 									id="email"
@@ -52,7 +43,7 @@ include('../includes/admin-sidebar.ejs') %>
 								>
 							</div>
 
-							<button type="text" class="submit">submit</button>
+							<button type="text" class="submit">Update</button>
 						</div>
 					</form>
 				</div>

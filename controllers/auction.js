@@ -107,6 +107,11 @@ exports.getCarInfo = (req, res, next) => {
 	res.render("auction/carinfo", { title: "Car Info", car});
 };
 
+exports.getAddCar = (req, res, next) => {
+
+	res.render("auction/AddCar", { title: " Add Car", car});
+};
+
 exports.getPreviousAuction = (req, res, next) => {
 	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car});
 };

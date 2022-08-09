@@ -6,7 +6,7 @@
 	<% if (errorMessage) { %>
 		<div class="user-message user-message--error"><%= errorMessage %></div>
 	<% } %>
-	<form action="/user-signup" method="post" novalidate>
+	<form action="/user-signup" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
@@ -93,9 +93,9 @@
 				name="user[city]"
 			>
 				<option disabled selected>City</option>
-				<option value="1">Amman</option>
-				<option value="2">Salt</option>
-				<option value="3">Irbid</option>
+				<option value="Amman">Amman</option>
+				<option value="Salt">Salt</option>
+				<option value="Irbid">Irbid</option>
 			</select>
 		</div>
 		<div id="submit-button" class="text-center">
@@ -104,38 +104,5 @@
 	</form>
 </div>
 
-<!-- <script>
-	
-	const form = document.querySelector('form');
-	const firstNameError = document.querySelector('.user[firstName].error');
-
-	form.addEventListener('submit', async (e) => {
-		
-		e.preventDefault();
-
-		// get values
-		const firstName = form.user[firstName].value;
-		const lastName = form.user[lastName].value;
-		const email = form.user[email].value;
-		const phoneNumber = form.user[phoneNumber].value;
-		const password = form.user[password].value;
-		const city = form.user[city].value;
-		
-		try {
-			const res = await fetch('/user-signup', {
-				method: 'post',
-				body: JSON.stringify({ firstName, lastName,  email, phoneNumber, password,  city}),
-				headers: { 'Content-Type': 'application/json' }
-			});
-			const data = await res.json();
-			if (data.user) {
-				location.assign('/');
-			}
-		}
-		catch (err) {
-			console.log(err);
-		}
-	})
-</script> -->
 
 <%- include("../includes/end.ejs") %>
