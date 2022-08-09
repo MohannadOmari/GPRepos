@@ -1,11 +1,12 @@
 const Admin = require('../models/admin');
 const bcrypt = require('bcrypt');
+const { validationResult } = require("express-validator");
 
 exports.getDashboard = (req, res, next) => {
 	res.render("admin/dashboard", { title: "Dashboard" });
 };
 exports.getProfile = (req, res, next) => {
-	res.render("profile/admin-profile", { title: "Admin Profile" });
+	res.render("profile/admin-profile", { title: "Admin Profile", errorMessage: req.flash('error') });
 };
 exports.getOrganizerRequests = (req, res, next) => {
 	res.render("admin/Organizer-requests", { title: "Organizer Requests" });
@@ -51,4 +52,33 @@ exports.postAdminLogout = (req, res, next) => {
 		console.log(err);
 		res.redirect("/admin");
 	})
-}
+};
+
+exports.postUpdateAdmin = (req, res, next) => {
+	const email = req.session.admin.email;
+	console.log(email);
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		return res.status(422).render("profile/admin-profile", { 
+			title: "Admin Profile",
+			errorMessage: errors.array()[0].msg,
+			});
+	}
+
+	Admin.findOne({email: email})
+	.then(admin => {
+		console.log(admin);
+		const newAdmin = req.body.admin;
+		if (admin.email != newAdmin.email) {
+			admin.email = newAdmin.email;
+		}
+		if (admin.password != newAdmin.password) {
+			admin.password = newAdmin.password;
+		}
+		req.session.admin = {email: admin.email, password: admin.password};
+		admin.save();
+		return res.redirect("dashboard");
+	})
+	.catch(err => {console.log(err)})
+};

@@ -48,19 +48,6 @@ organizerSchema.pre('save', async function (next) {
     next();
 })
 
-/* organizerSchema.statics.signin = async function (email, password) {
-    const org = await this.findOne({ email });
-    if (org) {
-       const auth = await bcrypt.compare(password, org.password);
-       if (auth) {
-        return org;
-       }
-       throw Error('Incorrect password');
-    }
-    throw Error('Incorrect email');
-}
- */
-
 const Organizer = mongoose.model('Organizer', organizerSchema);
 
 module.exports = Organizer;

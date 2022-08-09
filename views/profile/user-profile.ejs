@@ -3,6 +3,9 @@
 <!--update Profile (User information)-->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Profile</h2>
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
 	<form action="/user-Profile" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
@@ -58,6 +61,7 @@
 				type="number"
 				placeholder="Phone Number"
 				class="form-control"
+				name="user[phoneNumber]"
 			/>
 		</div>
 
@@ -196,12 +200,5 @@
 
 
 
-<!-- <section id="signup-container" class="container mt-5 w-100 bg-white">
-	<h2 id="heading" class="text-center text-grey">Car Won</h2>
-	<div class="container mt-5">
-		<h3 id="heading" class="text-center text-grey">Auction 8</h3>
-		<%- include("../includes/car.ejs", {cars: cars}) %>
-	</div>
-	<br />
-</section> -->
+
 <%- include("../includes/end.ejs") %>

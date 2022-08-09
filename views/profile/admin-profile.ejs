@@ -7,12 +7,15 @@
 <%- include('../includes/admin-sidebar.ejs') %>
 <section class="home-section">
 	<%- include('../includes/admin-nav.ejs') %>
-
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
 	<div class="home-content" style="margin: 0 auto">
 		<div class="sales-boxes">
 			<div class="recent-sales box" style="margin: 0 auto">
 				<div class="sales-details" style="margin: 0 auto">
-					<form action="/admin-profile" method="post">
+					<form action="/admin/profile" method="post">
+						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						<div class="form">
 							<div class="title">Profile</div>
 						
@@ -23,6 +26,7 @@
 									class="input"
 									type="text"
 									placeholder=" "
+									name="admin[email]"
 								/>
 								<div class="cut cut-short"></div>
 								<label for="email" class="placeholder"
