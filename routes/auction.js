@@ -13,7 +13,7 @@ router.get("/Auctioninfo", auctionController.getAuctionInfo);
 
 router.get("/carinfo", auctionController.getCarInfo);
 
-router.get("/AddCar", auctionController.getAddCar);
+router.get("/AddCar", isAuth, auctionController.getAddCar);
 
 router.get("/PreviousAuction", auctionController.getPreviousAuction);
 
