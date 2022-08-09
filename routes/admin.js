@@ -8,10 +8,10 @@ router.get("/dashboard", adminController.getDashboard);
 
 router.get("/profile", adminController.getProfile);
 
-router.get("/admin-signin", adminController.getAdminSignin);
-
-//router.post("/admin-signin", adminController.postAdminSignin);
+router.get("/", adminController.getAdminSignin);
 
 router.get("/organizer-requests", adminController.getOrganizerRequests);
+
+router.get("/Car-requests", adminController.getCarRequests);
 
 module.exports = router;

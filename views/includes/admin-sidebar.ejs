@@ -1,3 +1,5 @@
+</head>
+<body>
 <div class="sidebar">
 	<a href="/" style="text-decoration: none">
 		<div class="logo-details">
@@ -27,6 +29,15 @@
 		</li>
 		<li>
 			<a
+				href="/admin/Car-requests"
+				class="<%= title === 'Car Requests' ? 'active': '' %>"
+			>
+				<i class="bx bx-user"></i>
+				<span class="links_name">Cars</span>
+			</a>
+		</li>
+		<li>
+			<a
 				href="/admin/profile"
 				class="<%= title === 'Admin Profile' ? 'active': '' %>"
 			>
@@ -35,7 +46,7 @@
 			</a>
 		</li>
 		<li class="log_out">
-			<a href="#">
+			<a href="/admin">
 				<i class="bx bx-log-out"></i>
 				<span class="links_name">Log out</span>
 			</a>
