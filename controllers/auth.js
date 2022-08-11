@@ -137,7 +137,7 @@ exports.postUserSignin = (req, res) => {
 				if (doMatch) {
 					req.session.isBidder = true;
 					req.session.isLoggedIn = true;
-					req.session.user = user;
+					req.session.user = userDoc;
 					return req.session.save(err => {
 						console.log(err);
 						res.redirect("/auction");
@@ -168,7 +168,7 @@ exports.postOrganizerSignin = (req, res) => {
 				if (doMatch) {
 					req.session.isOrganizer = true;
 					req.session.isLoggedIn = true;
-					req.session.org = org;
+					req.session.org = orgDoc;
 					return req.session.save(err => {
 						console.log(err);
 						res.redirect("/auction");

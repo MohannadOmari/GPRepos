@@ -10,6 +10,12 @@ router.get("/dashboard", isAdmin, adminController.getDashboard);
 
 router.get("/profile", isAdmin, adminController.getProfile);
 
+router.get("/car-requests", adminController.getCarRequests);
+
+router.patch("/accpet-car", isAdmin, adminController.patchAccpetCar);
+
+router.patch("/reject-car", isAdmin, adminController.patchRejectCar);
+
 router.get("/", adminController.getAdminSignin);
 
 router.post("/", adminController.postAdminSignin);

@@ -8,61 +8,17 @@ const Schema = mongoose.Schema;
 const auctionSchema = new Schema({
 
     startDate: {
-        type: Date,
+        type: String,
         // required: true
     },
-    finishDate: {
-        type: Date,
-        // required: true
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'Admin'
     },
     cars: [
         {
-            brand: {
-                type: String,
-                required: true
-            },
-            model: {
-                type: String,
-                required: true
-            },
-            year: {
-                type: String,
-                required: true
-            },
-            fuel: {
-                type: String,
-                required: true
-            },
-            mileage: {
-                type: Number,
-                required: true
-            },
-            gearType: {
-                type: String,
-                required: true
-            },
-            interiorColor: {
-                type: String,
-                required: true
-            },
-            exteriorColor: {
-                type: String,
-                required: true
-            },
-            /* carInspection: [{
-                type: String
-            }],
-            pictures: [{
-                type: String,
-                required: true
-            }], */
-            price: {
-                type: Number,
-                required: true
-            },
-            notes: {
-                type: String,
-            }
+           type: Schema.Types.ObjectId,
+           ref: 'Car'
         }
     ]
 }, { timestamps: true });

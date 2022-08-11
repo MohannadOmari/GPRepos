@@ -5,8 +5,9 @@ const { validationResult } = require("express-validator");
 exports.getDashboard = (req, res, next) => {
 	res.render("admin/dashboard", { title: "Dashboard" });
 };
-exports.getProfile = (req, res, next) => {
-	res.render("profile/admin-profile", { title: "Admin Profile", errorMessage: req.flash('error') });
+exports.getProfile = async (req, res, next) => {
+	const admin = await Admin.findById(req.session.admin._id);
+	res.render("profile/admin-profile", { title: "Admin Profile", errorMessage: req.flash('error'), admin });
 };
 exports.getOrganizerRequests = (req, res, next) => {
 	res.render("admin/Organizer-requests", { title: "Organizer Requests" });
@@ -31,7 +32,7 @@ exports.postAdminSignin = (req, res, next) => {
 			.then(doMatch => {
 				if (doMatch) {
 					req.session.isAdmin = true;
-					req.session.admin = admin;
+					req.session.admin = adminDoc;
 					return req.session.save(err => {
 						console.log(err);
 						res.redirect("admin/dashboard");
@@ -69,16 +70,31 @@ exports.postUpdateAdmin = (req, res, next) => {
 	Admin.findOne({email: email})
 	.then(admin => {
 		console.log(admin);
-		const newAdmin = req.body.admin;
-		if (admin.email != newAdmin.email) {
-			admin.email = newAdmin.email;
-		}
-		if (admin.password != newAdmin.password) {
-			admin.password = newAdmin.password;
-		}
-		req.session.admin = {email: admin.email, password: admin.password};
+		req.session.admin = admin;
 		admin.save();
 		return res.redirect("dashboard");
 	})
 	.catch(err => {console.log(err)})
+};
+
+exports.getCarRequests = async (req, res, next) => {
+	const cars = await Car.find();
+	const auctions = await Auction.find();
+	res.render("admin/car-requests", {title: "Car Requests", cars, auctions});
+};
+
+exports.patchAccpetCar = async (req, res, next) => {
+	const carId = req.body.carId;
+	const car = await Car.findByIdAndUpdate(carId, {status: "accepted"});
+	await car.save();
+
+	res.redirect("/admin/car-requests");
+};
+
+exports.patchRejectCar = async (req, res, next) => {
+	const carId = req.body.carId;
+	const car = await Car.findByIdAndUpdate(carId, {status: "rejected"});
+	await car.save();
+
+	res.redirect("/admin/car-requests");
 };

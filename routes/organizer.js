@@ -2,11 +2,11 @@ const express = require("express");
 const { body } = require("express-validator");
 
 const organizerController = require("../controllers/organizer");
-const isAuth = require("../middleware/isAuth");
+const isOrganizer = require("../middleware/isOrganizer");
 
 const router = express.Router();
 
-router.get("/organizer-profile", isAuth, organizerController.getOrganizerProfile);
+router.get("/organizer-profile", isOrganizer, organizerController.getOrganizerProfile);
 
 router.post("/organizer-profile",
     body('org[firstName]', 'First name cannot be longer than 15 characters')

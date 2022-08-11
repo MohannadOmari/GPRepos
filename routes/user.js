@@ -2,11 +2,11 @@ const express = require("express");
 const { body } = require("express-validator");
 
 const userController = require("../controllers/user");
-const isAuth = require("../middleware/isAuth");
+const isBidder = require("../middleware/isBidder");
 
 const router = express.Router();
 
-router.get("/user-profile", isAuth, userController.getUserProfile);
+router.get("/user-profile", isBidder, userController.getUserProfile);
 
 router.post("/user-profile",
             body('user[firstName]', 'First name cannot be longer than 15 characters')

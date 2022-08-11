@@ -13,20 +13,22 @@
 				required
 				type="text"
 				class="form-control"
-				placeholder="First Name"
+				placeholder="<%= org.firstName%>"
 				aria-label="FirstName"
 				aria-describedby="basic-addon1"
 				name="org[firstName]"
+				value="<%= org.firstName%>"
 			/>
 			<input
 				style="width: 0auto"
 				required
 				type="text"
 				class="form-control"
-				placeholder="Last Name"
+				placeholder="<%= org.lastName%>"
 				aria-label="LastName"
 				aria-describedby="basic-addon1"
 				name="org[lastName]"
+				value="<%= org.lastName %>"
 			/>
 		</div>
 
@@ -36,17 +38,19 @@
 				required
 				type="email"
 				class="form-control"
-				placeholder="Email"
+				placeholder="<%= org.email %>"
 				aria-label="Email"
 				aria-describedby="basic-addon2"
 				name="org[email]"
+				value="<%= org.email %>"
 			/>
 			<div class="input-group mb-3">
 				<input
 					type="number"
-					placeholder="Phone Number"
+					placeholder="<%= org.phoneNumber %>"
 					class="form-control"
 					name="org[phoneNumber]"
+					value="<%= org.phoneNumber %>"
 				/>
 			</div>
 	
