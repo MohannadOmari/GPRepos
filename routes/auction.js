@@ -16,6 +16,8 @@ router.get("/carinfo", auctionController.getCarInfo);
 
 router.get("/AddCar", isOrganizer, auctionController.getAddCar);
 
+router.post("/AddCar", auctionController.postAddCar);
+
 router.get("/PreviousAuction", auctionController.getPreviousAuction);
 
 router.get("/NextAuction", auctionController.getNextAuction);

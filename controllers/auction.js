@@ -1,3 +1,7 @@
+const Organizer = require("../models/organizer");
+const Auction = require("../models/auction");
+const Car = require("../models/cars");
+
 const car = {
 	brand: "BMW",
 	model: "x",
@@ -167,4 +171,25 @@ let auction = {
 	],
 };
 
-
+exports.postAddCar = async (req, res, next) => {
+	const carDetails = req.body.car;
+	await Organizer.findById(req.session.org._id)
+		.then(org => {
+			const car = new Car({
+				brand: carDetails.brand,
+				model: carDetails.model,
+				year: carDetails.year,
+				fuel: carDetails.fuel,
+				mileage: carDetails.mileage,
+				gearType: carDetails.gearType,
+				interiorColor: carDetails.interiorColor,
+				exteriorColor: carDetails.exteriorColor,
+				notes: carDetails.notes,
+				author: org._id
+			});
+			car.save();
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
