@@ -6,18 +6,20 @@ exports.getOrganizerProfile = async (req, res, next) => {
 	res.render("profile/organizer-profile", { title: "organizer Profile", errorMessage: req.flash('error'), org});
 };
 
-exports.postUpdateOrganizer = (req, res, next) => {
+exports.postUpdateOrganizer = async (req, res, next) => {
 	const email = req.session.org.email;
 	const errors = validationResult(req);
+	org = await Organizer.findOne({email: email})
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render("profile/organizer-profile", { 
 			title: "organizer Profile",
 			errorMessage: errors.array()[0].msg,
+			org
 			});
 	}
 
-	Organizer.findOne({email: email})
+	await Organizer.findOne({email: email})
 	.then(org => {
 		const newOrg = req.body.org;
 		org.firstName = newOrg.firstName;

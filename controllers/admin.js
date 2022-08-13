@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
 const Auction = require('../models/auction');
 const Car = require('../models/cars');
+const Organizer = require("../models/organizer");
 
 exports.getDashboard = (req, res, next) => {
 	res.render("admin/dashboard", { title: "Dashboard" });
@@ -11,11 +12,15 @@ exports.getProfile = async (req, res, next) => {
 	const admin = await Admin.findById(req.session.admin._id);
 	res.render("profile/admin-profile", { title: "Admin Profile", errorMessage: req.flash('error'), admin });
 };
-exports.getOrganizerRequests = (req, res, next) => {
-	res.render("admin/Organizer-requests", { title: "Organizer Requests" });
+exports.getOrganizerRequests = async (req, res, next) => {
+	const orgs = await Organizer.find();
+	res.render("admin/Organizer-requests", { title: "Organizer Requests", orgs });
 };
-exports.getCarRequests = (req, res, next) => {
-	res.render("admin/Car-requests", { title: "Car Requests" });
+
+exports.getCarRequests = async (req, res, next) => {
+	const cars = await Car.find();
+	const auctions = await Auction.find();
+	res.render("admin/car-requests", {title: "Car Requests", cars, auctions});
 };
 
 exports.getAdminSignin = (req, res, next) => {
@@ -83,11 +88,9 @@ exports.postUpdateAdmin = (req, res, next) => {
 	.catch(err => {console.log(err)})
 };
 
-exports.getCarRequests = async (req, res, next) => {
-	const cars = await Car.find();
-	const auctions = await Auction.find();
-	res.render("admin/car-requests", {title: "Car Requests", cars, auctions});
-};
+/* exports.getCarRequests = (req, res, next) => {
+	res.render("admin/Car-requests", { title: "Car Requests" });
+}; */
 
 exports.patchAccpetCar = async (req, res, next) => {
 	const carId = req.body.carId;
@@ -103,4 +106,12 @@ exports.patchRejectCar = async (req, res, next) => {
 	await car.save();
 
 	res.redirect("/admin/car-requests");
+};
+
+exports.patchAccpetOrganizer = (req, res, next) => {
+
+};
+
+exports.patchRejectOrganizer = (req, res, next) => {
+
 };

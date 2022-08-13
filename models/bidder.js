@@ -30,7 +30,7 @@ const BidderSchema = new Schema ({
             },
             wallet: {
                 type: Number,
-               
+                default: 0
             },
             city: {
                 type: String,
@@ -38,7 +38,7 @@ const BidderSchema = new Schema ({
             },
             bankAccount: {
                 type: Schema.Types.ObjectId,
-                ref: 'Bank'
+                ref: 'BankAccount'
             },/* 
             verification: {
                 type: Number

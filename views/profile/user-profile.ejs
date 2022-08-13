@@ -91,6 +91,7 @@
 	</form>
 </section>
 
+<% if (!hasBankAccount) { %>
 <!--bank account-->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
@@ -104,10 +105,10 @@
 				required
 				type="number"
 				class="form-control"
-				placeholder="Back Account Number"
+				placeholder="Card Number"
 				aria-label="backAccountNumber"
 				aria-describedby="basic-addon1"
-				name="backAccountNumber"
+				name="cardNumber"
 			/>
 		</div>
 		<div class="input-group mb-3">
@@ -116,7 +117,7 @@
 				required
 				type="text"
 				class="form-control"
-				placeholder="Card Name"
+				placeholder="Name on Card"
 				aria-label="cardName"
 				aria-describedby="basic-addon1"
 				name="cardName"
@@ -167,7 +168,7 @@
 		</div>
 	</form>
 </section>
-
+<% } else { %>
 <!-- wallet -->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Wallet Info</h2>
@@ -185,13 +186,13 @@
 		</div>
 		<div class="col">
 			<h3>wallet Top Up</h3>
-			<form action="user/balance" method="post">
+			<form action="/balance" method="post">
 				<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				<input
 					type="number"
 					placeholder="Amount to Add"
 					class="form-control"
-					name=""
+					name="money"
 					id=""
 				/>
 				<button type="submit" class="form-control btn btn-primary mt-3">
@@ -201,7 +202,7 @@
 		</div>
 	</div>
 </section>
-
+<% } %>
 
 
 

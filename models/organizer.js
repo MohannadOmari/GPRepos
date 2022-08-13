@@ -33,8 +33,9 @@ const organizerSchema = new Schema ({
             credentials: {
                 type: String
             },
-            approved: {
-                type: String
+            status: {
+                type: String,
+                default: "Pending"
             }
         
 }, { timestamps: true });

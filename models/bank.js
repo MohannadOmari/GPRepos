@@ -9,7 +9,8 @@ const bankSchema = {
     },
     balance: {
         type: Number,
-        required: true
+        required: true,
+        default: 10000
     },
     accountNumber: { 
         type: Number,
@@ -23,7 +24,7 @@ const bankSchema = {
         type: String, 
         required: true 
     },
-    cvv: { 
+    ccv: { 
         type: Number, 
         required: true 
     },

@@ -110,7 +110,6 @@ exports.postOrganizerSignup = (req, res) => {
 			return res.redirect("/organizer-signin");
 		}
 		const organizer = new Organizer(org);
-		organizer.approved = "Pending";
 		return organizer.save();
 	})
 	.then(result => {
@@ -166,7 +165,7 @@ exports.postOrganizerSignin = (req, res) => {
 			bcrypt.compare(org.password, orgDoc.password)
 			.then(doMatch => {
 				if (doMatch) {
-					if(orgDoc.approved == "Approved") {
+					if(orgDoc.status === "Approved") {
 						req.session.isOrganizer = true;
 						req.session.isLoggedIn = true;
 						req.session.org = orgDoc;

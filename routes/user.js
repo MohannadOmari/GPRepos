@@ -24,4 +24,23 @@ router.post("/user-profile",
                 .trim(),
     userController.postUpdateUser);
 
+router.get("/card-info", );
+
+router.post("/card-info",
+    body('backAccountNumber', 'Not a valid card number')
+        .isLength({min: 16, max: 16}),
+    body('expireYY')
+        .custom(value => {
+             year = new Date().getFullYear().toString().split("20");
+            if (value < year[1]) {
+                throw new Error('Card expired')
+            }
+            return true;
+        }),
+    body('CCV', 'Wrong CCV')
+        .isLength({min: 3, max: 3}),
+    userController.postAddBankAccount);
+
+router.post("/balance", userController.postAddBalance);
+
 module.exports = router;
