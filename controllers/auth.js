@@ -84,7 +84,7 @@ exports.postUserSignup = ('/', (req, res) => {
 });
 
 // creates Organizer and saves to the database
-exports.postOrganizerSignup = ('/', (req, res) => {
+exports.postOrganizerSignup = (req, res) => {
 	const org = req.body.org;
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -100,7 +100,6 @@ exports.postOrganizerSignup = ('/', (req, res) => {
 			}
 			});
 	}
-
 	Organizer.findOne({email: org.email})
 	.then(orgDoc => {
 		if (orgDoc) {
@@ -111,6 +110,7 @@ exports.postOrganizerSignup = ('/', (req, res) => {
 			return res.redirect("/organizer-signin");
 		}
 		const organizer = new Organizer(org);
+		organizer.approved = "Pending";
 		return organizer.save();
 	})
 	.then(result => {
@@ -120,7 +120,7 @@ exports.postOrganizerSignup = ('/', (req, res) => {
 		console.log(err);
 	});
 
-});
+};
 
 // bidder signin function
 exports.postUserSignin = (req, res) => {
@@ -166,13 +166,17 @@ exports.postOrganizerSignin = (req, res) => {
 			bcrypt.compare(org.password, orgDoc.password)
 			.then(doMatch => {
 				if (doMatch) {
-					req.session.isOrganizer = true;
-					req.session.isLoggedIn = true;
-					req.session.org = orgDoc;
-					return req.session.save(err => {
-						console.log(err);
-						res.redirect("/auction");
-					})
+					if(orgDoc.approved == "Approved") {
+						req.session.isOrganizer = true;
+						req.session.isLoggedIn = true;
+						req.session.org = orgDoc;
+						return req.session.save(err => {
+							console.log(err);
+							res.redirect("/auction");
+						})} else {
+							req.flash('error', 'This Organizer is not approved yet');
+							return res.redirect("/organizer-signin");
+					}
 				}
 				req.flash('error', 'Invalid email or password');
 				res.redirect("/organizer-signin");

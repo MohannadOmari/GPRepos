@@ -19,6 +19,13 @@ exports.postUpdateOrganizer = (req, res, next) => {
 
 	Organizer.findOne({email: email})
 	.then(org => {
+		const newOrg = req.body.org;
+		org.firstName = newOrg.firstName;
+		org.lastName = newOrg.lastName;
+		org.email = newOrg.email;
+		org.phoneNumber = newOrg.phoneNumber;
+		org.password = newOrg.password;
+
 		req.session.org = org;
 		org.save();
 		return res.redirect("/organizer-profile");

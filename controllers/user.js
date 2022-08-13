@@ -19,6 +19,14 @@ exports.postUpdateUser = (req, res, next) => {
 
 	Bidder.findOne({email: email})
 	.then(user => {
+		const newUser = req.body.user;
+		user.firstName = newUser.firstName;
+		user.lastName = newUser.lastName;
+		user.email = newUser.email;
+		user.city = newUser.city;
+		user.phoneNumber = newUser.phoneNumber;
+		user.password = newUser.password;
+		
 		req.session.user = user;
 		user.save();
 		return res.redirect("/user-profile");

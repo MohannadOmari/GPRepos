@@ -27,14 +27,13 @@ const organizerSchema = new Schema ({
                 type: String,
                 required: true       
             },
-            wallet: {
-                type: Number,
-                //required: true
-            },
             /*verification: {
                 type: Number
             },*/
             credentials: {
+                type: String
+            },
+            approved: {
                 type: String
             }
         

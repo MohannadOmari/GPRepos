@@ -1,6 +1,8 @@
 const Admin = require('../models/admin');
 const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
+const Auction = require('../models/auction');
+const Car = require('../models/cars');
 
 exports.getDashboard = (req, res, next) => {
 	res.render("admin/dashboard", { title: "Dashboard" });
@@ -70,6 +72,10 @@ exports.postUpdateAdmin = (req, res, next) => {
 	Admin.findOne({email: email})
 	.then(admin => {
 		console.log(admin);
+		const newAdmin = req.body.admin;
+		admin.email = newAdmin.email;
+		admin.password = newAdmin.password;
+		
 		req.session.admin = admin;
 		admin.save();
 		return res.redirect("dashboard");
