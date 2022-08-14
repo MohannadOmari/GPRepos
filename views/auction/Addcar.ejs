@@ -3,7 +3,7 @@
 
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Add car</h2>
-	<form action="/AddCar" method="post" enctype="multipart/form-data">
+	<form action="/auction/AddCar?_csrf=<%=csrfToken%>" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
             <input
@@ -57,7 +57,7 @@
 				placeholder="Milage"
 				aria-label="Milage"
 				aria-describedby="basic-addon1"
-				name="car[milage]"
+				name="car[mileage]"
 			/>
             <input
 				style="width: 0auto"

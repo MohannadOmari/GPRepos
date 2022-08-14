@@ -86,6 +86,7 @@ exports.postUserSignup = ('/', (req, res) => {
 // creates Organizer and saves to the database
 exports.postOrganizerSignup = (req, res) => {
 	const org = req.body.org;
+	console.log(org);
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());

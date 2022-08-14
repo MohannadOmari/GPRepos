@@ -6,21 +6,25 @@ const isAdmin = require("../middleware/isAdmin");
 
 const router = express.Router();
 
+router.get("/", adminController.getAdminSignin);
+
+router.post("/", adminController.postAdminSignin);
+
 router.get("/dashboard", isAdmin, adminController.getDashboard);
 
 router.get("/profile", isAdmin, adminController.getProfile);
 
-router.patch("/accpet-car", isAdmin, adminController.patchAccpetCar);
+router.get("/add-auction", isAdmin, adminController.getAddAuction);
 
-router.patch("/reject-car", isAdmin, adminController.patchRejectCar);
+router.post("/add-auction", isAdmin, adminController.postAddAuction);
 
-router.patch("/accept-organizer", isAdmin, adminController.patchAccpetOrganizer);
+router.post("/accept-car", isAdmin, adminController.patchAcceptCar);
 
-router.patch("/reject-organizer", isAdmin, adminController.patchRejectOrganizer);
+router.post("/reject-car", isAdmin, adminController.patchRejectCar);
 
-router.get("/", adminController.getAdminSignin);
+router.post("/accept-organizer", isAdmin, adminController.patchAcceptOrganizer);
 
-router.post("/", adminController.postAdminSignin);
+router.post("/reject-organizer", isAdmin, adminController.patchRejectOrganizer);
 
 router.get("/Organizer-requests", isAdmin, adminController.getOrganizerRequests);
 

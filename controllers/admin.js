@@ -18,9 +18,14 @@ exports.getOrganizerRequests = async (req, res, next) => {
 };
 
 exports.getCarRequests = async (req, res, next) => {
-	const cars = await Car.find();
-	const auctions = await Auction.find();
-	res.render("admin/car-requests", {title: "Car Requests", cars, auctions});
+	const cars = await Car.find().populate("author");
+	res.render("admin/car-requests", {title: "Car Requests", cars});
+};
+
+exports.getAddAuction = async (req, res, next) => {
+	const cars = await Car.find({status: "Accepted"});
+	console.log(cars);
+	res.render("admin/add-auction", { title: "Add Auction", cars });
 };
 
 exports.getAdminSignin = (req, res, next) => {
@@ -92,9 +97,10 @@ exports.postUpdateAdmin = (req, res, next) => {
 	res.render("admin/Car-requests", { title: "Car Requests" });
 }; */
 
-exports.patchAccpetCar = async (req, res, next) => {
+exports.patchAcceptCar = async (req, res, next) => {
+	console.log("HELLO");
 	const carId = req.body.carId;
-	const car = await Car.findByIdAndUpdate(carId, {status: "accepted"});
+	const car = await Car.findByIdAndUpdate(carId, {status: "Accepted"});
 	await car.save();
 
 	res.redirect("/admin/car-requests");
@@ -108,10 +114,23 @@ exports.patchRejectCar = async (req, res, next) => {
 	res.redirect("/admin/car-requests");
 };
 
-exports.patchAccpetOrganizer = (req, res, next) => {
+exports.patchAcceptOrganizer = async (req, res, next) => {
+	const orgId = req.body.orgId;
+	console.log(orgId);
+	const org = await Organizer.findByIdAndUpdate(orgId, { status: "Approved" });
+	await org.save();
 
+	res.redirect("/admin/organizer-requests");
 };
 
-exports.patchRejectOrganizer = (req, res, next) => {
+exports.patchRejectOrganizer = async (req, res, next) => {
+	const orgId = req.body.orgId;
+	const org = await Organizer.findByIdAndUpdate(orgId, { status: "Rejected" });
+	await org.save();
+
+	res.redirect("/admin/organizer-requests");
+};
+
+exports.postAddAuction = (req, res, next) => {
 
 };

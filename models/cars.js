@@ -8,7 +8,8 @@ const CarSchema = new Schema ({
         ref: 'Organizer'
     },
     status: {
-        type: String
+        type: String,
+        default: "Pending"
     },
     brand: {
         type: String,
@@ -42,9 +43,9 @@ const CarSchema = new Schema ({
         type: String,
         required: true
     },
-    /* carInspection: [{
+    /* carInspection: {
         type: String
-    }],
+    },
     images: [{
         type: String,
         required: true

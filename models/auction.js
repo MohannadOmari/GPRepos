@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const auctionSchema = new Schema({
 
     startDate: {
-        type: String,
+        type: Date,
         // required: true
     },
     author: {

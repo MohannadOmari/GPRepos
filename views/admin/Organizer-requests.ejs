@@ -16,11 +16,19 @@
 				<div class="sales-details">
 					<ul class="details">
 						<li class="topic">Date</li>
-						<li><a href="#"> <%= org.createdAt %> </a></li>
+						<li> <%= org.createdAt.toString().substring(0, org.createdAt.toString().indexOf(':') - 2) %> </li>
 					</ul>
 					<ul class="details">
 						<li class="topic">Organizer</li>
-						<li><a href="#"> <%= org.firstName + ' ' + org.lastName %> </a></li>
+						<li> <%= org.firstName + ' ' + org.lastName %> </li>
+					</ul>
+					<ul class="details">
+						<li class="topic">Email</li>
+						<li> <%= org.email %> </li>
+					</ul>
+					<ul class="details">
+						<li class="topic">Phone Number</li>
+						<li><a href="#"> <%= org.phoneNumber %> </a></li>
 					</ul>
 					<!-- <ul class="details">
 						<li class="topic">Credential</li>
@@ -31,7 +39,8 @@
 					<ul class="details">
 						<li class="topic">Status</li>
 						<li>
-							<form action="/accept-organizer" method="post">
+							<form action="/admin/accept-organizer?_csrf=<%=csrfToken%>" method="post">
+								<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 								<button type="submit"
 									class="button"
 									style="color: #fff; background-color: red"
@@ -41,7 +50,8 @@
 								<input type="hidden" value="<%= org._id %>" name="orgId">
 						</li>
 						<li>
-							<form action="/reject-organizer" method="post">
+							<form action="/admin/reject-organizer?_csrf=<%=csrfToken%>" method="post">
+								<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 								<button type="submit"
 									class="button"
 									style="color: #fff; background-color: red"

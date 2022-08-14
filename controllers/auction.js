@@ -76,29 +76,26 @@ const user = {
 	wallet: 100,
 };
 
-exports.getIndex = (req, res, next) => {
-	let today = new Date().toLocaleString("en-US", { timeZone: "UTC" });
-	let auctionDate = auctionData[0].date.toLocaleString("en-US", {
-		timeZone: "UTC",
-	});
-
-	let countDown =
-		parseInt(
-			auctionDate.substring(
-				auctionDate.indexOf("/") + 1,
-				auctionDate.lastIndexOf("/")
-			)
-		) -
-		parseInt(
-			today.substring(today.indexOf("/") + 1, today.lastIndexOf("/"))
-		);
-
-	const enterAuction = countDown === 0 && user.wallet > 200 ? true : false;
+exports.getIndex = (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
+	let today = new Date();
+	console.log(today);
+	let dateStr =
+  		("00" + (today.getMonth() + 1)).slice(-2) + "/" +
+  		("00" + today.getDate()).slice(-2) + "/" +
+  			today.getFullYear() + " " +
+  		("00" + today.getHours()).slice(-2) + ":" +
+  		("00" + today.getMinutes()).slice(-2) + ":" +
+  		("00" + today.getSeconds()).slice(-2);
+	dateStr = dateStr.replaceAll('/', ' ');
+	console.log(dateStr);	
+	const date = "31 Aug 2042 17:00:00";
+	const enterAuction = user.wallet > 200 ? true : false;
 	res.render("auction/index", {
 		auctionData,
 		title: "Auction Page",
-		countDown,
 		enterAuction,
+		date,
+
 	});
 };
 
@@ -173,6 +170,7 @@ let auction = {
 
 exports.postAddCar = async (req, res, next) => {
 	const carDetails = req.body.car;
+	console.log(carDetails);
 	await Organizer.findById(req.session.org._id)
 		.then(org => {
 			const car = new Car({
@@ -188,6 +186,7 @@ exports.postAddCar = async (req, res, next) => {
 				author: org._id
 			});
 			car.save();
+			res.redirect("/");
 		})
 		.catch(err => {
 			console.log(err);

@@ -82,7 +82,7 @@ $(document).ready(function () {
 		}
 		//
 		$("#countdown").countdown({
-			date: "31 Aug 2022 17:00:00", // change date/time here - do not change the format!
+			date: "31 Aug 2042 17:00:00", // change date/time here - do not change the format!
 			format: "on",
 		});
 	});
