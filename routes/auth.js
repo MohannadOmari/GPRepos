@@ -14,15 +14,28 @@ router.post("/user-signin", authController.postUserSignin);
 router.post("/logout", authController.postLogout);
 
 router.post("/user-signup",
-            body('user[firstName]', 'First name cannot be longer than 15 characters')
-                .isLength({max: 15}),
-            body('user[lastName]', 'Last name cannot be longer than 15 characters')
-                .isLength({max: 15}),
+            body('user[firstName]', 'First name must be between 3 and 15 characters with no numbers')
+                .isLength({ min: 3, max: 15 })
+                .isAlpha(),
+            body('user[lastName]', 'Last name must be between 3 and 15 characters with no numbers')
+                .isLength({ min: 3, max: 15 })
+                .isAlpha(),
             body('user[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10}),
+                .isLength({min: 10, max: 10}),
             body('user[email]')
                 .isEmail()
-                .withMessage('Please enter a valid Email'),
+                .withMessage('Please enter a valid Email')
+                .custom(value => {
+                    domain = value.split("@");
+                    console.log(domain[1]);
+                    if (domain[1].toLowerCase() !== "gmail.com" 
+                        && domain[1].toLowerCase() !== "outlook.com"
+                        && domain[1].toLowerCase() !== "hotmail.com"
+                        && domain[1].toLowerCase() !== "yahoo.com") {
+                        throw new Error("email domain is invalid");
+                    }
+                    return true;
+                }),
             body('user[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
                 .isLength({min: 8})
                 .isAlphanumeric()
@@ -42,15 +55,27 @@ router.get("/organizer-signin", authController.getOrganizerSignin);
 router.post("/organizer-signin", authController.postOrganizerSignin);
 
 router.post("/organizer-signup",
-            body('org[firstName]', 'First name cannot be longer than 15 characters')
-                .isLength({max: 15}),
-            body('org[lastName]', 'Last name cannot be longer than 15 characters')
-                .isLength({max: 15}),
+            body('org[firstName]', 'First name must be between 3 and 15 characters with no numbers')
+                .isLength({ min: 3, max: 15 })
+                .isAlpha(),
+            body('org[lastName]', 'Last name must be between 3 and 15 characters with no numbers')
+                .isLength({ min: 3, max: 15 })
+                .isAlpha(),
             body('org[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10}),
+                .isLength({min: 10, max: 10}),
             body('org[email]')
                 .isEmail()
-                .withMessage('Please enter a valid Email'),
+                .withMessage('Please enter a valid Email')
+                .custom(value => {
+                    domain = value.split("@");
+                    if (domain[1].toLowerCase() !== "gmail.com" 
+                        && domain[1].toLowerCase() !== "outlook.com"
+                        && domain[1].toLowerCase() !== "hotmail.com"
+                        && domain[1].toLowerCase() !== "yahoo.com"){
+                        throw new Error("email domain is invalid");
+                    }
+                    return true;
+                }),
             body('org[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
                 .isLength({min: 8})
                 .isAlphanumeric()

@@ -54,6 +54,7 @@ exports.postAddBankAccount = async (req,res,next) => {
 		expDate: expireDate,
 		ccv: ccv
 	});
+	
 	await bankAccount.save();
 	await Bidder.findById(req.session.user._id)
 		.then(user => {
