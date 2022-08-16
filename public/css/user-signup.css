@@ -49,3 +49,8 @@
 .auth-buttons {
 	margin: 0 8px 0 8px;
 }
+.user-message--error{
+	 margin-bottom: 12px;
+	 color: #D8000C;
+}
+

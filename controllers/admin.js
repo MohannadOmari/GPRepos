@@ -19,7 +19,7 @@ exports.getOrganizerRequests = async (req, res, next) => {
 
 exports.getCarRequests = async (req, res, next) => {
 	const cars = await Car.find().populate("author");
-	res.render("admin/car-requests", {title: "Car Requests", cars});
+	res.render("admin/car-requests", {title: "Car Requests" , cars});
 };
 
 exports.getAddAuction = async (req, res, next) => {

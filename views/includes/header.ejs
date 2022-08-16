@@ -2,7 +2,7 @@
 	<header class="">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-				<img src="../imgs/logoAuction.png" class="" alt="logo" />
+				<img src="../imgs/logoAuction.png"  alt="logo" />
 
 				<button
 					class="navbar-toggler"
@@ -40,10 +40,7 @@
 						<% if (isBidder) { %>
 						<li class="nav-item">
 
-							<a class="nav-link" href="/wishlist"
-
-								>Wishlist</a
-							>
+							<a class="nav-link" href="/wishlist">Wishlist</a>
 						</li>
 						<% } %>
 						<% } %>
@@ -86,23 +83,7 @@
 							>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="about-us">About Us</a>
-						</li>
-						<li id="search-form">
-							<form class="d-flex">
-								<input
-									class="form-control me-2"
-									type="search"
-									placeholder="Search"
-									aria-label="Search"
-								/>
-								<button
-									class="btn btn-outline-primary"
-									type="submit"
-								>
-									Search
-								</button>
-							</form>
+							<a class="nav-link" href="/about-us">About Us</a>
 						</li>
 					</ul>
 					<% if (!isAuthenticated) { %>
