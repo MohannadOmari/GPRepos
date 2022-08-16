@@ -10,37 +10,35 @@
 	<!--Side Bar-->
 	<ul class="nav-links">
 		<li>
-			<a
-				href="/admin/dashboard"
-				class="<%= title === 'Dashboard' ? 'active': '' %>"
-			>
+			<a href="/admin/dashboard" class="<%= title === 'Dashboard' ? 'active': '' %>">
 				<i class="bx bx-grid-alt"></i>
 				<span class="links_name">Dashboard</span>
 			</a>
 		</li>
+		 <!-- Organizer Request-->
 		<li>
-			<a
-				href="/admin/organizer-requests"
-				class="<%= title === 'Organizer Requests' ? 'active': '' %>"
-			>
+			<a href="/admin/organizer-requests" class="<%= title === 'Organizer Requests' ? 'active': '' %>">
 				<i class="bx bx-user"></i>
 				<span class="links_name">Organizer</span>
 			</a>
 		</li>
+        <!-- Car Request-->
 		<li>
-			<a
-				href="/admin/Car-requests"
-				class="<%= title === 'Car Requests' ? 'active': '' %>"
-			>
+			<a href="/admin/Car-requests" class="<%= title === 'Car Requests' ? 'active': '' %>">
 				<i class="bx bx-user"></i>
 				<span class="links_name">Cars</span>
 			</a>
 		</li>
+
 		<li>
-			<a
-				href="/admin/profile"
-				class="<%= title === 'Admin Profile' ? 'active': '' %>"
-			>
+			<a href="/admin/add-auction" class="<%= title === 'Car Requests' ? 'active': '' %>">
+				<i class="bx bx-user"></i>
+				<span class="links_name">Auctions</span>
+			</a>
+		</li>
+
+		<li>
+			<a href="/admin/profile" class="<%= title === 'Admin Profile' ? 'active': '' %>">
 				<i class="bx bx-cog"></i>
 				<span class="links_name">Profile</span>
 			</a>
