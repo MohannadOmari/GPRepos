@@ -45,11 +45,11 @@ const CarSchema = new Schema ({
     },
     /* carInspection: {
         type: String
-    },
+    }, */
     images: [{
-        type: String,
-        required: true
-    }], */
+        url: String,
+        name: String
+    }],
     price: {
         type: Number,
         required: true,

@@ -111,6 +111,8 @@ exports.postOrganizerSignup = (req, res) => {
 			return res.redirect("/organizer-signin");
 		}
 		const organizer = new Organizer(org);
+		organizer.credentials.url = req.file.path;
+		organizer.credentials.name = req.file.filename;
 		return organizer.save();
 	})
 	.then(result => {

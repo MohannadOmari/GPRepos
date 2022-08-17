@@ -93,7 +93,6 @@ exports.postUpdateAdmin = (req, res, next) => {
 };
 
 exports.patchAcceptCar = async (req, res, next) => {
-	console.log("HELLO");
 	const carId = req.body.carId;
 	const car = await Car.findByIdAndUpdate(carId, {status: "Accepted"});
 	await car.save();

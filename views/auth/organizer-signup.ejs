@@ -6,7 +6,7 @@
 	<% if (errorMessage) { %>
 		<div class="user-message user-message--error"><%= errorMessage %></div>
 	<% } %>
-	<form action="/organizer-signup?_csrf=<%=csrfToken%>" method="post">
+	<form action="/organizer-signup?_csrf=<%=csrfToken%>" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
 			<input
@@ -89,7 +89,7 @@
 		</div>
 		
 
-<!-- 		<div class="align-items-center">
+		<div class="align-items-center">
 			<div class="mt-3">
 				<label for="img">Credentials:</label>
 				<input
@@ -99,11 +99,11 @@
 					class="form-control"
 					placeholder="Credentials"
 					aria-describedby="basic-addon1"
-					name="org[credentials]"
+					name="credentials"
 					accept="image/*"
 				/>
 			</div>
-		</div> -->
+		</div>
 
       
 		

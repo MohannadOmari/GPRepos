@@ -1,5 +1,8 @@
 const express = require("express");
 const { body } = require("express-validator");
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 const authController = require("../controllers/auth");
 
@@ -55,6 +58,7 @@ router.get("/organizer-signin", authController.getOrganizerSignin);
 router.post("/organizer-signin", authController.postOrganizerSignin);
 
 router.post("/organizer-signup",
+            upload.single('credentials'),
             body('org[firstName]', 'First name must be between 3 and 15 characters with no numbers')
                 .isLength({ min: 3, max: 15 })
                 .isAlpha(),

@@ -173,20 +173,11 @@ exports.postAddCar = async (req, res, next) => {
 	console.log(carDetails);
 	await Organizer.findById(req.session.org._id)
 		.then(org => {
-			const car = new Car({
-				brand: carDetails.brand,
-				model: carDetails.model,
-				year: carDetails.year,
-				fuel: carDetails.fuel,
-				mileage: carDetails.mileage,
-				gearType: carDetails.gearType,
-				interiorColor: carDetails.interiorColor,
-				exteriorColor: carDetails.exteriorColor,
-				notes: carDetails.notes,
-				author: org._id
-			});
+			const car = new Car(carDetails);
+			car.author = org._id;
+			car.images = req.files.map(f => ({ url: f.path, name: f.filename }));
 			car.save();
-			res.redirect("/");
+			res.redirect("/auction");
 		})
 		.catch(err => {
 			console.log(err);

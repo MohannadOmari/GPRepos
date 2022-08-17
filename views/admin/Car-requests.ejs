@@ -22,11 +22,25 @@
 						<li class="topic">Author</li>
 						<li><a href="#"><%= car.author.firstName + ' ' + car.author.lastName %></a></li>
 					</ul>
+					<ul class="details">
+						<li class="topic">Brand</li>
+						<li><a href="#"><%= car.brand %></a></li>
+					</ul>
+					<ul class="details">
+						<li class="topic">Model</li>
+						<li><a href="#"><%= car.model %></a></li>
+					</ul>
+					<ul class="details">
+						<li class="topic">Year</li>
+						<li><a href="#"><%= car.year %></a></li>
+					</ul>
 					<!-- <ul class="details">
-						<li class="topic">Number of Cars</li>
-						<li><a href="#"><%= cars.length %></a></li>
+						<li class="topic">Images</li>
+						<% for (let img of car.images) { %>
+							<li><img src="<% img.url %>"></li>
+						<% } %>
 					</ul> -->
-
+					
 					<ul class="details">
 						<li class="topic">Status</li>
 

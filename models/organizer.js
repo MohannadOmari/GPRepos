@@ -31,7 +31,8 @@ const organizerSchema = new Schema ({
                 type: Number
             },*/
             credentials: {
-                type: String
+                url: String,
+                name: String
             },
             status: {
                 type: String,
