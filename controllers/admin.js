@@ -24,7 +24,6 @@ exports.getCarRequests = async (req, res, next) => {
 
 exports.getAddAuction = async (req, res, next) => {
 	const cars = await Car.find({status: "Accepted"});
-	console.log(cars);
 	res.render("admin/add-auction", { title: "Add Auction", cars });
 };
 
@@ -92,10 +91,6 @@ exports.postUpdateAdmin = (req, res, next) => {
 	})
 	.catch(err => {console.log(err)})
 };
-
-/* exports.getCarRequests = (req, res, next) => {
-	res.render("admin/Car-requests", { title: "Car Requests" });
-}; */
 
 exports.patchAcceptCar = async (req, res, next) => {
 	console.log("HELLO");
