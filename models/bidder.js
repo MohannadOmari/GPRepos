@@ -46,14 +46,6 @@ const BidderSchema = new Schema ({
         
 }, { timestamps: true });
 
-// encrypt password when new bidder is created
-BidderSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-
-    next();
-});
-
 const Bidder = mongoose.model('Bidder', BidderSchema);
 
 module.exports = Bidder;

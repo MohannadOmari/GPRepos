@@ -63,7 +63,7 @@ exports.postUserSignup = ('/', (req, res) => {
 	}
 
 	Bidder.findOne({email: user.email})
-	.then(userDoc => {
+	.then(async userDoc => {
 		if (userDoc) {
 			req.flash(
 				'error',
@@ -71,7 +71,10 @@ exports.postUserSignup = ('/', (req, res) => {
 			);
 			return res.redirect("/user-signin");
 		}
+		const salt = await bcrypt.genSalt(10);
+		const password = await bcrypt.hash(req.body.user.password, salt);
 		const bidder = new Bidder(user);
+		bidder.password = password;
 		return bidder.save();
 	})
 	.then(result => {
@@ -102,7 +105,7 @@ exports.postOrganizerSignup = (req, res) => {
 			});
 	}
 	Organizer.findOne({email: org.email})
-	.then(orgDoc => {
+	.then(async orgDoc => {
 		if (orgDoc) {
 			req.flash(
 				'error',
@@ -110,7 +113,10 @@ exports.postOrganizerSignup = (req, res) => {
 			);
 			return res.redirect("/organizer-signin");
 		}
+		const salt = await bcrypt.genSalt(10);
+		const password = await bcrypt.hash(req.body.org.password, salt);
 		const organizer = new Organizer(org);
+		organizer.password = password;
 		organizer.credentials.url = req.file.path;
 		organizer.credentials.name = req.file.filename;
 		return organizer.save();
@@ -168,19 +174,20 @@ exports.postOrganizerSignin = (req, res) => {
 			bcrypt.compare(org.password, orgDoc.password)
 			.then(doMatch => {
 				if (doMatch) {
-					if(orgDoc.status === "Approved") {
-						req.session.isOrganizer = true;
-						req.session.isLoggedIn = true;
-						req.session.org = orgDoc;
-						return req.session.save(err => {
-							console.log(err);
-							res.redirect("/auction");
-						})} else {
-							req.flash('error', 'This Organizer is not approved yet');
-							return res.redirect("/organizer-signin");
+					if(orgDoc.status !== "Approved") {
+						req.flash('error', 'This Organizer is not approved yet');
+						return res.redirect("/organizer-signin");
 					}
+					req.session.isOrganizer = true;
+					req.session.isLoggedIn = true;
+					req.session.org = orgDoc;
+					return req.session.save(err => {
+						console.log(err);
+						res.redirect("/auction");
+					});
 				}
 				req.flash('error', 'Invalid email or password');
+				console.log("I am password");
 				res.redirect("/organizer-signin");
 			})
 			.catch(err => {

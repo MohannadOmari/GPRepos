@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(session({
 		secret: 'acdc123diokars6942069jotarofoodtruckkun',
 	 	resave: false,
+		cookie: {maxAge: 604800000},
 	 	saveUninitialized: false,
 		store: store}));
 app.use(flash());

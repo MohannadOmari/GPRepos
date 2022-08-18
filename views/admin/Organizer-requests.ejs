@@ -44,10 +44,10 @@
 								<button type="submit"
 									class="button"
 									style="color: #fff; width: 100%; background-color: green"
-									href="#"
 									>Accept
 								</button>
 								<input type="hidden" value="<%= org._id %>" name="orgId">
+							</form>
 						</li>
 						<li>
 							<form action="/admin/reject-organizer?_csrf=<%=csrfToken%>" method="post">
@@ -55,10 +55,10 @@
 								<button type="submit"
 									class="button"
 									style="color: #fff; width: 100%; background-color: red"
-									href="#"
 									>Reject
 								</button>
 								<input type="hidden" value="<%= org._id %>" name="orgId">
+							</form>
 						</li>
 					</ul>
 				</div>

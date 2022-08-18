@@ -1,5 +1,6 @@
 const Bidder = require("../models/bidder");
 const BankAccount = require("../models/bank");
+const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
 
 exports.getUserProfile = async (req, res, next) => {
@@ -22,6 +23,8 @@ exports.postUpdateUser = async (req, res, next) => {
 			});
 	}
 
+	const salt = await bcrypt.genSalt(10);
+	const password = await bcrypt.hash(req.body.user.password, salt);
 	await Bidder.findOne({email: email})
 	.then(user => {
 		const newUser = req.body.user;
@@ -30,7 +33,7 @@ exports.postUpdateUser = async (req, res, next) => {
 		user.email = newUser.email;
 		user.city = newUser.city;
 		user.phoneNumber = newUser.phoneNumber;
-		user.password = newUser.password;
+		user.password = password;
 		
 		req.session.user = user;
 		user.save();

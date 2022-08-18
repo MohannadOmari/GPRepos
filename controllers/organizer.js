@@ -1,4 +1,5 @@
 const Organizer = require("../models/organizer");
+const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
 
 exports.getOrganizerProfile = async (req, res, next) => {
@@ -18,7 +19,8 @@ exports.postUpdateOrganizer = async (req, res, next) => {
 			org
 			});
 	}
-
+	const salt = await bcrypt.genSalt(10);
+	const password = await bcrypt.hash(req.body.org.password, salt);
 	await Organizer.findOne({email: email})
 	.then(org => {
 		const newOrg = req.body.org;
@@ -26,7 +28,7 @@ exports.postUpdateOrganizer = async (req, res, next) => {
 		org.lastName = newOrg.lastName;
 		org.email = newOrg.email;
 		org.phoneNumber = newOrg.phoneNumber;
-		org.password = newOrg.password;
+		org.password = password;
 
 		req.session.org = org;
 		org.save();

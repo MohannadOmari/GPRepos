@@ -41,14 +41,6 @@ const organizerSchema = new Schema ({
         
 }, { timestamps: true });
 
-// encrypt password when new organizer is created
-organizerSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    
-    next();
-})
-
 const Organizer = mongoose.model('Organizer', organizerSchema);
 
 module.exports = Organizer;

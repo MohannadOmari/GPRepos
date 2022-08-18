@@ -110,9 +110,10 @@ exports.patchRejectCar = async (req, res, next) => {
 
 exports.patchAcceptOrganizer = async (req, res, next) => {
 	const orgId = req.body.orgId;
-	console.log(orgId);
 	const org = await Organizer.findByIdAndUpdate(orgId, { status: "Approved" });
+	console.log(org.password);
 	await org.save();
+	console.log(org.password);
 
 	res.redirect("/admin/organizer-requests");
 };
