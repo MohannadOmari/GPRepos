@@ -195,10 +195,7 @@
 	left: 240px;
 	transition: all 0.5s ease;
 }
-.add_auction {
-	top: 50px;
-	left: 100px;
-}
+
 
 .sidebar.active ~ .home-section {
 	width: calc(100% - 60px);
@@ -585,5 +582,8 @@ a.button {
 	.sidebar.active ~ .home-section nav {
 		left: 60px;
 		width: calc(100% - 60px);
+	}
+    .addAuction {
+		margin-top: 10px;
 	}
 }
