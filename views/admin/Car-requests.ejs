@@ -17,10 +17,12 @@
 					<ul class="details">
 						<li class="topic">Date</li>
 						<li>
+					
+						
 							<a href="#">
 								<%= car.createdAt.toString().substring(0,
 								car.createdAt.toString().indexOf(':') - 2) %>
-							</a>
+							</a> 
 						</li>
 					</ul>
 					<ul class="details">
@@ -48,11 +50,11 @@
 						<li class="topic">Images</li>
 						<li>
 							<% car.images.forEach((img, i) => {%>
-							<a href="<% img.url %>"> Picture<%= i %> </a>
+							<a href="<% img.url %>"> <%= i+1 %> </a>
 							<% }); %>
 						</li>
 					</ul>
-
+                       
 					<ul class="details">
 						<li class="topic">Status</li>
 
