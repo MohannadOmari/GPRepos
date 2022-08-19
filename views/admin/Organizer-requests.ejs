@@ -11,20 +11,23 @@
 		<div class="sales-boxes">
 			<div class="recent-sales box">
 				<div class="title">Recent Applicants</div>
-				<% for (let org of orgs) { %>
-					<% if (org.status === "Pending") { %>
+				<% for (let org of orgs) { %> <% if (org.status === "Pending") {
+				%>
 				<div class="sales-details">
 					<ul class="details">
 						<li class="topic">Date</li>
-						<li> <%= org.createdAt.toString().substring(0, org.createdAt.toString().indexOf(':') - 2) %> </li>
+						<li>
+							<%= org.createdAt.toString().substring(0,
+							org.createdAt.toString().indexOf(':') - 2) %>
+						</li>
 					</ul>
 					<ul class="details">
 						<li class="topic">Organizer</li>
-						<li> <%= org.firstName + ' ' + org.lastName %> </li>
+						<li><%= org.firstName + ' ' + org.lastName %></li>
 					</ul>
 					<ul class="details">
 						<li class="topic">Email</li>
-						<li> <%= org.email %> </li>
+						<li><%= org.email %></li>
 					</ul>
 					<ul class="details">
 						<li class="topic">Phone Number</li>
@@ -32,32 +35,72 @@
 					</ul>
 					<ul class="details">
 						<li class="topic">Credential</li>
-						<li><a href="<%= org.credentials.url %>" target="_blank">Credentials</a></li>
+						<li>
+							<a
+								href="<%= org.credentials.url %>"
+								target="_blank"
+								style="color: #013088"
+								>Credentials File
+							</a>
+						</li>
 					</ul>
 
-				
 					<ul class="details">
 						<li class="topic">Status</li>
 						<li>
-							<form action="/admin/accept-organizer?_csrf=<%=csrfToken%>" method="post">
-								<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-								<button type="submit"
+							<form
+								action="/admin/accept-organizer?_csrf=<%=csrfToken%>"
+								method="post"
+							>
+								<input
+									type="hidden"
+									name="_csrf"
+									value="<%= csrfToken %>"
+								/>
+								<button
+									type="submit"
 									class="button"
-									style="color: #fff; width: 100%; background-color: green"
-									>Accept
+									style="
+										color: #fff;
+										width: 100%;
+										background-color: green;
+									"
+								>
+									Accept
 								</button>
-								<input type="hidden" value="<%= org._id %>" name="orgId">
+								<input
+									type="hidden"
+									value="<%= org._id %>"
+									name="orgId"
+								/>
 							</form>
 						</li>
 						<li>
-							<form action="/admin/reject-organizer?_csrf=<%=csrfToken%>" method="post">
-								<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-								<button type="submit"
+							<form
+								action="/admin/reject-organizer?_csrf=<%=csrfToken%>"
+								method="post"
+							>
+								<input
+									type="hidden"
+									name="_csrf"
+									value="<%= csrfToken %>"
+								/>
+								<button
+									type="submit"
 									class="button"
-									style="color: #fff; width: 100%; background-color: red"
-									>Reject
+									style="
+										color: #fff;
+										width: 100%;
+										background-color: red;
+									"
+								>
+									Reject
 								</button>
-								<input type="hidden" value="<%= org._id %>" name="orgId">
+								<input
+									type="hidden"
+									value="<%= org._id %>"
+									name="orgId"
+								/>
 							</form>
 						</li>
 					</ul>

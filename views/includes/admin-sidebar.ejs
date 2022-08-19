@@ -25,13 +25,13 @@
         <!-- Car Request-->
 		<li>
 			<a href="/admin/Car-requests" class="<%= title === 'Car Requests' ? 'active': '' %>">
-				<i class="bx bx-user"></i>
+				<i class='bx bxs-car-garage'></i>
 				<span class="links_name">Cars</span>
 			</a>
 		</li>
 
 		<li>
-			<a href="/admin/add-auction" class="<%= title === 'Car Requests' ? 'active': '' %>">
+			<a href="/admin/add-auction" class="<%= title === 'Add Auction' ? 'active': '' %>">
 				<i class="bx bx-user"></i>
 				<span class="links_name">Auctions</span>
 			</a>
@@ -44,9 +44,9 @@
 			</a>
 		</li>
 			<li class="log_out">
-				<form action="admin-logout" method="post" class="bx bx-log-out">
+				<form action="admin-logout" method="post" class="">
 					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-					<button type="submit" class="links_name">Logout</button>
+				<button type="submit" class="button-1" role="button">Logout </button>
 				</form>
 			</li>
 	</ul>

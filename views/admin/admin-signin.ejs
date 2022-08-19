@@ -1,17 +1,16 @@
 
 <%- include('../includes/admin-head.ejs') %>
 <link rel="stylesheet" href="../css/signin.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <section class="home-section">
-	<% if (errorMessage) { %>
-		<div class="user-message user-message--error"><%= errorMessage %></div>
-	<% } %>
 		<form action="admin" method="post">
 			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 			<div class="form">
 				<div class="title">Sign in</div>
-							
+<%- include('../includes/flash-message.ejs',{ errorMessage:errorMessage}) %>
+
 				<div class="input-container ic2">
 					<input
 						id="email"
@@ -47,5 +46,6 @@
 </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -6,6 +6,13 @@
 .input:not(:placeholder-shown) ~ .placeholder {
 	color: #808097;
 }
+/* .user_message__error {
+	width: 100%;
+	margin-top: 10rem;
+} */
+.user_message__error {
+	color: #d8000c;
+}
 
 .input:focus ~ .placeholder {
 	color: #dc2f55;
@@ -104,7 +111,6 @@
 }
 .home-section {
 	padding: 0;
-
 	left: 240px;
 	transition: all 0.5s ease;
 	margin: 0 auto;

@@ -380,7 +380,7 @@ nav .profile-details i {
 	width: 65%;
 	background: #fff;
 	padding: 20px 30px;
-	margin: 0 20px;
+	margin: 0 auto;
 	border-radius: 12px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -407,6 +407,37 @@ nav .profile-details i {
 	color: #333;
 	font-size: 400;
 	text-decoration: none;
+}
+.button-1 {
+	background-color: #0346c3;
+	border-radius: 8px;
+	border-style: none;
+	box-sizing: border-box;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	height: 40px;
+	line-height: 20px;
+	list-style: none;
+	margin: 0;
+	outline: none;
+	text-align: center;
+	text-decoration: none;
+	transition: color 100ms;
+	vertical-align: baseline;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	width: 61px;
+}
+
+.button-1:hover,
+.button-1:focus {
+	background-color: #081d45;
 }
 
 a.button {
