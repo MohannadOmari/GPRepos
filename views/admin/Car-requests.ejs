@@ -46,9 +46,11 @@
 					</ul>
 					<ul class="details">
 						<li class="topic">Images</li>
-						<% car.images.forEach((img, i) => {%>
-						<li><a href="<% img.url %>"><%= Picture i %> </a></li>
-						<% }); %>
+						<li>
+							<% car.images.forEach((img, i) => {%>
+							<a href="<% img.url %>"> Picture<%= i %> </a>
+							<% }); %>
+						</li>
 					</ul>
 
 					<ul class="details">
@@ -78,8 +80,6 @@
 									name="carId"
 								/>
 							</form>
-						</li>
-						<li>
 							<form action="/admin/reject-car" method="post">
 								<input
 									type="hidden"
