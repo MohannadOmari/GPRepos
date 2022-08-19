@@ -5,9 +5,36 @@
 	rel="stylesheet"
 />
 <%- include('../includes/admin-sidebar.ejs') %>
+
 <section class="home-section">
 	<%- include('../includes/admin-nav.ejs') %>
+	<div class="home-content">
+		<div class="sales-boxes">
+		<form action="" class="add_auction">
+			<h1>Add Auction</h1>
+			<div>
+				<label for="startDate">Start Date for Auction:</label>
+				<input type="date" name="startDate" id="startDate" />
+			</div>
+		<div>
+			<% cars.forEach((car, i) => { %>
+				<input type="number" name="startPrice<%= i %>" id="" placeholder="Start Price for <%= car.brand %>">
+				<div>
+				<input
+				type="checkbox"
+				id="<%= car._id %>"
+				name="chosenCar<%= i %>"
+				value="<%= car._id %>"
+			/>
+			<label for="<%= car._id %>"> <%= car.brand %></label><br />
+				</div>
 
-    
+			<% }); %>
+		</div>
+		<div>
+			<button type="submit" class="button">Add Auction</button>
+		</div>
+	</form>
+	</div>
 </section>
-    <%- include('../includes/admin-end.ejs') %>
+<%- include('../includes/admin-end.ejs') %>
