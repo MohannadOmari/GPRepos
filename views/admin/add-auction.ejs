@@ -10,7 +10,8 @@
 	<%- include('../includes/admin-nav.ejs') %>
 	<div class="home-content">
 		<div class="sales-boxes">
-		<form action="" class="add_auction">
+		<form action="/admin/add-auction?_csrf=<%=csrfToken%>" method="post" class="add_auction">
+			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 			<h1>Add Auction</h1>
 			<div>
 				<label for="startDate">Start Date for Auction:</label>
@@ -18,12 +19,12 @@
 			</div>
 		<div>
 			<% cars.forEach((car, i) => { %>
-				<input type="number" name="startPrice<%= i %>" id="" placeholder="Start Price for <%= car.brand %>">
+				<input type="number" name="startPrice" id="" placeholder="Start Price for <%= car.brand %>">
 				<div>
 				<input
 				type="checkbox"
 				id="<%= car._id %>"
-				name="chosenCar<%= i %>"
+				name="chosenCar"
 				value="<%= car._id %>"
 			/>
 			<label for="<%= car._id %>"> <%= car.brand %></label><br />
