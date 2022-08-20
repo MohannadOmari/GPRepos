@@ -1,4 +1,5 @@
 const Organizer = require("../models/organizer");
+const Bidder = require("../models/bidder")
 const Auction = require("../models/auction");
 const Car = require("../models/cars");
 
@@ -76,26 +77,35 @@ const user = {
 	wallet: 100,
 };
 
-exports.getIndex = (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
-	let today = new Date();
-	console.log(today);
+exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
+	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	const today = new Date();	
+	let date = auctions[0].startDate;
+	let enterAuction = today > date ? true : false;
+
+	// splice the date and time to match format of countdown timer script
 	let dateStr =
-  		("00" + (today.getMonth() + 1)).slice(-2) + "/" +
-  		("00" + today.getDate()).slice(-2) + "/" +
-  			today.getFullYear() + " " +
-  		("00" + today.getHours()).slice(-2) + ":" +
-  		("00" + today.getMinutes()).slice(-2) + ":" +
-  		("00" + today.getSeconds()).slice(-2);
+  		("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+  		("00" + date.getDate()).slice(-2) + "/" +
+  			date.getFullYear() + " " +
+  		("00" + date.getHours()).slice(-2) + ":" +
+  		("00" + date.getMinutes()).slice(-2) + ":" +
+  		("00" + date.getSeconds()).slice(-2);
 	dateStr = dateStr.replaceAll('/', ' ');
-	console.log(dateStr);	
-	const date = "31 Aug 2042 17:00:00";
-	const enterAuction = user.wallet > 200 ? true : false;
+
+	if (req.session.isOrganizer) {
+		const org = await Organizer.findById(req.session.org._id);
+		enterAuction = today > date ? true : false;
+	}
+	if (req.session.isBidder) {
+		const bidder = await Bidder.findById(req.session.user._id);
+		enterAuction = today > date && bidder.wallet > 200 ? true : false;
+	}
+
 	res.render("auction/index", {
-		auctionData,
 		title: "Auction Page",
 		enterAuction,
-		date,
-
+		dateStr
 	});
 };
 
@@ -177,7 +187,7 @@ exports.postAddCar = async (req, res, next) => {
 			car.author = org._id;
 			car.images = req.files.map(f => ({ url: f.path, name: f.filename }));
 			car.save();
-			res.redirect("/auction");
+			res.redirect("/auction/addcar");
 		})
 		.catch(err => {
 			console.log(err);

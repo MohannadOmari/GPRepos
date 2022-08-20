@@ -12,13 +12,13 @@
 	<div class="home-content">
 		<div class="sales-boxes">
 
-		<form action="/admin/add-auction?_csrf=<%=csrfToken%>" method="post" class="add_auction">
+		<form action="/admin/add-auction?_csrf=<%=csrfToken%>" method="post" class="recent-sales box">
 			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-			<h1>Add Auction</h1>
-			<div>
-
+			<h2 style="text-align: center;">Add Auction</h2>
+			<br>
+			<div class="addAuction">
 				<label for="startDate">Start Date for Auction:</label>
-				<input type="date" name="startDate" id="startDate" />
+				<input type="datetime-local" name="startDate" id="startDate" />
 			</div>
 			<br>
 		<div >

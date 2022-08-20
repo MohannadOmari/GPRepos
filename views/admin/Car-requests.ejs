@@ -50,7 +50,7 @@
 						<li class="topic">Images</li>
 						<li>
 							<% car.images.forEach((img, i) => {%>
-							<a href="<% img.url %>"> <%= i+1 %> </a>
+							<a href="<%= img.url %>" target="_blank"> <%= i+1 %> </a>
 							<% }); %>
 						</li>
 					</ul>

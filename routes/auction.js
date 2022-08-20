@@ -3,6 +3,7 @@ const express = require("express");
 const auctionController = require("../controllers/auction");
 const isOrganizer = require("../middleware/isOrganizer");
 const isBidder = require("../middleware/isBidder");
+const isLoggedIn = require("../middleware/isLoggedin");
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
@@ -11,7 +12,7 @@ const router = express.Router();
 
 router.get("/", auctionController.getIndex);
 
-router.get("/bid", isBidder, isOrganizer, auctionController.getAuctionBid);
+router.get("/bid", isLoggedIn, auctionController.getAuctionBid);
 
 router.get("/Auctioninfo", auctionController.getAuctionInfo);
 

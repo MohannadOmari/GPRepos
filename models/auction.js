@@ -11,6 +11,9 @@ const auctionSchema = new Schema({
         type: Date,
         // required: true
     },
+    status: {
+        type: String
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'Admin'

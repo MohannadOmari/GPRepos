@@ -158,10 +158,11 @@ exports.postAddAuction = async (req, res, next) => {
 	const auction = new Auction({
 		startDate: startDate,
 		author: req.session.admin,
-		cars: cars
+		cars: cars,
+		status: "Ready"
 	});
 	
 	await auction.save();
-
+	
 	res.redirect("/admin/add-auction");
 };
