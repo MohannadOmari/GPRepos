@@ -12,22 +12,23 @@
 	<div class="home-content">
 		<div class="sales-boxes">
 
-		<form action="" class="recent-sales box">
-			<h2 style="text-align: center;">Add Auction</h2>
-			<br>
-			<div class="addAuction">
+		<form action="/admin/add-auction?_csrf=<%=csrfToken%>" method="post" class="add_auction">
+			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+			<h1>Add Auction</h1>
+			<div>
+
 				<label for="startDate">Start Date for Auction:</label>
 				<input type="date" name="startDate" id="startDate" />
 			</div>
 			<br>
 		<div >
 			<% cars.forEach((car, i) => { %>
-				<input type="number" name="startPrice<%= i %>" id="" placeholder="Start Price for <%= car.brand %>">
+				<input type="number" name="startPrice" id="" placeholder="Start Price for <%= car.brand %>">
 				<div>
 				<input
 				type="checkbox"
 				id="<%= car._id %>"
-				name="chosenCar<%= i %>"
+				name="chosenCar"
 				value="<%= car._id %>"
 			/>
 			<label for="<%= car._id %>">   Brand:  <%= car.brand %>  -   Model:  <%= car.model %>  -  Year:  <%= car.year %>  -  ExteriorColor:  <%= car.exteriorColor %>  -   Mileage: <%= car.mileage %>  </label><br><br>

@@ -4,6 +4,7 @@ const { validationResult } = require("express-validator");
 const Auction = require('../models/auction');
 const Car = require('../models/cars');
 const Organizer = require("../models/organizer");
+const { populate } = require('../models/admin');
 
 exports.getDashboard = (req, res, next) => {
 	res.render("admin/dashboard", { title: "Dashboard" });
@@ -126,6 +127,41 @@ exports.patchRejectOrganizer = async (req, res, next) => {
 	res.redirect("/admin/organizer-requests");
 };
 
-exports.postAddAuction = (req, res, next) => {
+exports.postAddAuction = async (req, res, next) => {
+	const carsIds = req.body.chosenCar;
+	const startDate = req.body.startDate;
+	const startPrices = req.body.startPrice;
+	const cars = [];
+	const prices = [];
+	const ids = [];
 
+	for (let price of startPrices) {
+		if (price) {
+			prices.push(price);
+		}
+	}
+	if ((typeof carsIds) === 'object') {
+		for (let carId of carsIds) {
+			ids.push(carId);
+		}
+	} else {
+		ids.push(carsIds);
+	}
+
+	for (let i = 0; i < prices.length; i++) {
+		await Car.findByIdAndUpdate(ids[i], { price: parseInt(prices[i]), status: "onAuction" });
+	}
+	for (let i = 0; i < prices.length; i++) {
+		cars.push(await Car.findById(ids[i]));
+	}
+	
+	const auction = new Auction({
+		startDate: startDate,
+		author: req.session.admin,
+		cars: cars
+	});
+	
+	await auction.save();
+
+	res.redirect("/admin/add-auction");
 };

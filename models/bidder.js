@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const bcrypt = require('bcrypt');
-
 const Schema = mongoose.Schema;
 
 const BidderSchema = new Schema ({
@@ -40,9 +38,10 @@ const BidderSchema = new Schema ({
                 type: Schema.Types.ObjectId,
                 ref: 'BankAccount'
             },/* 
-            verification: {
-                type: Number
-            } */
+            cars: [{
+                type: Schema.Types.ObjectId,
+                ref: 'Car'
+            }] */
         
 }, { timestamps: true });
 
