@@ -14,6 +14,8 @@ router.get("/", auctionController.getIndex);
 
 router.get("/bid", isLoggedIn, auctionController.getAuctionBid);
 
+router.post("/bidding", isLoggedIn, auctionController.postAddBid);
+
 router.get("/Auctioninfo", auctionController.getAuctionInfo);
 
 router.get("/carinfo", auctionController.getCarInfo);

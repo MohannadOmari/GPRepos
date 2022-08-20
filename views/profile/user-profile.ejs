@@ -91,7 +91,7 @@
 	</form>
 </section>
 
-<% if (!hasBankAccount) { %>
+<% if (!bankAccount) { %>
 <!--bank account-->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
@@ -175,13 +175,12 @@
 	<div class="row">
 		<div class="col">
 			<h3>wallet Info</h3>
-			<span>Balance: <i class="text-success">200$</i></span>
+			<span>Balance: <i class="text-success">$<%= user.wallet %></i></span>
 		</div>
 		<div class="col">
 			<h3>wallet Transaction</h3>
 			<p>
-				Last Transaction: <span class="text-danger">-200$</span> on
-				<span class="text-primary">Auction 8</span>
+				Last Transaction: <span class="text-danger">$<%= bankAccount.transactions[bankAccount.transactions.length-1] %></span>
 			</p>
 		</div>
 		<div class="col">

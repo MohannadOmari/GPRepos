@@ -43,9 +43,9 @@ const CarSchema = new Schema ({
         type: String,
         required: true
     },
-    /* carInspection: {
+    carInspection: {
         type: String
-    }, */
+    },
     images: [{
         url: String,
         name: String

@@ -2,80 +2,8 @@ const Organizer = require("../models/organizer");
 const Bidder = require("../models/bidder")
 const Auction = require("../models/auction");
 const Car = require("../models/cars");
+const Bid = require("../models/bid");
 
-const car = {
-	brand: "BMW",
-	model: "x",
-	year: 2020,
-	exteriorColor: "red",
-	interiorColor: "black",
-	gearType: "auto",
-	Fuel: 1000,
-	milage: 100000,
-	carInspection: "Good",
-	notes: "none",
-	imgs: [
-		"../imgs/landing-page.jpg",
-		"../imgs/landing-page.jpg",
-		"../imgs/landing-page.jpg",
-		"../imgs/landing-page.jpg",
-		"../imgs/landing-page.jpg",
-	],
-};
-
-let auctionData = [
-	{
-		date: new Date("July 11, 2022 03:24:00"),
-		cars: [
-			{
-				organizerName: "Yazan",
-				brand: "BMW",
-				model: "x",
-				year: 2020,
-				exteriorColor: "red",
-				interiorColor: "black",
-				gearType: "auto",
-				Fuel: 1000,
-				milage: 100000,
-				carInspection: "Good",
-				notes: "none",
-				imgs: [
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-				],
-			},
-			{
-				organizerName: "Ahmed",
-
-				brand: "Honda",
-				model: "Insight",
-				year: 2020,
-				exteriorColor: "red",
-				interiorColor: "black",
-				gearType: "auto",
-				Fuel: 1000,
-				milage: 100000,
-				carInspection: "Good",
-				notes: "none",
-				imgs: [
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-					"../imgs/landing-page.jpg",
-				],
-			},
-		],
-	},
-];
-
-const user = {
-	name: "Ahmed",
-	wallet: 100,
-};
 
 exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
@@ -101,7 +29,7 @@ exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substr
 		const bidder = await Bidder.findById(req.session.user._id);
 		enterAuction = today > date && bidder.wallet > 200 ? true : false;
 	}
-
+	
 	res.render("auction/index", {
 		title: "Auction Page",
 		enterAuction,
@@ -109,73 +37,39 @@ exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substr
 	});
 };
 
-exports.getAuctionInfo = (req, res, next) => {
-	res.render("auction/Auctioninfo", { auctionData, title: "Auction Info"});
+exports.getAuctionInfo = async (req, res, next) => {
+	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	const auction = auctions[0];
+	res.render("auction/Auctioninfo", { auction, title: "Auction Info"});
 };
 
 exports.getCarInfo = (req, res, next) => {
 
-	res.render("auction/carinfo", { title: "Car Info", car});
+	res.render("auction/carinfo", { title: "Car Info" });
 };
 
 exports.getAddCar = (req, res, next) => {
-
-	res.render("auction/AddCar", { title: " Add Car", car});
+	res.render("auction/AddCar", { title: " Add Car" });
 };
 
-exports.getPreviousAuction = (req, res, next) => {
-	res.render("auction/PreviousAuction", { title: "PreviousAuction ", car});
+exports.getPreviousAuction = async (req, res, next) => {
+	const auctions = await Auction.find({status: "Finished"}).sort({startDate: "asc"}).populate('cars');
+	res.render("auction/PreviousAuction", { title: "PreviousAuction ", auctions});
 };
-exports.getNextAuction = (req, res, next) => {
-	res.render("auction/NextAuction", { title: "NextAuction ", car});
+exports.getNextAuction = async (req, res, next) => {
+	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	res.render("auction/NextAuction", { title: "NextAuction ", auctions});
 };
 
-exports.getAuctionBid = (req, res, next) => {
+exports.getAuctionBid = async (req, res, next) => {
+	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	const auction = auctions[0];
 	res.render("auction/bid", {
 		title: "Auction Bid",
 		auction,
 		state: "green",
 		currentBid: 200,
 	});
-};
-let auction = {
-	date: new Date("July 11, 2022 03:24:00"),
-	cars: [
-		{
-			organizerName: "Yazan",
-			brand: "BMW",
-			model: "x",
-			year: 2020,
-			exteriorColor: "red",
-			interiorColor: "black",
-			gearType: "auto",
-			Fuel: 1000,
-			milage: 100000,
-			carInspection: "Good",
-			notes: "none",
-			imgs: ["../imgs/bmwback.jpg", "../imgs/bmwfront.jpg", "../imgs/bmwinterior.jpg", "../imgs/bmwleft.jpg"],
-		},
-		{
-			organizerName: "Ahmed",
-
-			brand: "Honda",
-			model: "Insight",
-			year: 2020,
-			exteriorColor: "red",
-			interiorColor: "black",
-			gearType: "auto",
-			Fuel: 1000,
-			milage: 100000,
-			carInspection: "Good",
-			notes: "none",
-			imgs: [
-				"../imgs/car2.jpg",
-				"../imgs/car2.jpg",
-				"../imgs/car2.jpg",
-				"../imgs/car2.jpg",
-			],
-		},
-	],
 };
 
 exports.postAddCar = async (req, res, next) => {
@@ -192,4 +86,9 @@ exports.postAddCar = async (req, res, next) => {
 		.catch(err => {
 			console.log(err);
 		});
+};
+
+exports.postAddBid = async (req,res,next) => {
+	console.log(req.body);
+	res.redirect("/auction/bid");
 };

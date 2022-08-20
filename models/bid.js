@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 
 const BidSchema = new Schema ({
     bid: {
-        type: number,
+        type: Number,
+    },
+    bidder: {
+        type: Schema.Types.ObjectId,
+        ref: 'Bidder'
     },
     car: {
         type: Schema.Types.ObjectId,

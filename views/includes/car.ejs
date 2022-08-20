@@ -11,10 +11,10 @@
 			data-bs-ride="carousel"
 		>
 			<div class="carousel-inner ">
-				<% car.imgs.forEach((image,i)=> { %>
+				<% car.images.forEach((image,i)=> { %>
 				<div class="carousel-item <%= i === 0 ? 'active' : ''%>">
 					<img
-						src="<%=  image %>"
+						src="<%=  image.url %>"
 						class="d-block my-2"
 						alt=""
 						style="
@@ -26,7 +26,7 @@
 				</div>
 				<%}) %>
 			</div>
-			<% if(car.imgs.length>1) {%>
+			<% if(car.images.length>1) {%>
 			<button
 				class="carousel-control-prev"
 				type="button"
@@ -76,8 +76,8 @@
 			<div class="col">Gear Type<h4 class="carinformation"><%= car.gearType %></h4></div>
         </div>
         <div class="row">
-            <div class="col">Fuel<h4 class="carinformation"><%= car.Fuel %></h4></div>
-            <div class="col">Milage<h4 class="carinformation"><%= car.milage %></h4></div>
+            <div class="col">Fuel<h4 class="carinformation"><%= car.fuel %></h4></div>
+            <div class="col">Milage<h4 class="carinformation"><%= car.mileage %></h4></div>
             <div class="col">Interior Color<h4 class="carinformation"><%= car.interiorColor %></h4></div>
 			<div class="col">Car Inspection<h4 class="carinformation"><%= car.carInspection %></h4></div>
 			<div class="col">Notes<h4 class="carinformation"><%= car.notes %></h4></div>
