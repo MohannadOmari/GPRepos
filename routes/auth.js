@@ -35,7 +35,7 @@ router.post("/user-signup",
                         && domain[1].toLowerCase() !== "outlook.com"
                         && domain[1].toLowerCase() !== "hotmail.com"
                         && domain[1].toLowerCase() !== "yahoo.com") {
-                        throw new Error("email domain is invalid");
+                        throw new Error("Email domain is invalid");
                     }
                     return true;
                 }),
@@ -76,7 +76,7 @@ router.post("/organizer-signup",
                         && domain[1].toLowerCase() !== "outlook.com"
                         && domain[1].toLowerCase() !== "hotmail.com"
                         && domain[1].toLowerCase() !== "yahoo.com"){
-                        throw new Error("email domain is invalid");
+                        throw new Error("Email domain is invalid");
                     }
                     return true;
                 }),
