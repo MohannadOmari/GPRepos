@@ -2,8 +2,10 @@ const Organizer = require("../models/organizer");
 const Bidder = require("../models/bidder")
 const Auction = require("../models/auction");
 const Car = require("../models/cars");
-const Bid = require("../models/bid");
 
+let nextCar = 0;
+let bidHappened = false;
+let moveInfo = 0;
 
 exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
@@ -33,14 +35,15 @@ exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substr
 	res.render("auction/index", {
 		title: "Auction Page",
 		enterAuction,
-		dateStr
+		dateStr,
+		auction: auctions[0]
 	});
 };
 
 exports.getAuctionInfo = async (req, res, next) => {
-	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
-	const auction = auctions[0];
-	res.render("auction/Auctioninfo", { auction, title: "Auction Info"});
+	console.log(req.params);
+	const auction = await Auction.findById(req.params.auctionId).populate('cars');
+	res.render("auction/Auctioninfo", { auction, title: "Auction Info", moveInfo});
 };
 
 exports.getCarInfo = (req, res, next) => {
@@ -57,19 +60,79 @@ exports.getPreviousAuction = async (req, res, next) => {
 	res.render("auction/PreviousAuction", { title: "PreviousAuction ", auctions});
 };
 exports.getNextAuction = async (req, res, next) => {
-	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	const auctions = await Auction.find( {status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	res.render("auction/NextAuction", { title: "NextAuction ", auctions});
 };
 
 exports.getAuctionBid = async (req, res, next) => {
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	const auction = auctions[0];
-	res.render("auction/bid", {
-		title: "Auction Bid",
-		auction,
-		state: "green",
-		currentBid: 200,
-	});
+	if (nextCar < auction.cars.length - 1) {
+		res.render("auction/bid", {
+			title: "Auction Bid",
+			auction,
+			state: "green",
+			currentBid: 200,
+			nextCar
+		});
+	} else {
+		nextCar = 0
+		res.render("auction/bid", {
+			title: "Auction Bid",
+			auction,
+			state: "green",
+			currentBid: 200,
+			nextCar
+		});
+	}
+	
+};
+
+exports.postNextCar= async (req, res, next) => {
+
+	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
+	// nextCar = nextCar > auctions?.cars?.length ? 0 : nextCar
+	const auction = auctions[0];
+	console.log(nextCar);
+	if (bidHappened) {
+		await Car.findByIdAndUpdate(auction.cars[nextCar]._id, { status: "Sold" });
+	}
+	if (nextCar < auction?.cars?.length - 1) {
+		nextCar++;
+		res.render("auction/bid", {
+			title: "Auction Bid",
+			auction,
+			state: "green",
+			currentBid: 200,
+			nextCar
+		});
+	} else {
+		console.log("I am here");
+		await Auction.findByIdAndUpdate(auction._id, { status: "Finished" });
+		res.redirect("/auction");
+	}
+};
+
+exports.postNextInInfo = async (req, res, next) => {
+	const auction = await Auction.findById(req.params.auctionId).populate('cars');
+	console.log(moveInfo);
+	if (moveInfo < auction.cars.length - 1) {
+		moveInfo++;
+	} else {
+		moveInfo = 0;
+	}
+	res.render("auction/Auctioninfo", { auction, title: "Auction Info", moveInfo});
+};
+
+exports.postPrevInInfo = async (req, res, next) => {
+	const auction = await Auction.findById(req.params.auctionId).populate('cars');
+	console.log(moveInfo);
+	if (moveInfo === 0) {
+		moveInfo = auction.cars.length - 1;
+	} else {
+		moveInfo--;
+	}
+	res.render("auction/Auctioninfo", { auction, title: "Auction Info", moveInfo});
 };
 
 exports.postAddCar = async (req, res, next) => {
@@ -90,5 +153,10 @@ exports.postAddCar = async (req, res, next) => {
 
 exports.postAddBid = async (req,res,next) => {
 	console.log(req.body);
+	const id = req.params.id;
+	const car = await Car.findById(id);
+	let newPrice = parseInt(car.price) + parseInt(req.body.bid);
+	await Car.findByIdAndUpdate(id, {price: newPrice});
+	bidHappened = true;
 	res.redirect("/auction/bid");
 };

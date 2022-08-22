@@ -3,9 +3,7 @@
 <!--bidder signin-->
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign in</h2>
-	<% if (errorMessage) { %>
-		<div class="user-message user-message--error error"><%= errorMessage %></div>
-	<% } %>
+	<%- include('../includes/flash-message.ejs',{ errorMessage:errorMessage}) %>
 	<form action="/user-signin" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="input-group mb-3">

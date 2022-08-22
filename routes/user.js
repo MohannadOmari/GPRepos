@@ -18,8 +18,8 @@ router.post("/user-profile",
             body('user[email]')
                 .isEmail()
                 .withMessage('Please enter a valid Email'),
-            body('user[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
-                .isLength({min: 8})
+            body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
+                .isLength({min: 8, max: 18})
                 .isAlphanumeric()
                 .trim(),
     userController.postUpdateUser);

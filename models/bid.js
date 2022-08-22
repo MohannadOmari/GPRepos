@@ -13,6 +13,10 @@ const BidSchema = new Schema ({
     car: {
         type: Schema.Types.ObjectId,
         ref: 'Car'
+    },
+    auction: {
+        type: Schema.Types.ObjectId,
+        ref: 'Auction'
     }
 }, {timestamps: true});
 

@@ -39,8 +39,8 @@ router.post("/user-signup",
                     }
                     return true;
                 }),
-            body('user[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
-                .isLength({min: 8})
+            body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
+                .isLength({min: 8, max: 18})
                 .isAlphanumeric()
                 .trim(),
             body('confirmPassword').trim().custom((value, { req }) => {
@@ -80,8 +80,8 @@ router.post("/organizer-signup",
                     }
                     return true;
                 }),
-            body('org[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
-                .isLength({min: 8})
+            body('org[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
+                .isLength({min: 8, max: 18})
                 .isAlphanumeric()
                 .trim(),
             body('confirmPassword').trim().custom((value, { req }) => {

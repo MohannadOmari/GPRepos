@@ -1,8 +1,12 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
 <section class="d-flex flex-row justify-content-center m-5">
-	
-
-		<%- include("../includes/car.ejs", {car: auction.cars[0]}) %>
+<% if (isAdmin) { %>
+	<form action="/auction/next" method="post">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+		<button type="submit" class="btn btn-primary">Next Car</button>
+	</form>
+<% } %>
+		 <%- include("../includes/car.ejs", {car: auction.cars[nextCar]}) %>
 
 	
 </section>
@@ -12,11 +16,11 @@
 	</div>
 	<div>
 		<h4 class="h-4 mt-4">
-			Current Bid: <i> 200$</i>
+			Current Price: <i> <%= auction.cars[nextCar].price %>$</i>
 		</h4>
 	</div>
 	<div>
-		<form action="/auction/bidding" method="post">
+		<form action="/auction/bidding/<%= auction.cars[nextCar]._id %>" method="post">
 			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 			<div class="mt-4">
 				<button
@@ -27,7 +31,7 @@
 					+
 				</button>
 				<label class="form-label"
-					><h2 id="bid-amount" class="text-center">100</h2>
+					><input type="number" name="bid" id="bid-amount" class="text-center" placeholder="100"/>
 				</label>
 				<button
 					id="decline-button"
