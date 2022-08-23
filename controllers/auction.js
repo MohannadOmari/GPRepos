@@ -96,6 +96,7 @@ exports.postNextCar= async (req, res, next) => {
 	console.log(nextCar);
 	if (bidHappened) {
 		await Car.findByIdAndUpdate(auction.cars[nextCar]._id, { status: "Sold" });
+		bidHappened = false;
 	}
 	if (nextCar < auction?.cars?.length - 1) {
 		nextCar++;
@@ -107,7 +108,6 @@ exports.postNextCar= async (req, res, next) => {
 			nextCar
 		});
 	} else {
-		console.log("I am here");
 		await Auction.findByIdAndUpdate(auction._id, { status: "Finished" });
 		res.redirect("/auction");
 	}
@@ -156,7 +156,9 @@ exports.postAddBid = async (req,res,next) => {
 	const id = req.params.id;
 	const car = await Car.findById(id);
 	let newPrice = parseInt(car.price) + parseInt(req.body.bid);
-	await Car.findByIdAndUpdate(id, {price: newPrice});
-	bidHappened = true;
+	if (newPrice > car.price){
+		await Car.findByIdAndUpdate(id, {price: newPrice});
+		bidHappened = true;
+	}
 	res.redirect("/auction/bid");
 };
