@@ -10,16 +10,16 @@ router.get("/user-profile", isBidder, userController.getUserProfile);
 
 router.post("/user-profile",
             body('user[firstName]', 'First name cannot be longer than 15 characters')
-                .isLength({max: 15}),
+                .isLength({ min: 3,max: 15 }),
             body('user[lastName]', 'Last name cannot be longer than 15 characters')
-                .isLength({max: 15}),
+                .isLength({ min: 3,max: 15 }),
             body('user[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10}),
+                .isLength({ min: 10, max: 10 }),
             body('user[email]')
                 .isEmail()
                 .withMessage('Please enter a valid Email'),
             body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
-                .isLength({min: 8, max: 18})
+                .isLength({ min: 8, max: 18 })
                 .isAlphanumeric()
                 .trim(),
     userController.postUpdateUser);
@@ -38,7 +38,7 @@ router.post("/card-info",
             return true;
         }),
     body('CCV', 'Wrong CCV')
-        .isLength({min: 3, max: 3}),
+        .isLength({ min: 3, max: 3 }),
     userController.postAddBankAccount);
 
 router.post("/balance", userController.postAddBalance);

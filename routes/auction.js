@@ -4,6 +4,7 @@ const auctionController = require("../controllers/auction");
 const isOrganizer = require("../middleware/isOrganizer");
 const isBidder = require("../middleware/isBidder");
 const isLoggedIn = require("../middleware/isLoggedin");
+const isAdmin = require("../middleware/isAdmin");
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
@@ -14,7 +15,7 @@ router.get("/", auctionController.getIndex);
 
 router.get("/auctioninfo/:auctionId", auctionController.getAuctionInfo);
 
-router.post("/next", auctionController.postNextCar);
+router.post("/next", isAdmin, auctionController.postNextCar);
 
 router.post("/nextInAuction/:auctionId", auctionController.postNextInInfo);
 

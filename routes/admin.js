@@ -28,11 +28,11 @@ router.post("/reject-organizer", isAdmin, adminController.patchRejectOrganizer);
 
 router.get("/Organizer-requests", isAdmin, adminController.getOrganizerRequests);
 
-router.post("/admin-logout", adminController.postAdminLogout);
+router.post("/admin-logout", isAdmin, adminController.postAdminLogout);
 
 router.get("/Car-requests", isAdmin, adminController.getCarRequests);
 
-router.post("/profile",
+router.post("/profile", isAdmin,
     body('admin[email]')
     .isEmail()
     .withMessage('Please enter a valid Email'),

@@ -37,11 +37,12 @@ const BidderSchema = new Schema ({
             bankAccount: {
                 type: Schema.Types.ObjectId,
                 ref: 'BankAccount'
-            },/* 
+            },
             cars: [{
                 type: Schema.Types.ObjectId,
-                ref: 'Car'
-            }] */
+                ref: 'Car',
+                default: []
+            }]
         
 }, { timestamps: true });
 

@@ -13,6 +13,6 @@ router.post("/contact-us", basicController.postContactUs);
 
 router.get("/About-us", basicController.getAboutUs);
 
-router.get("/Wishlist", isBidder, basicController.getWishlist);
+router.get("/Wishlist", isBidder, basicController.getWishlist); //remove
 
 module.exports = router;
