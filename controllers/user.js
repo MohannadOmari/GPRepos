@@ -69,7 +69,7 @@ exports.postAddBankAccount = async (req,res,next) => {
 			req.session.user = user;
 		});
 	
-	res.redirect("user-profile");
+		this.getUserProfile(req, res, next);
 };
 
 exports.postAddBalance = async (req,res,next) => {

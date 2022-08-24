@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const BidSchema = new Schema ({
     bid: {
         type: Number,
+        default: 0
     },
     bidder: {
         type: Schema.Types.ObjectId,

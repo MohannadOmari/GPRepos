@@ -2,17 +2,18 @@ const Organizer = require("../models/organizer");
 const Bidder = require("../models/bidder")
 const Auction = require("../models/auction");
 const Car = require("../models/cars");
+const Bid = require("../models/bid");
 
 let nextCar = 0;
-let bidHappened = false;
 let moveInfo = 0;
+let bidHappened = false;
 
 exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	const today = new Date();	
 	let date = auctions[0].startDate;
 	let enterAuction = today > date ? true : false;
-
+	
 	// splice the date and time to match format of countdown timer script
 	let dateStr =
   		("00" + (date.getMonth() + 1)).slice(-2) + "/" +
@@ -67,23 +68,32 @@ exports.getNextAuction = async (req, res, next) => {
 exports.getAuctionBid = async (req, res, next) => {
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	const auction = auctions[0];
-	if (nextCar < auction.cars.length - 1) {
+	const today = new Date();
+
+	if (auction.startDate > today) {
+		res.redirect("/auction");
+	}
+
+	if (req.session.isBidder) {
+		const isBid = await Bid.findOne({ bidder: req.session.user._id });
+		if (!isBid) {
+			const bid = new Bid({
+				bidder: req.session.user._id,
+				auction: auction._id,
+			});
+			bid.save();
+		}
+	}
+
+	if (nextCar < auction.cars.length) {
 		res.render("auction/bid", {
 			title: "Auction Bid",
 			auction,
-			state: "green",
-			currentBid: 200,
-			nextCar
+			nextCar,
 		});
 	} else {
-		nextCar = 0
-		res.render("auction/bid", {
-			title: "Auction Bid",
-			auction,
-			state: "green",
-			currentBid: 200,
-			nextCar
-		});
+		nextCar = 0;
+		this.getIndex(req, res, next);
 	}
 	
 };
@@ -91,25 +101,27 @@ exports.getAuctionBid = async (req, res, next) => {
 exports.postNextCar= async (req, res, next) => {
 
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
-	// nextCar = nextCar > auctions?.cars?.length ? 0 : nextCar
 	const auction = auctions[0];
 	console.log(nextCar);
 	if (bidHappened) {
 		await Car.findByIdAndUpdate(auction.cars[nextCar]._id, { status: "Sold" });
+		const bid = await Bid.find().sort({bid: "desc"}).populate("car").populate("bidder");
+		const user = await Bidder.findById(bid[0].bidder);
+		user.cars.push(bid[0].car);
+		user.save();
+		bidHappened = false;
 	}
 	if (nextCar < auction?.cars?.length - 1) {
 		nextCar++;
 		res.render("auction/bid", {
 			title: "Auction Bid",
 			auction,
-			state: "green",
-			currentBid: 200,
 			nextCar
 		});
 	} else {
-		console.log("I am here");
 		await Auction.findByIdAndUpdate(auction._id, { status: "Finished" });
-		res.redirect("/auction");
+		nextCar = 0;
+		this.getIndex(req, res, next);
 	}
 };
 
@@ -155,8 +167,11 @@ exports.postAddBid = async (req,res,next) => {
 	console.log(req.body);
 	const id = req.params.id;
 	const car = await Car.findById(id);
-	let newPrice = parseInt(car.price) + parseInt(req.body.bid);
-	await Car.findByIdAndUpdate(id, {price: newPrice});
-	bidHappened = true;
+	const newPrice = parseInt(car.price) + parseInt(req.body.bid);
+	if (newPrice > car.price){
+		await Car.findByIdAndUpdate(id, {price: newPrice});
+		const userBid = await Bid.findOneAndUpdate({ bidder: req.session.user._id }, { bid: newPrice, car: car._id });
+		bidHappened = true;
+	}
 	res.redirect("/auction/bid");
 };

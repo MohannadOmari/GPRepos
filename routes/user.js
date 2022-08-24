@@ -9,14 +9,16 @@ const router = express.Router();
 router.get("/user-profile", isBidder, userController.getUserProfile);
 
 router.post("/user-profile",
+
             body('user[firstName]', 'First name must be between 3 and 15 characters with no numbers')
                 .isLength({ min:3 ,max: 15})
                 .isAlpha(),
             body('user[lastName]', 'Last name must be between 3 and 15 characters with no numbers')
                 .isLength({min:3 ,max: 15})
                 .isAlpha(),
+
             body('user[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10}),
+                .isLength({ min: 10, max: 10 }),
             body('user[email]')
                 .isEmail()
                 .withMessage('Please enter a valid Email')
@@ -31,7 +33,7 @@ router.post("/user-profile",
                     return true;
                 }),
             body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
-                .isLength({min: 8, max: 18})
+                .isLength({ min: 8, max: 18 })
                 .isAlphanumeric()
                 .trim(),
     userController.postUpdateUser);
@@ -50,7 +52,7 @@ router.post("/card-info",
             return true;
         }),
     body('CCV', 'Wrong CCV')
-        .isLength({min: 3, max: 3}),
+        .isLength({ min: 3, max: 3 }),
     userController.postAddBankAccount);
 
 router.post("/balance", userController.postAddBalance);

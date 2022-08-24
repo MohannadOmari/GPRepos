@@ -24,7 +24,7 @@ router.post("/user-signup",
                 .isLength({ min: 3, max: 15 })
                 .isAlpha(),
             body('user[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10, max: 10}),
+                .isLength({ min: 10, max: 10 }),
             body('user[email]')
                 .isEmail()
                 .withMessage('Please enter a valid Email')
@@ -40,7 +40,7 @@ router.post("/user-signup",
                     return true;
                 }),
             body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
-                .isLength({min: 8, max: 18})
+                .isLength({ min: 8, max: 18 })
                 .isAlphanumeric()
                 .trim(),
             body('confirmPassword').trim().custom((value, { req }) => {
@@ -66,7 +66,7 @@ router.post("/organizer-signup",
                 .isLength({ min: 3, max: 15 })
                 .isAlpha(),
             body('org[phoneNumber]', 'Please enter a valid phone number')
-                .isLength({min: 10, max: 10}),
+                .isLength({ min: 10, max: 10 }),
             body('org[email]')
                 .isEmail()
                 .withMessage('Please enter a valid Email')
@@ -81,7 +81,7 @@ router.post("/organizer-signup",
                     return true;
                 }),
             body('org[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
-                .isLength({min: 8, max: 18})
+                .isLength({ min: 8, max: 18 })
                 .isAlphanumeric()
                 .trim(),
             body('confirmPassword').trim().custom((value, { req }) => {

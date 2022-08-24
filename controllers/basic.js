@@ -10,9 +10,6 @@ exports.getAboutUs = (req, res, next) => {
 	res.render("basic/About-us", { title: "About us" }); 
 };
 
-exports.getWishlist = (req, res, next) => {
-	res.render("basic/Wishlist", { title: "Wishlist" });
-};
 
 exports.postContactUs = (req, res, next) => {
 	res.redirect("/auction");

@@ -21,7 +21,7 @@
 			<span class="input-group-text" id="basic-addon2">@example.com</span>
 		</div>
 
-        <div class="align-items-center">
+        <div class="align-items-center password-container">
 			<div class="">
 				<input
 					required
@@ -32,6 +32,8 @@
 					aria-describedby="passwordHelpInline"
 					name="org[password]"
 				/>
+				<i class="fa-solid fa-eye" id="eye"></i>
+			
 			</div>
 		</div>
 
@@ -41,6 +43,6 @@
 	</form>
 </div>
 
-
+<script src="../js/password.js"></script>
 <%- include("../includes/end.ejs") %>
 

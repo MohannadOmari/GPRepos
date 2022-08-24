@@ -9,6 +9,7 @@ const router = express.Router();
 router.get("/organizer-profile", isOrganizer, organizerController.getOrganizerProfile);
 
 router.post("/organizer-profile",
+
 body('org[firstName]', 'First name must be between 3 and 15 characters with no numbers')
                 .isLength({ min:3 ,max: 15})
                 .isAlpha(),
@@ -29,8 +30,9 @@ body('org[firstName]', 'First name must be between 3 and 15 characters with no n
                     }
                     return true;
                 }),
+
     body('org[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
-    .isLength({min: 8, max: 18})
+    .isLength({ min: 8, max: 18 })
     .isAlphanumeric()
     .trim(),
     organizerController.postUpdateOrganizer);
