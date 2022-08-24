@@ -1,15 +1,20 @@
-const h2 = document.getElementById("bid-amount");
+const inputBid = document.getElementById("bid-amount");
 
 const addAmountButton = document.getElementById("add-button");
 const declineAmountButton = document.getElementById("decline-button");
 
 addAmountButton.addEventListener("click", () => {
-	h2.textContent = parseInt(h2.textContent) + 100;
+	inputBid.value = parseInt(inputBid.placeholder) + 100;
+	inputBid.placeholder = parseInt(inputBid.placeholder) + 100;
+	
+	console.log(inputBid.placeholder)
 });
 declineAmountButton.addEventListener("click", () => {
-	if (parseInt(h2.textContent) - 100 <= 100) {
-		h2.textContent = 100;
+	if (parseInt(inputBid.placeholder) - 100 <= 100) {
+		inputBid.value = 100;
+		inputBid.placeholder = 100;
 	} else {
-		h2.textContent = parseInt(h2.textContent) - 100;
+		inputBid.value = parseInt(inputBid.placeholder) - 100;
+		inputBid.placeholder = parseInt(inputBid.placeholder) - 100;
 	}
 });

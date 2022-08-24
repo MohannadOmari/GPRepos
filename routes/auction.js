@@ -12,11 +12,17 @@ const router = express.Router();
 
 router.get("/", auctionController.getIndex);
 
+router.get("/auctioninfo/:auctionId", auctionController.getAuctionInfo);
+
+router.post("/next", auctionController.postNextCar);
+
+router.post("/nextInAuction/:auctionId", auctionController.postNextInInfo);
+
+router.post("/prevInAuction/:auctionId", auctionController.postPrevInInfo);
+
 router.get("/bid", isLoggedIn, auctionController.getAuctionBid);
 
-router.post("/bidding", isLoggedIn, auctionController.postAddBid);
-
-router.get("/Auctioninfo", auctionController.getAuctionInfo);
+router.post("/bidding/:id", isLoggedIn, auctionController.postAddBid);
 
 router.get("/carinfo", auctionController.getCarInfo);
 
@@ -40,5 +46,8 @@ isOrganizer, auctionController.postAddCar);
 router.get("/PreviousAuction", auctionController.getPreviousAuction);
 
 router.get("/NextAuction", auctionController.getNextAuction);
+
+
+
 
 module.exports = router;

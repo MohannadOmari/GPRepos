@@ -9,17 +9,29 @@ const router = express.Router();
 router.get("/user-profile", isBidder, userController.getUserProfile);
 
 router.post("/user-profile",
-            body('user[firstName]', 'First name cannot be longer than 15 characters')
-                .isLength({max: 15}),
-            body('user[lastName]', 'Last name cannot be longer than 15 characters')
-                .isLength({max: 15}),
+            body('user[firstName]', 'First name must be between 3 and 15 characters with no numbers')
+                .isLength({ min:3 ,max: 15})
+                .isAlpha(),
+            body('user[lastName]', 'Last name must be between 3 and 15 characters with no numbers')
+                .isLength({min:3 ,max: 15})
+                .isAlpha(),
             body('user[phoneNumber]', 'Please enter a valid phone number')
                 .isLength({min: 10}),
             body('user[email]')
                 .isEmail()
-                .withMessage('Please enter a valid Email'),
-            body('user[password]','Please enter a password with only numbers and letters and minimum 8 characters long')
-                .isLength({min: 8})
+                .withMessage('Please enter a valid Email')
+                .custom(value => {
+                    domain = value.split("@");
+                    if (domain[1].toLowerCase() !== "gmail.com" 
+                        && domain[1].toLowerCase() !== "outlook.com"
+                        && domain[1].toLowerCase() !== "hotmail.com"
+                        && domain[1].toLowerCase() !== "yahoo.com"){
+                        throw new Error("Email domain is invalid");
+                    }
+                    return true;
+                }),
+            body('user[password]','Please enter a password with only numbers and letters with minimum 8 and maximum 18 characters long')
+                .isLength({min: 8, max: 18})
                 .isAlphanumeric()
                 .trim(),
     userController.postUpdateUser);

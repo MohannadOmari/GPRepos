@@ -5,7 +5,7 @@ const { validationResult } = require("express-validator");
 
 exports.getUserProfile = async (req, res, next) => {
 	const user = await Bidder.findById(req.session.user._id);
-	const bankAccount = await BankAccount.findOne({userId: user._id});
+	const bankAccount = await BankAccount.findOne({userId: user._id}) ? true : false;
 	res.render("profile/user-profile", { title: "User Profile", errorMessage: req.flash('error'), user, bankAccount}); // must query car from database , cars won 
 };
 

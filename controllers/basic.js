@@ -14,3 +14,6 @@ exports.getWishlist = (req, res, next) => {
 	res.render("basic/Wishlist", { title: "Wishlist" });
 };
 
+exports.postContactUs = (req, res, next) => {
+	res.redirect("/auction");
+};

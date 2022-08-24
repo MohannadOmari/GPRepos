@@ -44,6 +44,7 @@ exports.postAdminSignin = (req, res, next) => {
 			.then(doMatch => {
 				if (doMatch) {
 					req.session.isAdmin = true;
+					req.session.isLoggedIn = true;
 					req.session.admin = adminDoc;
 					return req.session.save(err => {
 						console.log(err);

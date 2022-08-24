@@ -1,8 +1,14 @@
 img {
-	width: 17%;
-	height: 17%;
+	width: 14rem;
 	margin-left: 10px;
 	padding: 0;
 	margin-top: 15px;
 	margin-right: 50px;
+}
+
+
+#logo {
+
+	text-decoration: none !important;
+
 }
