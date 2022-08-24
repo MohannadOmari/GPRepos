@@ -69,8 +69,7 @@ exports.getAuctionBid = async (req, res, next) => {
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	const auction = auctions[0];
 	const today = new Date();
-
-	if (auction.startDate > today && req.session.user?.wallet >= 200 || !req.session.isAdmin) {
+	if (auction.startDate > today || req.session.user?.wallet >= 200 && req.session.isAdmin) {
 		res.redirect("/auction");
 	}
 

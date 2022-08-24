@@ -94,18 +94,18 @@ exports.postAddBalance = async (req,res,next) => {
 	const moneyAdded = req.body.money;
 	
 	await Bidder.findById(req.session.user._id)
-		.then(user => {
-			BankAccount.findById(user.bankAccount)
+		.then(async user => {
+			await BankAccount.findById(user.bankAccount)
 				.then(account => {
 					if (account.balance - moneyAdded >= 0) {
 						account.balance -= parseInt(moneyAdded);
 						account.transactions.push(moneyAdded);
 						account.save();
 						user.wallet += parseInt(moneyAdded);
-						user.save();
-						req.session.user = user;
+						user.save();	
 					}
 				});
+				req.session.user = user;
 		});
 
 	res.redirect("user-profile");
