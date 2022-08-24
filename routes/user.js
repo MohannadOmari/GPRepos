@@ -43,6 +43,8 @@ router.get("/card-info");
 router.post("/card-info",
     body('cardNumber', 'Not a valid card number')
         .isLength({ min: 16, max: 16 }),
+    body('cardName', 'Name must be alphabet')
+        .isAlpha(),
     body('expireYY')
         .custom(value => {
              year = new Date().getFullYear().toString().split("20");
