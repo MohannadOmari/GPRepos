@@ -3,7 +3,9 @@
 <!--bidder signin-->
 <div id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey">Sign in</h2>
-	<%- include('../includes/flash-message.ejs',{ errorMessage:errorMessage}) %>
+	<% if (errorMessage) { %>
+		<div class="user-message user-message--error"><%= errorMessage %></div>
+	<% } %>
 	<form action="/user-signin" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="input-group mb-3">
@@ -19,7 +21,7 @@
 			<span class="input-group-text" id="basic-addon2">@example.com</span>
 		</div>
 
-        <div class="align-items-center">
+        <div class="align-items-center password-container">
 			<div class="">
 				<input
 					required
@@ -30,7 +32,10 @@
 					aria-describedby="passwordHelpInline"
 					name="user[password]"
 				/>
+				<i class="fa-solid fa-eye" id="eye"></i>
+			
 			</div>
+			
 		</div>
 
         <div id="submit-button" class="text-center">
@@ -39,6 +44,7 @@
 	</form>
 </div>
 
+<script src="../js/password.js"></script>
 <%- include("../includes/end.ejs") %>
 
 

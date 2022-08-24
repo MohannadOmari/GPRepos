@@ -14,15 +14,15 @@
 				<% for (let org of orgs) { %> <% if (org.status === "Pending") {
 				%>
 				<div class="sales-details">
-					<ul class="details">
-						<li class="topic">Date</li>
+					<ul class="details ">
+						<li class="topic ">Date</li>
 						<li>
 							<%= org.createdAt.toString().substring(0,
 							org.createdAt.toString().indexOf(':') - 2) %>
 						</li>
 					</ul>
-					<ul class="details">
-						<li class="topic">Organizer</li>
+					<ul class="details ">
+						<li class="topic ">Organizer</li>
 						<li><%= org.firstName + ' ' + org.lastName %></li>
 					</ul>
 					<ul class="details">
@@ -48,59 +48,34 @@
 					<ul class="details">
 						<li class="topic">Status</li>
 						<li>
-							<form
-								action="/admin/accept-organizer?_csrf=<%=csrfToken%>"
-								method="post"
-							>
-								<input
-									type="hidden"
-									name="_csrf"
-									value="<%= csrfToken %>"
-								/>
+							<form action="/admin/accept-organizer?_csrf=<%=csrfToken%>" method="post">
+
+								<input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
 								<button
 									type="submit"
 									class="button"
-									style="
-										color: #fff;
-										width: 100%;
-										background-color: green;
-									"
-								>
+									style="color: #fff; width: 100%; background-color: green;">
 									Accept
 								</button>
-								<input
-									type="hidden"
-									value="<%= org._id %>"
-									name="orgId"
-								/>
+
+								<input type="hidden" value="<%= org._id %>" name="orgId"/>
+
 							</form>
 						</li>
+
 						<li>
-							<form
-								action="/admin/reject-organizer?_csrf=<%=csrfToken%>"
-								method="post"
-							>
-								<input
-									type="hidden"
-									name="_csrf"
-									value="<%= csrfToken %>"
-								/>
+							<form action="/admin/reject-organizer?_csrf=<%=csrfToken%>" method="post">
+
+								<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 								<button
 									type="submit"
 									class="button"
-									style="
-										color: #fff;
-										width: 100%;
-										background-color: red;
-									"
-								>
+									style="color: #fff; width: 100%; background-color: red;">
 									Reject
 								</button>
-								<input
-									type="hidden"
-									value="<%= org._id %>"
-									name="orgId"
-								/>
+
+								<input type="hidden" value="<%= org._id %>" name="orgId"/>
+								
 							</form>
 						</li>
 					</ul>

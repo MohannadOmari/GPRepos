@@ -1,11 +1,7 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/header.ejs') %>
-<section class="d-flex flex-row justify-content-center m-5">
-<% if (isAdmin) { %>
-	<form action="/auction/next" method="post">
-		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-		<button type="submit" class="btn btn-primary">Next Car</button>
-	</form>
-<% } %>
+
+<section class="d-flex flex-row justify-content-center mb-3">
+
 		 <%- include("../includes/car.ejs", {car: auction.cars[nextCar]}) %>
 
 	
@@ -47,7 +43,14 @@
 		</form>
 	</div>
 
-	
 </section>
+
+<% if (isAdmin) { %>
+	<form action="/auction/next" method="post" style="text-align: center;" class="mt-5">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+		<button type="submit" class="btn btn-success w-25"  >Next Car</button>
+	</form>
+<% } %>
+
 <script src="../js/bid.js"></script>
 <%- include("../includes/end.ejs") %>

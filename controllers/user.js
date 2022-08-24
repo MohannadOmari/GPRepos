@@ -12,6 +12,7 @@ exports.getUserProfile = async (req, res, next) => {
 		user, bankAccount, 
 		bankError: req.flash('error') 
 	}); 
+
 };
 
 exports.postUpdateUser = async (req, res, next) => {
@@ -77,6 +78,7 @@ exports.postAddBankAccount = async (req,res,next) => {
 		ccv: ccv
 	});
 	
+
 	await bank.save();
 	await BankAccount.findOne({ accountNumber: cardNumber })
 	.then(async account => {
@@ -85,6 +87,7 @@ exports.postAddBankAccount = async (req,res,next) => {
 	const newUser = await Bidder.findById(req.session.user._id);
 	req.session.user = newUser;
 	this.getUserProfile(req, res, next);
+
 };
 
 exports.postAddBalance = async (req,res,next) => {
