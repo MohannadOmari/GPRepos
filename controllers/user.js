@@ -6,20 +6,26 @@ const { validationResult } = require("express-validator");
 exports.getUserProfile = async (req, res, next) => {
 	const user = await Bidder.findById(req.session.user._id);
 	const bankAccount = await BankAccount.findOne({userId: user._id});
-	res.render("profile/user-profile", { title: "User Profile", errorMessage: req.flash('error'), user, bankAccount}); // must query car from database , cars won 
+	res.render("profile/user-profile", { 
+		title: "User Profile", 
+		errorMessage: req.flash('error'), 
+		user, bankAccount, 
+		bankError: req.flash('error') 
+	}); 
 };
 
 exports.postUpdateUser = async (req, res, next) => {
 	const email = req.session.user.email;
 	const errors = validationResult(req);
-	user = await Bidder.findOne({email: email});
-	hasBankAccount = await BankAccount.findOne({userId: user._id});
+	const user = await Bidder.findOne({email: email});
+	const bankAccount = await BankAccount.findOne({userId: user._id});
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render("profile/user-profile", { 
 			title: "User Profile",
 			errorMessage: errors.array()[0].msg,
-			user, hasBankAccount
+			bankError: req.flash('error'),
+			user, bankAccount
 			});
 	}
 
@@ -50,7 +56,20 @@ exports.postAddBankAccount = async (req,res,next) => {
 	const expireDate = expireMM.concat("/", expireYY);
 	const ccv = req.body.CCV;
 
-	const bankAccount = new BankAccount({
+	const bankAccount = await BankAccount.findOne({ userId: req.session.user._id });
+	const user = await Bidder.findById(req.session.user._id);
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		return res.status(422).render("profile/user-profile", { 
+			title: "User Profile",
+			bankError: errors.array()[0].msg,
+			errorMessage: req.flash('error'), 
+			user, bankAccount
+			});
+	}
+
+	const bank = new BankAccount({
 		userId: req.session.user._id,
 		accountNumber: cardNumber,
 		cardName: cardName,
@@ -58,18 +77,14 @@ exports.postAddBankAccount = async (req,res,next) => {
 		ccv: ccv
 	});
 	
-	await bankAccount.save();
-	await Bidder.findById(req.session.user._id)
-		.then(user => {
-			BankAccount.findOne({accountNumber: cardNumber})
-				.then(account => {
-					user.bankAccount = account._id;
-				})
-			user.save();
-			req.session.user = user;
-		});
-	
-	res.redirect("user-profile");
+	await bank.save();
+	await BankAccount.findOne({ accountNumber: cardNumber })
+	.then(async account => {
+		await Bidder.findByIdAndUpdate(req.session.user._id, { bankAccount: account._id });
+	});
+	const newUser = await Bidder.findById(req.session.user._id);
+	req.session.user = newUser;
+	this.getUserProfile(req, res, next);
 };
 
 exports.postAddBalance = async (req,res,next) => {

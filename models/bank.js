@@ -30,6 +30,7 @@ const bankSchema = {
     },
     transactions: [{
         type: String,
+        default: []
     }]
 }
 

@@ -24,11 +24,11 @@ router.post("/user-profile",
                 .trim(),
     userController.postUpdateUser);
 
-router.get("/card-info", );
+router.get("/card-info");
 
 router.post("/card-info",
-    body('backAccountNumber', 'Not a valid card number')
-        .isLength({min: 16, max: 16}),
+    body('cardNumber', 'Not a valid card number')
+        .isLength({ min: 16, max: 16 }),
     body('expireYY')
         .custom(value => {
              year = new Date().getFullYear().toString().split("20");
