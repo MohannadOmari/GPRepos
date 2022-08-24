@@ -4,10 +4,11 @@ const { validationResult } = require("express-validator");
 const Auction = require('../models/auction');
 const Car = require('../models/cars');
 const Organizer = require("../models/organizer");
-const { populate } = require('../models/admin');
 
-exports.getDashboard = (req, res, next) => {
-	res.render("admin/dashboard", { title: "Dashboard" });
+exports.getDashboard = async (req, res, next) => {
+	const auctions = await Auction.find();
+	const cars = await Car.find({ status: "Sold" }).populate('author');
+	res.render("admin/dashboard", { title: "Dashboard", auctions, cars });
 };
 exports.getProfile = async (req, res, next) => {
 	const admin = await Admin.findById(req.session.admin._id);

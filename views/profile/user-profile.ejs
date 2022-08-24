@@ -211,8 +211,7 @@
 	<% if (user.cars) { %>
 		<% for (let car of user.cars) { %>
 			<div class="container mt-5">
-				<h3 id="heading" class="text-center text-grey">Auction 8</h3>
-				<%- include("../includes/car.ejs", {cars: car}) %>
+				<%- include("../includes/car.ejs", {car: car}) %>
 			</div>
 	<% }} %>
 	<br />
