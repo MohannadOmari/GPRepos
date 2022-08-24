@@ -95,7 +95,9 @@
 <!--bank account-->
 <section id="containers" class="container mt-5 w-100 bg-white">
 	<h2 id="heading" class="text-center text-grey mb-5">Card Info</h2>
-
+	<% if (bankError) { %>
+		<div class="user-message user-message--error"><%= bankError %></div>
+	<% } %>
 	<form action="/card-info" method="post">
 		<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 		<div class="input-group mb-3">
