@@ -121,6 +121,7 @@ exports.postNextCar= async (req, res, next) => {
 	} else {
 		await Auction.findByIdAndUpdate(auction._id, { status: "Finished" });
 		nextCar = 0;
+		await Bid.deleteMany();
 		this.getIndex(req, res, next);
 	}
 };

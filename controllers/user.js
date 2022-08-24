@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
 
 exports.getUserProfile = async (req, res, next) => {
-	const user = await Bidder.findById(req.session.user._id);
+	const user = await Bidder.findById(req.session.user._id).populate('cars');
 	const bankAccount = await BankAccount.findOne({userId: user._id});
 	res.render("profile/user-profile", { 
 		title: "User Profile", 
