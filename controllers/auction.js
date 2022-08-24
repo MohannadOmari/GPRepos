@@ -8,7 +8,7 @@ let nextCar = 0;
 let moveInfo = 0;
 let bidHappened = false;
 
-exports.getIndex = async (req, res, next) => { //car.createdAt.toString().substring(0, car.createdAt.toString().indexOf(':') - 2)
+exports.getIndex = async (req, res, next) => { 
 	const auctions = await Auction.find({status: "Ready"}).sort({startDate: "asc"}).populate('cars');
 	const today = new Date();	
 	let date = auctions[0].startDate;
@@ -48,7 +48,6 @@ exports.getAuctionInfo = async (req, res, next) => {
 };
 
 exports.getCarInfo = (req, res, next) => {
-
 	res.render("auction/carinfo", { title: "Car Info" });
 };
 
@@ -70,10 +69,14 @@ exports.getAuctionBid = async (req, res, next) => {
 	const auction = auctions[0];
 	const today = new Date();
 	
-	if (auction.startDate < today && req.session.user?.wallet <= 200 || !req.session.isAdmin) {
+	if (req.session.isBidder) {
+		if (auction.startDate > today && req.session.user.wallet >= 200) {
+			res.redirect("/auction");
+		}
+	} else if (!req.session.isAdmin) {
 		res.redirect("/auction");
 	}
-
+	
 	if (req.session.isBidder) {
 		const isBid = await Bid.findOne({ bidder: req.session.user._id });
 		if (!isBid) {

@@ -1,15 +1,15 @@
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
-}
+}// configure dotenv if not in production mode only save locally
 
 const express = require("express");
 const path = require("path");
 const mongoose = require('mongoose');
-const dbLogin = require("./connection/dbLogin");
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const flash = require("connect-flash");
-const csrf = require('csurf');
+const dbLogin = require("./connection/dbLogin"); // Database URI saved in different folder
+const session = require('express-session'); // API for creating and saving sessions and cookies
+const MongoDBStore = require('connect-mongodb-session')(session); // API to store sessions in the database
+const flash = require("connect-flash"); // error messages for validation
+const csrf = require('csurf'); // cross-site forgery 
 
 const authRoutes = require("./routes/auth");
 const auctionRoutes = require("./routes/auction");

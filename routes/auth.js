@@ -1,8 +1,8 @@
 const express = require("express");
-const { body } = require("express-validator");
-const multer = require('multer');
-const { storage } = require('../cloudinary');
-const upload = multer({ storage });
+const { body } = require("express-validator"); // validation middleware
+const multer = require('multer'); // API for uploading files
+const { storage } = require('../cloudinary'); // Where the Images will be stored
+const upload = multer({ storage }); // configuring where multer will store images
 
 const authController = require("../controllers/auth");
 

@@ -1,7 +1,7 @@
 const Bidder = require("../models/bidder");
 const Organizer = require("../models/organizer");
-const bcrypt = require('bcrypt');
-const { validationResult } = require("express-validator");
+const bcrypt = require('bcrypt'); //API for hashing data
+const { validationResult } = require("express-validator"); //for validation
 
 exports.getUserSignup = (req, res, next) => {
 	res.render("auth/user-signup", { 
