@@ -70,7 +70,7 @@ exports.getAuctionBid = async (req, res, next) => {
 	const auction = auctions[0];
 	const today = new Date();
 
-	if (auction.startDate > today) {
+	if (auction.startDate > today && req.session.user?.wallet >= 200 || !req.session.isAdmin) {
 		res.redirect("/auction");
 	}
 
